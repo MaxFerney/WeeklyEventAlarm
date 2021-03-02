@@ -27,11 +27,8 @@ App.setPreference('HideKeyboardFormAccessoryBar', true);
 App.setPreference('Orientation', 'default');
 App.setPreference('Orientation', 'all', 'ios');
 
-// // Pass preferences for a particular PhoneGap/Cordova plugin.
-// App.configurePlugin('com.phonegap.plugins.facebookconnect', {
-//   APP_ID: '1234567890',
-//   API_KEY: 'supersecretapikey'
-// });
+// Pass preferences for a particular PhoneGap/Cordova plugin.
+App.configurePlugin('cordova-plugin-mapbox', { ACCESS_TOKEN: 'ABCDEF12345' });
 
 // Add custom tags for a particular PhoneGap/Cordova plugin to the end of the
 // generated config.xml. 'Universal Links' is shown as an example here.
