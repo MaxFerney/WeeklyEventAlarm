@@ -10,7 +10,12 @@
   "dependencies": {
     "jquery": "^3.6.0",
     "meteor-node-stubs": "^1.0.1",
-    "moment": "^2.29.1"
+    "moment": "^2.29.1",
+    "node-sass": "^5.0.0",
+    "@babel/runtime": "^7.13.9",
+    "react": "^16.14.0",
+    "react-dom": "^16.14.0",
+    "react-router-dom": "^5.2.0"
   },
   "meteor": {
     "mainModule": {
@@ -18,11 +23,5 @@
       "server": "server/main.js"
     },
     "testModule": "tests/main.js"
-  },
-  "devDependencies": {
-    "@babel/runtime": "^7.13.9",
-    "react": "^16.14.0",
-    "react-dom": "^16.14.0",
-    "react-router-dom": "^5.2.0"
   }
 }
