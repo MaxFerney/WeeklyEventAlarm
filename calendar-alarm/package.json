@@ -8,18 +8,15 @@
     "visualize": "meteor --production --extra-packages bundle-visualizer"
   },
   "dependencies": {
+    "@babel/runtime": "^7.13.9",
     "jquery": "^3.6.0",
     "meteor-node-stubs": "^1.0.1",
     "moment": "^2.29.1",
-<<<<<<< HEAD
-    "prop-types": "^15.7.2"
-=======
     "node-sass": "^5.0.0",
-    "@babel/runtime": "^7.13.9",
+    "prop-types": "^15.7.2",
     "react": "^16.14.0",
     "react-dom": "^16.14.0",
     "react-router-dom": "^5.2.0"
->>>>>>> abab178122d8a044497c783d37490d5eda649b5c
   },
   "meteor": {
     "mainModule": {
