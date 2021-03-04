@@ -8,11 +8,8 @@
     "visualize": "meteor --production --extra-packages bundle-visualizer"
   },
   "dependencies": {
-    "@babel/runtime": "^7.11.2",
-    "meteor-node-stubs": "^1.0.1",
-    "react": "^16.14.0",
-    "react-dom": "^16.14.0",
-    "react-router-dom": "^5.2.0"
+    "jquery": "^3.6.0",
+    "meteor-node-stubs": "^1.0.1"
   },
   "meteor": {
     "mainModule": {
@@ -20,5 +17,11 @@
       "server": "server/main.js"
     },
     "testModule": "tests/main.js"
+  },
+  "devDependencies": {
+    "@babel/runtime": "^7.13.9",
+    "react": "^16.14.0",
+    "react-dom": "^16.14.0",
+    "react-router-dom": "^5.2.0"
   }
 }
