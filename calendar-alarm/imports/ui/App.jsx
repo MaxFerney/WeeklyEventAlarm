@@ -1,11 +1,36 @@
 import React from 'react';
-import { Hello } from './Hello.jsx';
-import { Info } from './Info.jsx';
+import {
+    Router,
+    Switch,
+    Route,
+    NavLink,
+    useParams,
+    useRouteMatch,
+    useHistory,
+    useLocation,
+    withRouter
+} from "react-router-dom";
+import PropTypes from 'prop-types';
+import { createBrowserHistory } from "history";
 
-export const App = () => (
-  <div>
-    <h1>Welcome to Meteor!</h1>
-    <Hello/>
-    <Info/>
-  </div>
-);
+const customHistory = createBrowserHistory();
+
+//ROUTED PAGES
+import HomePage from './pages/Home.jsx';
+
+export default class App extends React.Component{
+    render(){
+        return(
+            <Router history={customHistory}>
+                <Switch>
+                    <Route
+                        key="home"
+                        path="/"
+                        exact>
+                        <HomePage message="Hi there" />
+                    </Route>
+                </Switch>
+            </Router>
+        );
+    }
+}
