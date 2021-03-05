@@ -27,7 +27,7 @@ export default class App extends React.Component{
                         key="home"
                         path="/"
                         exact>
-                        <HomePage message="Hi there" />
+                        <HomePage/>
                     </Route>
                 </Switch>
             </Router>

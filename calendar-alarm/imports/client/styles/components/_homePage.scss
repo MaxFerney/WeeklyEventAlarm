@@ -1,0 +1,36 @@
+@import "mixins";
+#homePage{
+    display:grid;
+    grid-template-rows:20% 30% 10%;
+    grid-template-columns:auto;
+    height:100vh;
+    @include squishElements($squish);
+}
+#dailyEvents{
+    @include createTextBackground($background-white,$dropShadow,$radius,3%);
+}
+//specific styling
+h1{
+    @include createTextBackground($background-white,$dropShadow,$radius,0);
+    @include doFontStuff("Montserrat",$fontSize-h1);
+    text-align: center;
+    margin-top:5%;
+    margin-bottom:$margin-b;
+}
+h2{
+    @include doFontStuff("Montserrat",$fontSize-h2);
+    margin-bottom:$margin-b;
+}
+button{
+    @include createTextBackground($background-white,$dropShadow,$radius,5%);
+    @include doFontStuff("Montserrat",$fontSize-p);
+    @include squishElements(10%);
+    margin-top:$margin-b;
+}
+ul{
+    list-style-type:circle;
+    padding-left:3%;
+}
+ul>li{
+    margin-bottom:2%;
+}

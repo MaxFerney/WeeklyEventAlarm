@@ -1,0 +1,15 @@
+//creates background behind the text
+@mixin createTextBackground($background-color,$drop-shadow,$border-radius,$padding){
+    background-color:$background-color;
+    border-radius:$border-radius;
+    box-shadow: $drop-shadow;
+    padding:$padding;
+}
+@mixin doFontStuff($font,$fontSize){
+    font-family:$font,sans-serif;
+    font-size:$fontSize;
+}
+@mixin squishElements($howMuchSquish){
+    margin-left:$howMuchSquish;
+    margin-right:$howMuchSquish;
+}
