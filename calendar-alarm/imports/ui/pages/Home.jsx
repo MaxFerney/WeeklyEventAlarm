@@ -3,6 +3,8 @@ import React, { useState } from 'react';
 import {NavLink, Link, Redirect} from "react-router-dom";
 import PropTypes from 'prop-types';
 import moment from 'moment';
+
+import NavButton from './../components/NavButton.jsx'
 // import {  } from "react-router";
 
 // Components
@@ -15,7 +17,7 @@ const HomePage = (props) => {
         let date = new Date();
         return (date.getTime()+ESTCurrentTimeFix);
     };
-    
+
     const redirectToCal=()=>{
         return(
             <Redirect to={{
@@ -38,7 +40,7 @@ const HomePage = (props) => {
                     <li>test event</li>
                 </ul>
             </div>
-            <NavLink to="/calendar">Continue</NavLink>
+            <NavButton id="continue" to_pathname="/calendar" to_state={{from:"home"}} text="Continue" />
         </div>
     );
 }
