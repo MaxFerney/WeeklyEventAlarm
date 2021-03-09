@@ -4,6 +4,7 @@ import {
     Switch,
     Route,
     NavLink,
+    Redirect,
     useParams,
     useRouteMatch,
     useHistory,
@@ -17,6 +18,10 @@ const customHistory = createBrowserHistory();
 
 //ROUTED PAGES
 import HomePage from './pages/Home.jsx';
+// import EventDescription from './pages/EventDescription.jsx';
+// import Edit from './pages/Edit.jsx';
+import Calendar from './pages/Calendar.jsx';
+import AlarmPage from './pages/AlarmPage.jsx';
 
 export default class App extends React.Component{
     render(){
@@ -29,6 +34,30 @@ export default class App extends React.Component{
                         exact>
                         <HomePage/>
                     </Route>
+                    <Route
+                        key="calendar"
+                        path="/calendar">
+                        <Calendar/>
+                    </Route>
+                    {/*<Route
+                        key="edit"
+                        path="/edit"
+                        exact>
+                        <Edit/>
+                    </Route>*/}
+                    {/*<Route
+                        key="description"
+                        path="/description"
+                        exact>
+                        <EventDescription/>
+                    </Route>*/}
+                    <Route
+                        key="alarmpage"
+                        path="/alarm"
+                        exact>
+                        <AlarmPage/>
+                    </Route>
+
                 </Switch>
             </Router>
         );

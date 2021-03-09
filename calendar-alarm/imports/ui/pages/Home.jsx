@@ -1,6 +1,6 @@
 // Modules
 import React, { useState } from 'react';
-import {NavLink, Link} from "react-router-dom";
+import {NavLink, Link, Redirect} from "react-router-dom";
 import PropTypes from 'prop-types';
 // import {  } from "react-router";
 
@@ -106,6 +106,16 @@ const HomePage = (props) => {
       }
       return month;
   }
+    const redirectToCal=()=>{
+        return(
+            <Redirect to={{
+                pathname:"/calendar/",
+                state:{
+                    from:"home"
+                }
+            }}/>
+        );
+    };
   //Needs to route to Calendar.jsx
     return(
         <div id="homePage">
@@ -118,7 +128,7 @@ const HomePage = (props) => {
                     <li>test event</li>
                 </ul>
             </div>
-            <button>Continue</button>
+            <NavLink to="/calendar">Continue</NavLink>
         </div>
     );
 }
