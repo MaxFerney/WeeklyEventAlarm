@@ -29,7 +29,7 @@ const AlarmPage = (props) => {
             </div>
 
 
-            <NavButton id="continue" to_pathname="/calendar" to_state={{from:"alarm"}} text="back to events" />
+            <NavButton id="continue" to_pathname="/calendar" to_state={{from:"alarm"}} text="Back to events" />
         </div>
     );
 }

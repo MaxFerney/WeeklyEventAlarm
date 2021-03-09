@@ -36,7 +36,8 @@ export default class App extends React.Component{
                     </Route>
                     <Route
                         key="calendar"
-                        path="/calendar">
+                        path="/calendar"
+                        exact>
                         <Calendar/>
                     </Route>
                     {/*<Route

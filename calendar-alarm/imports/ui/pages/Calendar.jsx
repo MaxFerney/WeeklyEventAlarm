@@ -10,21 +10,47 @@ import PropTypes from 'prop-types';
 
 const Calendar = (props) => {
     //Stubbed out variables to edit later
-    let currentEvent="";
-    let eventTime="";
-    let commute=0;
-  //Needs to route to Calendar.jsx
+    let startDate="";
+    let endDate="";
+    //year is current year
+    let year="";
+    //Event variables
+    let currentEvent="Add Events";
+    let eventTimeStart="0:00";
+    let eventTimeEnd="0:00";
+    let amPm="am";
     return(
-        <div id="alarmPage">
-            <div id="eventAlarm">
-                <h1>{currentEvent}</h1>
-                <hr/>
-                <h1>{eventTime}</h1>
+        <div id="calendarPage">
+            <div id="weekPicker">
+                <p>&lt;</p>
+                <p>{startDate}-{endDate},{year}</p>
+                <p>&gt;</p>
             </div>
-            <p>Your event starts in 15 minutes! Please take proper precautions to assure you are not late.</p>
-            <p>Your estimated commute is: {commute} minutes</p>
-
-            <button>Back to Events</button>
+            <div id="weeklyCalendar">
+                <div id="dayOfWeek">
+                    <p>M</p>
+                    <p>T</p>
+                    <p>W</p>
+                    <p>R</p>
+                    <p>F</p>
+                    <p>S</p>
+                    <p>S</p>
+                </div>
+                <div id="taskArea">
+                    <div id="mondayTasks"></div>
+                    <div id="tuesdayTasks"></div>
+                    <div id="wednesdayTasks"></div>
+                    <div id="thursdayTasks"></div>
+                    <div id="fridayTasks"></div>
+                    <div id="saturdayTasks"></div>
+                    <div id="sundayTasks"></div>
+                </div>
+            </div>
+            <div id="dailyTaskList">
+                <ul>
+                    <li><p>{currentEvent}</p><p>{eventTimeStart}-{eventTimeEnd}{amPm}</p></li>
+                </ul>
+            </div>
         </div>
     );
 }
