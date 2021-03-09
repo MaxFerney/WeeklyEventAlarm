@@ -1,0 +1,23 @@
+// @import "mixins";
+#alarmPage{
+    display:grid;
+    grid-template-rows: repeat(8, 1fr);
+    //grid-template-columns:auto;
+    height:100vh;
+    @include squishElements($squish);
+    //page specific styling
+    div{
+        @include createTextBackground($background-red,$dropShadow,$radius,0);
+        @include doFontStuff("Montserrat",$fontSize-p);
+        padding:5px;
+        margin:10px;
+    }
+    #eventAlarm{
+        grid-row: 3/6;
+        @include createTextBackground($background-red,$dropShadow,$radius,0);
+        h1{
+            @include doFontStuff("Montserrat",$fontSize-h1);
+            text-align: center;
+        }
+    }
+}

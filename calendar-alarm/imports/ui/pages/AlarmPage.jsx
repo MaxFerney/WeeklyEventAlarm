@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import {NavLink, Link} from "react-router-dom";
 import PropTypes from 'prop-types';
+import NavButton from './../components/NavButton.jsx';
 // import {  } from "react-router";
 
 // Components
@@ -10,21 +11,25 @@ import PropTypes from 'prop-types';
 
 const AlarmPage = (props) => {
     //Stubbed out variables to edit later
-    let currentEvent="";
-    let eventTime="";
+    let currentEvent="Replace this event";
+    let eventTime="Replace this time";
     let commute=0;
   //Needs to route to Calendar.jsx
     return(
         <div id="alarmPage">
             <div id="eventAlarm">
-                <h1>{currentEvent}</h1>
-                <hr/>
-                <h1>{eventTime}</h1>
+                <h1>Replace Event</h1>
+                <h1>Replace Time</h1>
             </div>
-            <p>Your event starts in 15 minutes! Please take proper precautions to assure you are not late.</p>
-            <p>Your estimated commute is: {commute} minutes</p>
+            <div>
+                <p>Your event starts in 15 minutes! Please take proper precautions to assure you are not late.</p>
+            </div>
+            <div>
+                <p>Your estimated commute is: {commute} minutes</p>
+            </div>
 
-            <button>Back to Events</button>
+
+            <NavButton id="continue" to_pathname="/calendar" to_state={{from:"alarm"}} text="back to events" />
         </div>
     );
 }
