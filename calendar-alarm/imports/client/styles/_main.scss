@@ -1,6 +1,9 @@
-@import 'components/variables';
 @import 'components/reset';
+@import 'components/variables';
+@import "components/mixins";
 @import 'components/homePage';
+@import 'components/alarmPage';
+@import 'components/calendar';
 //Global styling goes in this document
 //font families and sizes
 body{
