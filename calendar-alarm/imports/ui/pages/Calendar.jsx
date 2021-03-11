@@ -16,7 +16,7 @@ const Calendar = (props) => {
     let startDate= moment( moment().day(0) ).format("MMM Do");
     // console.log( moment(moment().month()+1,"M").format("MMM") );
     // console.log( moment(moment().month()+1,"M").format("MMM").toString() + ", " + moment().date().toString() );
-    let endDate= moment( moment().day(0) ).format("MMM Do");
+    let endDate= moment( moment().day(6) ).format("MMM Do");
     //year is current year
     let year=moment( moment().day(0) ).format("YYYY");
     //Event variables
@@ -66,6 +66,7 @@ const Calendar = (props) => {
                     <li><p>{currentEvent}</p><p>{eventTimeStart}-{eventTimeEnd}{amPm}</p></li>
                 </ul>
             </div>
+            
         </div>
     );
 }
