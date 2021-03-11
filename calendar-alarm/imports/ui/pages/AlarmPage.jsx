@@ -18,8 +18,8 @@ const AlarmPage = (props) => {
     return(
         <div id="alarmPage">
             <div id="eventAlarm">
-                <h1>Replace Event</h1>
-                <h1>Replace Time</h1>
+                <h1>{currentEvent}</h1>
+                <h1>{eventTime}</h1>
             </div>
             <p>Your event starts in 15 minutes! Please take proper precautions to assure you are not late.</p>
             <p>Your estimated commute is: {commute} minutes</p>
