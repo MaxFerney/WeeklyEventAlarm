@@ -14,24 +14,27 @@
         padding-top:5%;
         margin-bottom:$margin-b;
     }
-    h2{
-        @include doFontStuff("Montserrat",$fontSize-h2);
-        margin-bottom:$margin-b;
+    #dailyEvents{
+        @include createTextBackground($background-white,$dropShadow,$radius,3%);
+        h2{
+            @include doFontStuff("Montserrat",$fontSize-h2);
+            margin-bottom:$margin-b;
+        }
+        ul{
+            list-style-type:circle;
+            padding-left:3%;
+        }
+        ul>li{
+            margin-bottom:2%;
+        }
     }
-    a{
-        @include createTextBackground($background-white,$dropShadow,$radius,5%);
+    #continue{
+        @include createTextBackground($background-white,$dropShadow,$radius,0);
         @include doFontStuff("Montserrat",$fontSize-p);
-        @include squishElements(10%);
-        margin-top:30%;
+        margin-top:5%;
+        text-align:center;
+        text-decoration:none;
+        justify-content: center;
+        color:black;
     }
-    ul{
-        list-style-type:circle;
-        padding-left:3%;
-    }
-    ul>li{
-        margin-bottom:2%;
-    }
-}
-#dailyEvents{
-    @include createTextBackground($background-white,$dropShadow,$radius,3%);
 }

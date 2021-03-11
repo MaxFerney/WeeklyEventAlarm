@@ -24,6 +24,7 @@ const AlarmPage = (props) => {
             <p>Your event starts in 15 minutes! Please take proper precautions to assure you are not late.</p>
             <p>Your estimated commute is: {commute} minutes</p>
             <NavButton id="continue" to_pathname="/calendar" to_state={{from:"alarm"}} text="Back to events" />
+            <img src="/images/alarm.png" alt="This pic is for decoration"/>
         </div>
     );
 }

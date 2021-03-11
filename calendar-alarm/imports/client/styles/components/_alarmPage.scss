@@ -38,5 +38,8 @@
         text-decoration:none;
         justify-content: center;
     }
+    img{
+        grid-row:-1/-1;
+    }
 
 }
