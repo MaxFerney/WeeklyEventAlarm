@@ -14,6 +14,8 @@ import {
 import PropTypes from 'prop-types';
 import { createBrowserHistory } from "history";
 
+import { CalendarCollectionAccess } from './../../lib/calData.js';
+
 const customHistory = createBrowserHistory();
 
 //ROUTED PAGES
