@@ -10,10 +10,10 @@ import PropTypes from 'prop-types';
 
 const Calendar = (props) => {
     //Stubbed out variables to edit later
-    let startDate="";
-    let endDate="";
+    let startDate="SomeDay";
+    let endDate="EndDay";
     //year is current year
-    let year="";
+    let year="2021";
     //Event variables
     let currentEvent="Add Events";
     let eventTimeStart="0:00";
@@ -28,22 +28,22 @@ const Calendar = (props) => {
             </div>
             <div id="weeklyCalendar">
                 <div id="dayOfWeek">
+                    <p>S</p>
                     <p>M</p>
                     <p>T</p>
                     <p>W</p>
                     <p>R</p>
                     <p>F</p>
                     <p>S</p>
-                    <p>S</p>
                 </div>
                 <div id="taskArea">
+                    <div id="sundayTasks"></div>
                     <div id="mondayTasks"></div>
                     <div id="tuesdayTasks"></div>
                     <div id="wednesdayTasks"></div>
                     <div id="thursdayTasks"></div>
                     <div id="fridayTasks"></div>
                     <div id="saturdayTasks"></div>
-                    <div id="sundayTasks"></div>
                 </div>
             </div>
             <div id="dailyTaskList">
