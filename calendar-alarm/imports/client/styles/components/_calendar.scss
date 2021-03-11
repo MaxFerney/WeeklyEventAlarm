@@ -17,4 +17,28 @@
         grid-template-rows: repeat(2, 1fr);
         grid-template-columns: repeat(7, 1fr);
     }
+    #dayOfWeek{
+        grid-column:1/-1;
+        display:grid;
+        grid-template-columns: repeat(7, 1fr);
+        p{
+            @include createTextBackground($background-white,$dropShadow,$radius,0);
+        }
+
+    }
+    #taskArea{
+        grid-column:1/-1;
+        grid-row:5/5;
+        display:grid;
+        grid-template-columns: repeat(7, 1fr);
+        div{
+            @include createTextBackground($background-white,$dropShadow,$radius,0);
+        }
+
+    }
+    #dailyTaskList{
+        grid-column:1/-1;
+        grid-row:8/8;
+        @include createTextBackground($background-white,$dropShadow,$radius,0);
+    }
 }

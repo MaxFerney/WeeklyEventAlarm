@@ -21,14 +21,8 @@ const AlarmPage = (props) => {
                 <h1>Replace Event</h1>
                 <h1>Replace Time</h1>
             </div>
-            <div>
-                <p>Your event starts in 15 minutes! Please take proper precautions to assure you are not late.</p>
-            </div>
-            <div>
-                <p>Your estimated commute is: {commute} minutes</p>
-            </div>
-
-
+            <p>Your event starts in 15 minutes! Please take proper precautions to assure you are not late.</p>
+            <p>Your estimated commute is: {commute} minutes</p>
             <NavButton id="continue" to_pathname="/calendar" to_state={{from:"alarm"}} text="Back to events" />
         </div>
     );
