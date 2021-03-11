@@ -2,6 +2,8 @@
 import React, { useState } from 'react';
 import {NavLink, Link} from "react-router-dom";
 import PropTypes from 'prop-types';
+import moment from 'moment';
+
 // import {  } from "react-router";
 
 // Components
@@ -9,16 +11,28 @@ import PropTypes from 'prop-types';
 // import Footer from './../components/Footer.js';
 
 const Calendar = (props) => {
+
     //Stubbed out variables to edit later
-    let startDate="SomeDay";
-    let endDate="EndDay";
+    let startDate= moment( moment().day(0) ).format("MMM Do");
+    // console.log( moment(moment().month()+1,"M").format("MMM") );
+    // console.log( moment(moment().month()+1,"M").format("MMM").toString() + ", " + moment().date().toString() );
+    let endDate= moment( moment().day(0) ).format("MMM Do");
     //year is current year
-    let year="2021";
+    let year=moment( moment().day(0) ).format("YYYY");
     //Event variables
     let currentEvent="Add Events";
     let eventTimeStart="0:00";
     let eventTimeEnd="0:00";
     let amPm="am";
+    const getDays = () =>{
+        let days=[];
+        for(var i=0;i<7;i++){
+            days.push(
+                <p key={i}>{moment( moment().day(i) ).format("dd [ | ] D")}</p>
+            );
+        }
+        return days;
+    };
     return(
         <div id="calendarPage">
             <div id="weekPicker">
@@ -28,13 +42,14 @@ const Calendar = (props) => {
             </div>
             <div id="weeklyCalendar">
                 <div id="dayOfWeek">
-                    <p>S</p>
+                    {getDays()}
+                    {/*<p>S {moment(moment().day())}</p>
                     <p>M</p>
                     <p>T</p>
                     <p>W</p>
                     <p>R</p>
                     <p>F</p>
-                    <p>S</p>
+                    <p>S</p>*/}
                 </div>
                 <div id="taskArea">
                     <div id="sundayTasks"></div>
