@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
     Router,
     Switch,
@@ -14,15 +14,32 @@ import {
 import PropTypes from 'prop-types';
 import { createBrowserHistory } from "history";
 
+import { CalendarCollectionAccess } from './../../lib/calData.js';
+
 const customHistory = createBrowserHistory();
 
 //ROUTED PAGES
 import HomePage from './pages/Home.jsx';
-// import EventDescription from './pages/EventDescription.jsx';
+import EventOverview from './pages/EventOverview.jsx';
 // import Edit from './pages/Edit.jsx';
 import Calendar from './pages/Calendar.jsx';
 import AlarmPage from './pages/AlarmPage.jsx';
 
+const allCategories = [
+    'Home',
+    'Work',
+    'School',
+    'Vacation'
+];
+
+function OverviewRouter() {
+    let { id } = useParams();
+    const props = {
+        categories:allCategories,
+        eventID:id
+    };
+    return <EventOverview {...props} />
+}
 export default class App extends React.Component{
     render(){
         return(
@@ -46,12 +63,12 @@ export default class App extends React.Component{
                         exact>
                         <Edit/>
                     </Route>*/}
-                    {/*<Route
-                        key="description"
-                        path="/description"
+                    {<Route
+                        key="overview"
+                        path="/overview/:id"
                         exact>
-                        <EventDescription/>
-                    </Route>*/}
+                        <OverviewRouter/>
+                    </Route>}
                     <Route
                         key="alarmpage"
                         path="/alarm"

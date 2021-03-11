@@ -66,6 +66,7 @@ const Calendar = (props) => {
                     <li><p>{currentEvent}</p><p>{eventTimeStart}-{eventTimeEnd}{amPm}</p></li>
                 </ul>
             </div>
+            
         </div>
     );
 }
