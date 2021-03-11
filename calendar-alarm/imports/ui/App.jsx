@@ -32,13 +32,13 @@ const allCategories = [
     'Vacation'
 ];
 
-function OverviewRouter() {
+function OverviewRouter(props) {
     let { id } = useParams();
-    const props = {
-        categories:allCategories,
-        eventID:id
-    };
-    return <EventOverview {...props} />
+    // const props = {
+    //     categories:allCategories,
+    //     eventID:id
+    // };
+    return <EventOverview {...props} categories={allCategories} eventID={id} />
 }
 export default class App extends React.Component{
     render(){
@@ -49,13 +49,13 @@ export default class App extends React.Component{
                         key="home"
                         path="/"
                         exact>
-                        <HomePage/>
+                        <HomePage {...this.props}/>
                     </Route>
                     <Route
                         key="calendar"
                         path="/calendar"
                         exact>
-                        <Calendar/>
+                        <Calendar {...this.props}/>
                     </Route>
                     {/*<Route
                         key="edit"
@@ -67,13 +67,13 @@ export default class App extends React.Component{
                         key="overview"
                         path="/overview/:id"
                         exact>
-                        <OverviewRouter/>
+                        <OverviewRouter {...this.props}/>
                     </Route>}
                     <Route
                         key="alarmpage"
                         path="/alarm"
                         exact>
-                        <AlarmPage/>
+                        <AlarmPage {...this.props}/>
                     </Route>
 
                 </Switch>
