@@ -1,21 +1,20 @@
 // @import "mixins";
 #homePage{
-    display:grid;
-    grid-template-rows:20% 30% 10%;
-    grid-template-columns:auto;
-    height:100vh;
+    @include createGrid(12,1);
     @include squishElements($squish);
     //specific styling
     h1{
         @include createTextBackground($background-white,$dropShadow,$radius,0);
         @include doFontStuff("Montserrat",$fontSize-h1);
+        grid-row:1/2;
         text-align: center;
         margin-top:5%;
-        padding-top:5%;
-        margin-bottom:$margin-b;
+        padding:3%;
     }
     #dailyEvents{
         @include createTextBackground($background-white,$dropShadow,$radius,3%);
+        grid-row:3/6;
+        height:30vh;
         h2{
             @include doFontStuff("Montserrat",$fontSize-h2);
             margin-bottom:$margin-b;
@@ -31,7 +30,9 @@
     #continue{
         @include createTextBackground($background-white,$dropShadow,$radius,0);
         @include doFontStuff("Montserrat",$fontSize-p);
+        grid-row:9/10;
         margin-top:5%;
+        padding-top:3%;
         text-align:center;
         text-decoration:none;
         justify-content: center;

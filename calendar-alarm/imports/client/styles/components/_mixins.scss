@@ -1,3 +1,10 @@
+//Establishes grid
+@mixin createGrid($rowNum,$colNum){
+    display:grid;
+    grid-template-rows: repeat($rowNum, 1fr);
+    grid-template-columns: repeat($colNum, 1fr);
+    height:100vh;
+}
 //creates background behind the text
 @mixin createTextBackground($background-color,$drop-shadow,$border-radius,$padding){
     background-color:$background-color;
