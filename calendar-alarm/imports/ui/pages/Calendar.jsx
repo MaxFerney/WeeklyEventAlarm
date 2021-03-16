@@ -34,9 +34,11 @@ const Calendar = (props) => {
         }
         return days;
     };
+    let selectedDay = "";
 
     function styleSelectedDay(selectedDay){
-
+        // $('#sundayTasks')
+        // selectedDay="selectedBorder";
         let el=document.getElementById(selectedDay);
         el.classList.add("selectedBorder");
     }
@@ -60,13 +62,13 @@ const Calendar = (props) => {
                     U+005C U+0022*/}
                 </div>
                 <div id="taskArea">
-                    <div id="sundayTasks" class="visualCalendar" onclick={()=>{styleSelectedDay("sundayTasks")}}>.</div>
-                    <div id="mondayTasks" class="visualCalendar" onclick={()=>{styleSelectedDay("mondayTasks")}}>.</div>
-                    <div id="tuesdayTasks" class="visualCalendar" onclick={()=>{styleSelectedDay("tuesdayTasks")}}>.</div>
-                    <div id="wednesdayTasks" class="visualCalendar" onclick={()=>{styleSelectedDay("wednesdayTasks")}}>.</div>
-                    <div id="thursdayTasks" class="visualCalendar" onclick={()=>{styleSelectedDay("thursdayTasks")}}>.</div>
-                    <div id="fridayTasks" class="visualCalendar" onclick={()=>{styleSelectedDay("fridayTasks")}}>.</div>
-                    <div id="saturdayTasks" class="visualCalendar" onclick={()=>{styleSelectedDay("saturdayTasks")}}>.</div>
+                    <div id="sundayTasks" className={"visualCalendar "+selectedDay} onClick={()=>{styleSelectedDay("sundayTasks")}}>.</div>
+                    <div id="mondayTasks" className="visualCalendar" onClick={()=>{styleSelectedDay("mondayTasks")}}>.</div>
+                    <div id="tuesdayTasks" className="visualCalendar" onClick={()=>{styleSelectedDay("tuesdayTasks")}}>.</div>
+                    <div id="wednesdayTasks" className="visualCalendar" onClick={()=>{styleSelectedDay("wednesdayTasks")}}>.</div>
+                    <div id="thursdayTasks" className="visualCalendar" onClick={()=>{styleSelectedDay("thursdayTasks")}}>.</div>
+                    <div id="fridayTasks" className="visualCalendar" onClick={()=>{styleSelectedDay("fridayTasks")}}>.</div>
+                    <div id="saturdayTasks" className="visualCalendar" onClick={()=>{styleSelectedDay("saturdayTasks")}}>.</div>
                 </div>
             </div>
             <div id="dailyTaskList">
