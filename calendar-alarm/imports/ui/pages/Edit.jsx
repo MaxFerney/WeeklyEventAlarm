@@ -23,11 +23,12 @@ const Edit = (props) => {
     const [eventID, setEventID] = useState(!!location.state ? location.state.eventID : null);
 
     const [redirectToOverview, setRedirectToOverview] = useState(false);
+    const [redirectToCalendar, setRedirectToCalendar] = useState(false);
     //let redirectToOverview = false;
 
 
     if (firstRender){
-        console.log("getting information");
+        console.log("getting information...");
         if (location.state.from=="addEvent"){
             //this is a new event. set defaults here
             console.log("this is a new event");
@@ -103,19 +104,19 @@ const Edit = (props) => {
         });
 
         //alert('New Time Added!');
-        console.log("lets gooo");
+        //console.log("lets gooo");
         setRedirectToOverview(true);
         //redirectToOverview=true
-        return (
-
-            <Redirect to={{
-                pathname:"/overview/"+location.state.eventID,
-                state:{
-                    eventID:location.state.eventID,
-                    from:"edit"
-                }
-            }}/>
-        );
+        // return (
+        //
+        //     <Redirect to={{
+        //         pathname:"/overview/"+location.state.eventID,
+        //         state:{
+        //             eventID:location.state.eventID,
+        //             from:"edit"
+        //         }
+        //     }}/>
+        // );
     }
 
     const getInfoData = (data=null) => {
@@ -164,19 +165,21 @@ const Edit = (props) => {
         //selection fanciness
         const selectDay = (dayNum) => {
             let currentDay = $('#day'+dayNum);
-            if (currentDay.hasClass("selectedBorder")){
+            if ($('#day'+dayNum).hasClass("selectedBorder")){
                 //remove day from days selected.
-                currentDay.removeClass("selectedBorder");
+                $('#day'+dayNum).removeClass("selectedBorder");
                 daysSelected = daysSelected.filter(function(e) { return e !== dayNum })
-                console.log("REMOVED DAY"+dayNum);
+                //console.log("REMOVED DAY"+dayNum);
             } else {
                 //add day
-                currentDay.addClass("selectedBorder");
+                $('#day'+dayNum).addClass("selectedBorder");
                 if(!daysSelected.includes(dayNum)){
                     daysSelected.push(dayNum)
+                    //console.log("adding day"+dayNum)
                 }
-                console.log("ADDED DAY"+dayNum);
+                //console.log("ADDED DAY"+dayNum);
             }
+            //console.log(daysSelected);
 
         }
         //generate buttons for days of week
@@ -186,9 +189,10 @@ const Edit = (props) => {
             if (data == null){
                 //if creating new
                 for(var i=0;i<7;i++){
-                    formattedDay = moment( moment().day(i) ).format("dd");
+                    let dayNum = i;
+                    let formattedDay = moment( moment().day(i) ).format("dd");
                     days.push(
-                        <div key={i} id={"day"+i} className={"dayButton"} onClick={()=>{selectDay(i)}}>{formattedDay}</div>
+                        <div key={i} id={"day"+i} className={"dayButton"} onClick={()=>{selectDay(dayNum)}}>{formattedDay}</div>
                     );
                 }
             } else {
@@ -274,10 +278,21 @@ const Edit = (props) => {
             }}/>
         );
 
-        console.log(redirectToOverview);
+        //console.log(redirectToOverview);
     }
-    console.log(item);
-    console.log(results);
+    if (redirectToCalendar){
+        return(
+            <Redirect to={{
+                pathname:"/calendar",
+                state:{
+                    eventID:location.state.eventID,
+                    from:"overview"
+                }
+            }}/>
+        );
+    }
+    //console.log(item);
+    //console.log(results);
     return (
        <div id="editPage">
             {/*<Helmet>
@@ -285,7 +300,8 @@ const Edit = (props) => {
             </Helmet>*/}
             {/*conditionals for if its an edit or create event type page.*/}
             {/*<Header />*/}
-            {(results==null) ? getData() : ()=>{getData(item)}}
+            {(results==null) ? getData() : getData(item)}
+            <button onClick={()=>{setRedirectToCalendar(true)}}>Back to Calendar</button>
             {/*<Footer />*/}
        </div>
     );
