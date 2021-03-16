@@ -23,6 +23,7 @@ const EventOverview = (props) => {
     const currTime = moment().format('X');
     const [eventID, setEventID] = useState(!!location.state ? location.state.eventID : null);
     const [redirectToCalendar, setRedirectToCalendar] = useState(false);
+    const [redirectToEdit, setRedirectToEdit] = useState(false);
     // console.log(eventID);
     // console.log(props.eventID);
     // console.log(moment().format('X'));
@@ -63,6 +64,17 @@ const EventOverview = (props) => {
             }}/>
         );
     }
+    if (redirectToEdit){
+        return(
+            <Redirect to={{
+                pathname:"/edit/"+location.state.eventID,
+                state:{
+                    eventID:location.state.eventID,
+                    from:"existingEvent"
+                }
+            }}/>
+        );
+    }
   //Needs to route to Calendar.jsx
     return(
         <div id="overviewPage">
@@ -74,6 +86,7 @@ const EventOverview = (props) => {
             <p>Your estimated commute is: {commute} minutes</p>
             {(results==null) ? <p>awaiting data</p> : renderItem()}
             <button onClick={()=>{setRedirectToCalendar(true)}}>Back to Calendar</button>
+            <button onClick={()=>{setRedirectToEdit(true)}}>Edit</button>
             {/*<NavButton id="continue" to_pathname="/calendar" to_state={{from:"alarm"}} text="Back to events" />*/}
         </div>
     );
