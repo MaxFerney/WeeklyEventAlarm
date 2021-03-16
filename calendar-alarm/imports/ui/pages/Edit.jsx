@@ -190,7 +190,7 @@ const Edit = (props) => {
                 //if creating new
                 for(var i=0;i<7;i++){
                     let dayNum = i;
-                    let formattedDay = moment( moment().day(i) ).format("dd");
+                    let formattedDay = moment( moment().day(i) ).format("ddd");
                     days.push(
                         <div key={i} id={"day"+i} className={"dayButton"} onClick={()=>{selectDay(dayNum)}}>{formattedDay}</div>
                     );
@@ -198,7 +198,7 @@ const Edit = (props) => {
             } else {
                 //if there are days selected from db
                 for(var i=0;i<7;i++){
-                    formattedDay = moment( moment().day(i) ).format("dd");
+                    formattedDay = moment( moment().day(i) ).format("ddd");
                     let isSelected = "";
                     if (daysSelected.includes(i)){
                         isSelected="selectedBorder"
