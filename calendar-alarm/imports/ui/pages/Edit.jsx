@@ -36,7 +36,9 @@ const Edit = (props) => {
             //gather defaults from existing event
             console.log("this is an existing event");
             results = props.allCalendarItems.filter(item => item.EventID.toString() === eventID.toString());
+
             item = JSON.stringify(results[0])
+            console.log(item);
             //do days selected in here too
         } else {
             console.error("something went horribly wrong");
@@ -59,6 +61,7 @@ const Edit = (props) => {
         var startTime = parseInt(moment($('#TimeStart').val()).format('X'))
         var stopTime = parseInt(moment($('#TimeEnd').val()).format('X'))
         var days = daysSelected;
+        var doInsert = false;
         if (data == null){
 
             var repeat = false;
@@ -71,37 +74,67 @@ const Edit = (props) => {
                 {hourPrior:0}
             ];
             var description = "None Provided";
+            doInsert=true;
         } else {
-            var repeat = data.Times.DoesRepeat;
-            var soundName = data.AlarmDetails.Sound;
-            var soundFileLocation = data.AlarmDetails.SoundFile;
+            var repeat = results[0].Times.DoesRepeat;
+            var soundName = results[0].AlarmDetails.Sound;
+            var soundFileLocation = results[0].AlarmDetails.SoundFile;
             //perhaps change this type or how it's stored
-            var notifications = data.AlarmDetails.Notifications;
-            var description = data.Details.Description;
+            var notifications = results[0].AlarmDetails.Notifications;
+            var description = results[0].Details.Description;
+        }
+        if (doInsert){
+            CalendarCollectionAccess.insert({
+                EventID:location.state.eventID,
+                isActive:true,
+                Details:{
+                    Name:name,
+                    Theme:theme,
+                    Address:address,
+                    Description:description
+                },
+                Times:{
+                    StartTime:startTime,
+                    StopTime:stopTime,
+                    Days:daysSelected,
+                    DoesRepeat:repeat
+                },
+                AlarmDetails:{
+                    Notifications:notifications,
+                    Sound:soundName,
+                    SoundFile:soundFileLocation
+                }
+            });
+
+        } else {
+            CalendarCollectionAccess.update({_id:item._id},
+                {$set:{
+                    EventID:location.state.eventID,
+                    isActive:true,
+                    Details:{
+                        Name:name,
+                        Theme:theme,
+                        Address:address,
+                        Description:description
+                    },
+                    Times:{
+                        StartTime:startTime,
+                        StopTime:stopTime,
+                        Days:daysSelected,
+                        DoesRepeat:repeat
+                    },
+                    AlarmDetails:{
+                        Notifications:notifications,
+                        Sound:soundName,
+                        SoundFile:soundFileLocation
+                    }
+                }
+            });
         }
 
 
-        CalendarCollectionAccess.insert({
-            EventID:location.state.eventID,
-            isActive:true,
-            Details:{
-                Name:name,
-                Theme:theme,
-                Address:address,
-                Description:description
-            },
-            Times:{
-                StartTime:startTime,
-                StopTime:stopTime,
-                Days:daysSelected,
-                DoesRepeat:repeat
-            },
-            AlarmDetails:{
-                Notifications:notifications,
-                Sound:soundName,
-                SoundFile:soundFileLocation
-            }
-        });
+
+
 
         //alert('New Time Added!');
         //console.log("lets gooo");
@@ -147,14 +180,16 @@ const Edit = (props) => {
                 </div>
             );
         } else {
+            console.log(data);
+            console.log(results[0].Details);
             return (
                 <div id="editInfoContainer">
                     <p>Name</p>
-                    <input id="eventName" type="text" className="" defaultValue={data.Details.Name}/>
+                    <input id="eventName" type="text" className="" defaultValue={results[0].Details.Name}/>
                     <p>Event Theme</p>
-                    { renderCategories(data.Details.Theme.toString()) }
+                    { renderCategories(results[0].Details.Theme.toString()) }
                     <p>Event Address</p>
-                    <input id="eventAddress" type="text" className="" defaultValue={data.Details.Address}/>
+                    <input id="eventAddress" type="text" className="" defaultValue={results[0].Details.Address}/>
                 </div>
             );
         }
@@ -223,8 +258,8 @@ const Edit = (props) => {
                 </div>
             );
         } else {
-            let defaultStart = data.Times.StartTime;
-            let defaultEnd = data.Times.StopTime;
+            let defaultStart = results[0].Times.StartTime;
+            let defaultEnd = results[0].Times.StopTime;
             return (
                 <div id="editTimeContainer">
                     <p>Start Time</p>
