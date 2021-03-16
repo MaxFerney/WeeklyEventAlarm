@@ -188,7 +188,7 @@ const Edit = (props) => {
                 for(var i=0;i<7;i++){
                     formattedDay = moment( moment().day(i) ).format("dd");
                     days.push(
-                        <div key={i} id={"day"+i} className={"dayButton visualCalendar"} onClick={()=>{selectDay(i)}}>{formattedDay}</div>
+                        <div key={i} id={"day"+i} className={"dayButton"} onClick={()=>{selectDay(i)}}>{formattedDay}</div>
                     );
                 }
             } else {
@@ -200,7 +200,7 @@ const Edit = (props) => {
                         isSelected="selectedBorder"
                     }
                     days.push(
-                        <div key={i} id={"day"+i} className={"dayButton visualCalendar "+isSelected} onClick={()=>{selectDay(i)}}>{formattedDay}</div>
+                        <div key={i} id={"day"+i} className={"dayButton "+isSelected} onClick={()=>{selectDay(i)}}>{formattedDay}</div>
                     );
                 }
             }
