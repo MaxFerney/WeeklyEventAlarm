@@ -34,6 +34,12 @@ const Calendar = (props) => {
         }
         return days;
     };
+
+    function styleSelectedDay(selectedDay){
+        let el=document.getElementById(selectedDay);
+        el.classList.add("selectedBorder");
+    }
+
     return(
         <div id="calendarPage">
             <div id="weekPicker">
@@ -50,16 +56,17 @@ const Calendar = (props) => {
                     <p>W</p>
                     <p>R</p>
                     <p>F</p>
-                    <p>S</p>*/}
+                    <p>S</p>
+                    U+005C U+0022*/}
                 </div>
                 <div id="taskArea">
-                    <div id="sundayTasks"></div>
-                    <div id="mondayTasks"></div>
-                    <div id="tuesdayTasks"></div>
-                    <div id="wednesdayTasks"></div>
-                    <div id="thursdayTasks"></div>
-                    <div id="fridayTasks"></div>
-                    <div id="saturdayTasks"></div>
+                    <div id="sundayTasks" class="visualCalendar" onclick="styleSelectedDay(U+005C U+0022 sundayTasks U+005C U+0022)">.</div>
+                    <div id="mondayTasks" class="visualCalendar" onclick="styleSelectedDay(U+005C U+0022 mondayTasks U+005C U+0022)">.</div>
+                    <div id="tuesdayTasks" class="visualCalendar" onclick="styleSelectedDay(U+005C U+0022 tuesdayTasks U+005C U+0022)">.</div>
+                    <div id="wednesdayTasks" class="visualCalendar" onclick="styleSelectedDay(U+005C U+0022 wednesdayTasks U+005C U+0022)">.</div>
+                    <div id="thursdayTasks" class="visualCalendar" onclick="styleSelectedDay(U+005C U+0022 thursdayTasks U+005C U+0022)">.</div>
+                    <div id="fridayTasks" class="visualCalendar" onclick="styleSelectedDay(U+005C U+0022 fridayTasks U+005C U+0022)">.</div>
+                    <div id="saturdayTasks" class="visualCalendar" onclick="styleSelectedDay(U+005C U+0022 saturdayTasks U+005C U+0022)">.</div>
                 </div>
             </div>
             <div id="dailyTaskList">
