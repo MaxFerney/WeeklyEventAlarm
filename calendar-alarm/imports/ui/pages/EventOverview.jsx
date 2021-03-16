@@ -35,7 +35,6 @@ const EventOverview = (props) => {
         console.log(results[0]);
         return results[0];
 
-
     }
     const renderItem = () => {
         return(

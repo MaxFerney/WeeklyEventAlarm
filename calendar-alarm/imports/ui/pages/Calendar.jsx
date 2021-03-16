@@ -54,7 +54,7 @@ const Calendar = (props) => {
                         pathname:"/overview/"+item.EventID,
                         state:{
                             eventID:item.EventID,
-                            from:'calendar'
+                            from:'existingEvent'
                         }
                     }}>
                         <span>{item.Details.Name}</span> <span>{item.Times.StartTime}-{item.Times.StopTime}</span>
@@ -106,7 +106,7 @@ const Calendar = (props) => {
                 pathname:"/edit/"+currentTime,
                 state:{
                     eventID:currentTime,
-                    from:'calendar'
+                    from:'addEvent'
                 }
             }}>+ Add Event</NavLink>
         </div>
