@@ -21,7 +21,7 @@ const customHistory = createBrowserHistory();
 //ROUTED PAGES
 import HomePage from './pages/Home.jsx';
 import EventOverview from './pages/EventOverview.jsx';
-// import Edit from './pages/Edit.jsx';
+import Edit from './pages/Edit.jsx';
 import Calendar from './pages/Calendar.jsx';
 import AlarmPage from './pages/AlarmPage.jsx';
 
@@ -34,10 +34,10 @@ const allCategories = [
 
 function OverviewRouter(props) {
     let { id } = useParams();
-    // const props = {
-    //     categories:allCategories,
-    //     eventID:id
-    // };
+    return <EventOverview {...props} categories={allCategories} eventID={id} />
+}
+function EditRouter(props) {
+    let { id } = useParams();
     return <EventOverview {...props} categories={allCategories} eventID={id} />
 }
 export default class App extends React.Component{
@@ -57,12 +57,12 @@ export default class App extends React.Component{
                         exact>
                         <Calendar {...this.props}/>
                     </Route>
-                    {/*<Route
+                    <Route
                         key="edit"
-                        path="/edit"
+                        path="/edit/:id"
                         exact>
-                        <Edit/>
-                    </Route>*/}
+                        <EditRouter {...this.props}/>
+                    </Route>
                     {<Route
                         key="overview"
                         path="/overview/:id"

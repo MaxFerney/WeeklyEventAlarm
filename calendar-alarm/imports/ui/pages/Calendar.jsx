@@ -24,6 +24,7 @@ const Calendar = (props) => {
     let eventTimeStart="0:00";
     let eventTimeEnd="0:00";
     let amPm="am";
+    let currentTime = moment().format('X');
     const getDays = () =>{
         let days=[];
         for(var i=0;i<7;i++){
@@ -65,8 +66,16 @@ const Calendar = (props) => {
                 <ul>
                     <li><p>{currentEvent}</p><p>{eventTimeStart}-{eventTimeEnd}{amPm}</p></li>
                 </ul>
+                {/*add event button*/}
+                <NavLink to={{
+                    pathname:"/edit/"+currentTime,
+                    state:{
+                        eventID:currentTime,
+                        from:'calendar'
+                    }
+                }}>+ Add Event</NavLink>
             </div>
-            
+
         </div>
     );
 }
