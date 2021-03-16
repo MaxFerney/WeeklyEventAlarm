@@ -25,6 +25,7 @@ const Calendar = (props) => {
     let eventTimeEnd="0:00";
     let amPm="am";
     let currentTime = moment().format('X');
+    console.log(currentTime);
     const getDays = () =>{
         let days=[];
         for(var i=0;i<7;i++){

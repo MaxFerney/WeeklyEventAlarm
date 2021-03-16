@@ -34,11 +34,13 @@ const allCategories = [
 
 function OverviewRouter(props) {
     let { id } = useParams();
-    return <EventOverview {...props} categories={allCategories} eventID={id} />
+    let location = useLocation();
+    return <EventOverview {...props} categories={allCategories} eventID={id} location={location} />
 }
 function EditRouter(props) {
     let { id } = useParams();
-    return <EventOverview {...props} categories={allCategories} eventID={id} />
+    let location = useLocation();
+    return <Edit {...props} categories={allCategories} eventID={id} location={location} />
 }
 export default class App extends React.Component{
     render(){

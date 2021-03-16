@@ -20,7 +20,7 @@ const EventOverview = (props) => {
     let results = null;
     let location = useLocation();
     const currTime = moment().format('X');
-    const [eventID, setEventID] = useState(!!location.state ? location.state.eventID : 1615502298);
+    const [eventID, setEventID] = useState(!!location.state ? location.state.eventID : null);
     const [eventItem, setEventItem] = useState(null);
     console.log(eventID);
     console.log(props.eventID);
@@ -56,7 +56,7 @@ const EventOverview = (props) => {
         var description = "None Provided";
 
         CalendarCollectionAccess.insert({
-            EventID:currTime,
+            EventID:location.state.eventID,
             isActive:true,
             Details:{
                 Name:name,

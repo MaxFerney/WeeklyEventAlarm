@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import moment from 'moment';
 //import { useParams } from 'react-router-dom';
 
-import { useParams, useHistory, Redirect, BrowserRouter as Router, Route, NavLink } from "react-router-dom";
+import { useParams, useHistory, Redirect, BrowserRouter as Router, Route, NavLink, useLocation } from "react-router-dom";
 
 // import Footer from './../components/footer.jsx';
 // import Header from './../components/header.jsx';
@@ -12,10 +12,11 @@ import { useParams, useHistory, Redirect, BrowserRouter as Router, Route, NavLin
 
 import { CalendarCollectionAccess } from './../../../lib/calData.js';
 
-export default class Edit extends React.Component{
-
-    renderCategories(default_category="Work"){
-        var mappedCategories = this.props.categories.map((category) => {
+const Edit = (props) => {
+    let location = useLocation();
+    const [redirectToOverview, setRedirectToOverview] = useState(false);
+    const renderCategories = (default_category="Work") => {
+        var mappedCategories = props.categories.map((category) => {
             if (category==default_category){
                 return(<option selected value={category}>{category}</option>);
             } else {
@@ -29,34 +30,78 @@ export default class Edit extends React.Component{
         );
     }
     //updates db with info
-    seeNewTime() {
-        var startTime = parseInt(moment($('#newTimeStart').val()).format('X'));
-        var stopTime = parseInt(moment($('#newTimeEnd').val()).format('X'));
-        var category = $('#categorySelection').val();
-
+    const seeNewTime = () => {
+        // var startTime = parseInt(moment($('#newTimeStart').val()).format('X'));
+        // var stopTime = parseInt(moment($('#newTimeEnd').val()).format('X'));
+        // var category = $('#categorySelection').val();
+        var name = $('#eventName').val();
+        var theme = 'Home';
+        var address = "1234 place rd";
+        var startTime = parseInt( moment( moment().minutes(),"m" ).format('X') );
+        var stopTime = parseInt( moment( moment(moment().minutes(),"m").add(1, 'h') ).format('X') );
+        console.log(startTime);
+        console.log(stopTime);
+        var days = [2,4];
+        var repeat = false;
+        var soundName = "Alarm";
+        var soundFileLocation = null;
+        //perhaps change this type or how it's stored
+        var notifications = [
+            {minPrior:2},
+            {minPrior:15},
+            {hourPrior:0}
+        ];
+        var description = "None Provided";
         CalendarCollectionAccess.insert({
-            start_time: startTime,
-            stop_time: stopTime,
-            category: category,
-            is_active: false
+            EventID:location.state.eventID,
+            isActive:true,
+            Details:{
+                Name:name,
+                Theme:theme,
+                Address:address,
+                Description:description
+            },
+            Times:{
+                StartTime:startTime,
+                StopTime:stopTime,
+                Days:days,
+                DoesRepeat:repeat
+            },
+            AlarmDetails:{
+                Notifications:notifications,
+                Sound:soundName,
+                SoundFile:soundFileLocation
+            }
         });
-            alert('New Time Added!')
+        //alert('New Time Added!');
+        console.log("lets gooo");
+        setRedirectToOverview(true);
+        return (
+
+            <Redirect to={{
+                pathname:"/overview/"+location.state.eventID,
+                state:{
+                    eventID:location.state.eventID,
+                    from:"edit"
+                }
+            }}/>
+        );
     }
 
-    getInfoData() {
+    const getInfoData = () => {
         return (
             <div id="editInfoContainer">
                 <p>Name</p>
                 <input id="eventName" type="text" class=""/>
                 <p>Event Theme</p>
-                { this.renderCategories("Work") }
+                { renderCategories("Work") }
                 <p>Event Address</p>
-                <input id="eventName" type="text" class=""/>
+                <input id="eventAddress" type="text" class=""/>
             </div>
         );
     }
 
-    getDateData() {
+    const getDateData = () => {
         return (
             <div id="editTimeContainer">
                 <p>Start Time</p>
@@ -64,16 +109,16 @@ export default class Edit extends React.Component{
                 <p>End Time</p>
                 <input id="newTimeEnd" type="datetime-local" class=""/>
                 <p>Category</p>
-                { this.renderCategories("Work") }
+                { renderCategories("Work") }
                 <br/>
-                <button id="saveValuesBtn" class="greenBG" onClick={ () => this.seeNewTime() }>
+                <button id="saveValuesBtn" class="greenBG" onClick={ () => seeNewTime() }>
                     Save
                 </button>
             </div>
         );
     }
 
-    getOtherData() {
+    const getOtherData = () => {
         return (
             <div id="editOtherContainer">
                 <h2 id="addNewTimeHeader">Add New Time</h2>
@@ -82,36 +127,48 @@ export default class Edit extends React.Component{
                 <p>End Time</p>
                 <input id="newTimeEnd" type="datetime-local" class="tanBG"/>
                 <p>Category</p>
-                { this.renderCategories("Work") }
+                { renderCategories("Work") }
                 <br/>
-                <button id="saveValuesBtn" class="greenBG" onClick={ () => this.seeNewTime() }>
+                <button id="saveValuesBtn" class="greenBG" onClick={ () => seeNewTime() }>
                     Save
                 </button>
             </div>
         );
     }
     //whole form
-    getData(){
+    const getData = () => {
         return(
             <div id="editContainer">
-                {this.getInfoData()}
-                {this.getDateData()}
-                {this.getOtherData()}
+                {getInfoData()}
+                {getDateData()}
+                {getOtherData()}
             </div>
         );
     }
 
-    render(){
-        return (
-           <div id="editPage">
-                {/*<Helmet>
-                    <title>Edit / Update</title>
-                </Helmet>*/}
-                {/*conditionals for if its an edit or create event type page.*/}
-                {/*<Header />*/}
-                {this.getData()}
-                {/*<Footer />*/}
-           </div>
+    if (redirectToOverview){
+        return(
+            <Redirect to={{
+                pathname:"/overview/"+location.state.eventID,
+                state:{
+                    eventID:location.state.eventID,
+                    from:"edit"
+                }
+            }}/>
         );
+
+        console.log(redirectToOverview);
     }
+    return (
+       <div id="editPage">
+            {/*<Helmet>
+                <title>Edit / Update</title>
+            </Helmet>*/}
+            {/*conditionals for if its an edit or create event type page.*/}
+            {/*<Header />*/}
+            {getData()}
+            {/*<Footer />*/}
+       </div>
+    );
 }
+export default Edit
