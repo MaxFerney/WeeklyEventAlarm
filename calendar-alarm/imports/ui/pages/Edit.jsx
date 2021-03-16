@@ -22,8 +22,8 @@ const Edit = (props) => {
 
     const [eventID, setEventID] = useState(!!location.state ? location.state.eventID : null);
 
-    //const [redirectToOverview, setRedirectToOverview] = useState(false);
-    let redirectToOverview = false;
+    const [redirectToOverview, setRedirectToOverview] = useState(false);
+    //let redirectToOverview = false;
 
 
     if (firstRender){
@@ -104,8 +104,8 @@ const Edit = (props) => {
 
         //alert('New Time Added!');
         console.log("lets gooo");
-        //setRedirectToOverview(true);
-        redirectToOverview=true
+        setRedirectToOverview(true);
+        //redirectToOverview=true
         return (
 
             <Redirect to={{
@@ -168,12 +168,14 @@ const Edit = (props) => {
                 //remove day from days selected.
                 currentDay.removeClass("selectedBorder");
                 daysSelected = daysSelected.filter(function(e) { return e !== dayNum })
+                console.log("REMOVED DAY"+dayNum);
             } else {
                 //add day
                 currentDay.addClass("selectedBorder");
                 if(!daysSelected.includes(dayNum)){
                     daysSelected.push(dayNum)
                 }
+                console.log("ADDED DAY"+dayNum);
             }
 
         }
@@ -186,7 +188,7 @@ const Edit = (props) => {
                 for(var i=0;i<7;i++){
                     formattedDay = moment( moment().day(i) ).format("dd");
                     days.push(
-                        <div key={i} id={"day"+i} className={"dayButton"} onClick={selectDay(i)}>{formattedDay}</div>
+                        <div key={i} id={"day"+i} className={"dayButton visualCalendar"} onClick={()=>{selectDay(i)}}>{formattedDay}</div>
                     );
                 }
             } else {
@@ -198,10 +200,11 @@ const Edit = (props) => {
                         isSelected="selectedBorder"
                     }
                     days.push(
-                        <div key={i} id={"day"+i} className={"dayButton "+isSelected} onClick={selectDay(i)}>{formattedDay}</div>
+                        <div key={i} id={"day"+i} className={"dayButton visualCalendar "+isSelected} onClick={()=>{selectDay(i)}}>{formattedDay}</div>
                     );
                 }
             }
+            return days;
         }
         if (data == null){
             return (
