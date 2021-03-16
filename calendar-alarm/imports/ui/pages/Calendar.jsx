@@ -35,13 +35,39 @@ const Calendar = (props) => {
         }
         return days;
     };
-    let selectedDay = "";
-
+    //Applies border to selected borders
     function styleSelectedDay(selectedDay){
-        // $('#sundayTasks')
-        // selectedDay="selectedBorder";
+        //make default selected = current day
+        $('.selectedBorder').removeClass("selectedBorder")
         let el=document.getElementById(selectedDay);
         el.classList.add("selectedBorder");
+    }
+
+    const renderDayItems = () => {
+        //set default to today
+        //make a moment selector
+        let fromdb = [];
+        const items = fromdb.map((item)=>{
+            return(
+                <li key={item.EventID}>
+                    <NavLink to={{
+                        pathname:"/overview/"+item.EventID,
+                        state:{
+                            eventID:item.EventID,
+                            from:'calendar'
+                        }
+                    }}>
+                        <span>{item.Details.Name}</span> <span>{item.Times.StartTime}-{item.Times.StopTime}</span>
+                    </NavLink>
+
+                </li>
+            )
+        })
+        return (
+            <ul id="">
+                {items}
+            </ul>
+        );
     }
     return(
         <div id="calendarPage">
@@ -63,7 +89,7 @@ const Calendar = (props) => {
                     U+005C U+0022*/}
                 </div>
                 <div id="taskArea">
-                    <div id="sundayTasks" className={"visualCalendar "+selectedDay} onClick={()=>{styleSelectedDay("sundayTasks")}}>.</div>
+                    <div id="sundayTasks" className="visualCalendar" onClick={()=>{styleSelectedDay("sundayTasks")}}>.</div>
                     <div id="mondayTasks" className="visualCalendar" onClick={()=>{styleSelectedDay("mondayTasks")}}>.</div>
                     <div id="tuesdayTasks" className="visualCalendar" onClick={()=>{styleSelectedDay("tuesdayTasks")}}>.</div>
                     <div id="wednesdayTasks" className="visualCalendar" onClick={()=>{styleSelectedDay("wednesdayTasks")}}>.</div>
@@ -73,19 +99,16 @@ const Calendar = (props) => {
                 </div>
             </div>
             <div id="dailyTaskList">
-                <ul>
-                    <li><p>{currentEvent}</p><p>{eventTimeStart}-{eventTimeEnd}{amPm}</p></li>
-                </ul>
+                {renderDayItems("sundayTasks")}
                 {/*add event button*/}
-                <NavLink to={{
-                    pathname:"/edit/"+currentTime,
-                    state:{
-                        eventID:currentTime,
-                        from:'calendar'
-                    }
-                }}>+ Add Event</NavLink>
             </div>
-
+            <NavLink to={{
+                pathname:"/edit/"+currentTime,
+                state:{
+                    eventID:currentTime,
+                    from:'calendar'
+                }
+            }}>+ Add Event</NavLink>
         </div>
     );
 }
