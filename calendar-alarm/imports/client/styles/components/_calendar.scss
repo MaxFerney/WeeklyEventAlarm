@@ -31,7 +31,6 @@
             @include createTextBackground($background-white,$dropShadow,$radius,0);
             @include doFontStuff("Montserrat",$fontSize-p);
         }
-
     }
     #taskArea{
         grid-column:1/-1;
@@ -42,13 +41,24 @@
             @include createTextBackground($background-white,$dropShadow,$radius,0);
             height:30vh;
         }
-
     }
     #dailyTaskList{
         grid-column:1/-1;
-        grid-row:5/5;
+        grid-row:5/6;
         border:2px solid black;
         @include createTextBackground($background-white,$dropShadow,$radius,0);
+    }
+    .events>a{
+        @include doFontStuff("Montserrat",$fontSize-p);
+        text-decoration:none;
+        padding:2%;
+        border-bottom-style:solid;
+        border-bottom-color:black;
+        border-bottom-width: 2px;
+        color:black;
+    }
+    .events>span{
+        margin-right:5%;
     }
     .selectedBorder{
         border:2px solid black;

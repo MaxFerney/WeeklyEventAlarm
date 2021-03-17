@@ -25,7 +25,7 @@ const DayItems = (props) => {
         let formatStart = moment(item.Times.StartTime, 'X').format('h:mm a');
         let formatEnd = moment(item.Times.StopTime, 'X').format('h:mm a');
         return(
-            <li key={item.EventID}>
+            <li key={item.EventID} class="events">
                 <NavLink to={{
                     pathname:"/overview/"+item.EventID,
                     state:{
