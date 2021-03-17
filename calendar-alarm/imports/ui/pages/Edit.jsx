@@ -39,7 +39,8 @@ const Edit = (props) => {
 
             item = JSON.stringify(results[0])
             console.log(item);
-            //do days selected in here too
+            daysSelected = results[0].Times.Days;
+
         } else {
             console.error("something went horribly wrong");
         }
@@ -61,9 +62,13 @@ const Edit = (props) => {
         var startTime = parseInt(moment($('#TimeStart').val()).format('X'))
         var stopTime = parseInt(moment($('#TimeEnd').val()).format('X'))
         var days = daysSelected;
+        if (daysSelected.length==0){
+            //ensure atleast a single day is selected
+            daysSelected.push(parseInt(moment($('#TimeStart').val()).format('d')))
+        }
         var doInsert = false;
-        if (data == null){
 
+        if (data == null){
             var repeat = false;
             var soundName = "Alarm";
             var soundFileLocation = null;
@@ -74,16 +79,7 @@ const Edit = (props) => {
                 {hourPrior:0}
             ];
             var description = "None Provided";
-            doInsert=true;
-        } else {
-            var repeat = results[0].Times.DoesRepeat;
-            var soundName = results[0].AlarmDetails.Sound;
-            var soundFileLocation = results[0].AlarmDetails.SoundFile;
-            //perhaps change this type or how it's stored
-            var notifications = results[0].AlarmDetails.Notifications;
-            var description = results[0].Details.Description;
-        }
-        if (doInsert){
+
             CalendarCollectionAccess.insert({
                 EventID:location.state.eventID,
                 isActive:true,
@@ -107,8 +103,15 @@ const Edit = (props) => {
             });
 
         } else {
-            CalendarCollectionAccess.update({_id:item._id},
-                {$set:{
+            console.log('attempting to update')
+            var repeat = results[0].Times.DoesRepeat;
+            var soundName = results[0].AlarmDetails.Sound;
+            var soundFileLocation = results[0].AlarmDetails.SoundFile;
+            //perhaps change this type or how it's stored
+            var notifications = results[0].AlarmDetails.Notifications;
+            var description = results[0].Details.Description;
+
+            var databaseUpdate = {
                     EventID:location.state.eventID,
                     isActive:true,
                     Details:{
@@ -129,8 +132,32 @@ const Edit = (props) => {
                         SoundFile:soundFileLocation
                     }
                 }
-            });
+
+            Meteor.call(`updateEventByID`, location.state.eventID, databaseUpdate);
+        //     CalendarCollectionAccess.update({_id:item._id},{$set:{
+        //             EventID:location.state.eventID,
+        //             isActive:true,
+        //             Details:{
+        //                 Name:name,
+        //                 Theme:theme,
+        //                 Address:address,
+        //                 Description:description
+        //             },
+        //             Times:{
+        //                 StartTime:startTime,
+        //                 StopTime:stopTime,
+        //                 Days:daysSelected,
+        //                 DoesRepeat:repeat
+        //             },
+        //             AlarmDetails:{
+        //                 Notifications:notifications,
+        //                 Sound:soundName,
+        //                 SoundFile:soundFileLocation
+        //             }
+        //         }
+        //     });
         }
+
 
 
 

@@ -11,6 +11,9 @@ Meteor.methods({
     },
     getEventByEventID(eventID){
         return CalendarCollectionAccess.find({EventID:eventID});
+    },
+    updateEventByID(eventID, data){
+        return CalendarCollectionAccess.update({EventID:eventID},{$set:data});
     }
 });
 
