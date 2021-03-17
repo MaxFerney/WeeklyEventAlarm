@@ -10,6 +10,52 @@ import { CalendarCollectionAccess } from './../../../lib/calData.js';
 // Components
 // import Header from './../components/Header.js';
 // import Footer from './../components/Footer.js';
+const DayItems = (props) => {
+    let location = useLocation();
+    // const [updateDayItems, setUpdateDayItems] = useState(false);
+    let today = moment(moment().day(), 'd')
+    console.log(today.day()); //2
+    // styleSelectedDay(today.format('ddd')) //tue
+    console.log(today.format('ddd'));
+    day = props.day;
+    if (day==null){
+        day = today;
+    }
+    //make a moment selector
+
+    //this gets items based on day.day
+    let dayItems = props.allCalendarItems.filter(item => {
+        return(
+            item.Times.Days.includes(day.day())
+        )
+    } );
+    console.log(dayItems);
+    let fromdb = [];
+    const items = dayItems.map((item)=>{
+        let formatStart = moment(item.Times.StartTime, 'X').format('h:mm a');
+        let formatEnd = moment(item.Times.StopTime, 'X').format('h:mm a');
+        return(
+            <li key={item.EventID}>
+                <NavLink to={{
+                    pathname:"/overview/"+item.EventID,
+                    state:{
+                        eventID:item.EventID,
+                        from:'existingEvent'
+                    }
+                }}>
+                    <span>{item.Details.Name}</span> <span>{formatStart}-{formatEnd}</span>
+                </NavLink>
+
+            </li>
+        )
+    })
+    return (
+        <ul id="">
+            {items}
+        </ul>
+    );
+
+}
 
 const Calendar = (props) => {
 
@@ -19,8 +65,10 @@ const Calendar = (props) => {
     // let results = null;
     // let item;
     let firstRender = true;
-    let currentDay = null
-
+    //let currentDay = null;
+    const [currentDay, setCurrentDay] = useState(null);
+    // const [updateDayItems, setUpdateDayItems] = useState(false);
+    let updateDayItems = false;
     let startDate= moment( moment().day(0) ).format("MMM Do");
     // console.log( moment(moment().month()+1,"M").format("MMM") );
     // console.log( moment(moment().month()+1,"M").format("MMM").toString() + ", " + moment().date().toString() );
@@ -33,6 +81,11 @@ const Calendar = (props) => {
     let eventTimeEnd="0:00";
     let amPm="am";
     let currentTime = moment().format('X');
+
+    let today = moment(moment().day(), 'd')
+    console.log(today.day()); //2
+    styleSelectedDay(today.format('ddd'))
+
     console.log(currentTime);
     const getDays = () =>{
         let days=[];
@@ -49,7 +102,12 @@ const Calendar = (props) => {
         //make default selected = current day
         $('.selectedBorder').removeClass("selectedBorder");
         $('#'+selectedDay).addClass("selectedBorder");
-        currentDay=moment(selectedDay, 'ddd');
+
+        //currentDay=moment(selectedDay, 'ddd');
+
+        console.log("current day changed to ");
+        updateDayItems = true;
+        console.log(currentDay);
         // let el=document.getElementById(selectedDay);
         // el.classList.add("selectedBorder");
     }
@@ -62,7 +120,10 @@ const Calendar = (props) => {
                     key={i}
                     id={dayID}
                     className="visualCalendar"
-                    onClick={()=>{styleSelectedDay(dayID)}}>
+                    onClick={()=>{
+                        styleSelectedDay(dayID);
+                        setCurrentDay(moment(dayID, 'ddd'));
+                    }}>
                     .
                 </div>
             );
@@ -70,6 +131,11 @@ const Calendar = (props) => {
         return days;
 
     }
+    const updateItems = (day) => {
+        updateDayItems = false;
+        return(renderDayItems(day));
+    }
+    /*
     const renderDayItems = (day=null) => {
         //set default to today
         let today = moment(moment().day(), 'd')
@@ -113,6 +179,11 @@ const Calendar = (props) => {
             </ul>
         );
     }
+*/
+    // useEffect(()=>{
+    //
+    // });
+
     return(
         <div id="calendarPage">
             <div id="weekPicker">
@@ -144,7 +215,7 @@ const Calendar = (props) => {
                 </div>
             </div>
             <div id="dailyTaskList">
-                {renderDayItems(currentDay)}
+                <DayItems {...props} day={currentDay}/>
                 {/*add event button*/}
             </div>
             <NavLink to={{
