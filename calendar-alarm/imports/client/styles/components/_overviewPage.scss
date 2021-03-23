@@ -1,6 +1,5 @@
 #overviewPage{
     @include createGrid(12,1);
-    max-width:75%;
     @include squishElements($squish);
     h1{
         @include createTextBackground($background-white,$dropShadow,$radius,0);
@@ -10,14 +9,54 @@
 
     }
     #eventOverview{
+        grid-row:2/7;
         @include createTextBackground($background-white,$dropShadow,$radius,0);
-        padding:3%;
-        grid-row:2/6;
+        @include createGrid(7,2);
+        div>p{
+            @include doFontStuff("Montserrat",$fontSize-p);
+        }
+        #details{
+            grid-row:1/1;
+            padding:3%;
+            div{
+                grid-column:1/1;
+            }
+            div:nth-child(2){
+                grid-column:2/2;
+            }
+        }
+        #times{
+            grid-row:2/2;
+            div{
+                grid-column:1/1;
+            }
+            div:nth-child(2){
+                grid-column:2/2;
+            }
+        }
+        #eventRepeat{
+            grid-row:3/3;
+            div{
+                grid-column:1/1;
+            }
+            div:nth-child(2){
+                grid-column:2/2;
+            }
+        }
+        #other{
+            grid-row:4/4;
+            div{
+                grid-column:1/1;
+            }
+            div:nth-child(2){
+                grid-column:2/2;
+            }
+        }
     }
     button{
         @include createTextBackground($background-white,$dropShadow,$radius,0);
         @include doFontStuff("Montserrat",$fontSize-p);
-        width:35%;
+        width:45%;
         float:left;
         grid-row:8/8;
     }

@@ -199,8 +199,8 @@ const Edit = (props) => {
             return (
                 <div id="editInfoContainer">
                     <input id="eventName" type="text" className="" placeholder="Event Name"/>
-                    { renderCategories("Event Theme") }
                     <input id="eventAddress" type="text" className="" placeholder="Event Address"/>
+                    { renderCategories("Event Theme") }
                 </div>
             );
         } else {
