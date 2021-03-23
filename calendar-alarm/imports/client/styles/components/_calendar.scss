@@ -1,5 +1,5 @@
 #calendarPage{
-    @include createGrid(7,7);
+    @include createGrid(12,7);
     @include squishElements($squish);
     //specific styling
     #weekPicker{
@@ -14,7 +14,7 @@
     }
     #weeklyCalendar{
         grid-column:1/-1;
-        grid-row:2/2;
+        grid-row:2/5;
         display:grid;
         grid-template-rows: repeat(2, 1fr);
         grid-template-columns: repeat(7, 1fr);
@@ -22,7 +22,7 @@
     #dayOfWeek{
         margin-top:5%;
         grid-column:1/-1;
-        grid-row:3/3;
+        grid-row:6/6;
         display:grid;
         grid-template-columns: repeat(7, 1fr);
         padding:1%;
@@ -34,21 +34,24 @@
     }
     #taskArea{
         grid-column:1/-1;
-        grid-row:4/4;
+        grid-row:7/7;
         display:grid;
         grid-template-columns: repeat(7, 1fr);
         .visualCalendar{
             @include createTextBackground($background-white,$dropShadow,$radius,0);
             height:30vh;
         }
+        //overflow:scroll;
     }
     #dailyTaskList{
+        grid-row:8/10;
         grid-column:1/-1;
-        grid-row:5/6;
         border:2px solid black;
         @include createTextBackground($background-white,$dropShadow,$radius,0);
     }
     #addEventButton{
+        grid-row:10/10;
+        grid-column:1/-1;
         @include createTextBackground($background-white,$dropShadow,$radius,0);
         @include doFontStuff("Montserrat",$fontSize-p);
         text-decoration:none;

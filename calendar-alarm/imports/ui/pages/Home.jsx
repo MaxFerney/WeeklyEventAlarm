@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import {NavLink, Link, Redirect} from "react-router-dom";
 import PropTypes from 'prop-types';
 import moment from 'moment';
-
+// import CalendarCollectionAccess from './../../lib/calData.js';
 import NavButton from './../components/NavButton.jsx';
 // import {  } from "react-router";
 
@@ -11,7 +11,20 @@ import NavButton from './../components/NavButton.jsx';
 // import Header from './../components/Header.js';
 // import Footer from './../components/Footer.js';
 
+
+
 const HomePage = (props) => {
+
+
+//     const renderEvents = function (passed_posts) {
+//   console.log(passed_posts);
+//   let formattedPosts = passed_posts.map(function(post){
+//     return <li key={events._id}>{events.Details.name} {events.Times.StartTime}-{events.Times.StopTime}</li>;
+//   });
+//
+//   return formattedPosts;
+// };
+    //const allPostsInDB = CalendarCollectionAccess.find().fetch();
     const getUnixSec = () =>{
         const ESTCurrentTimeFix = 18000000;
         let date = new Date();
@@ -35,9 +48,8 @@ const HomePage = (props) => {
             <div id="dailyEvents">
                 <h2>Today's Events</h2>
                 <ul>
-                    <li>test event</li>
-                    <li>test event</li>
-                    <li>test event</li>
+                    <li>Test Event</li>
+                    {/*renderEvents(allPostsInDB)*/}
                 </ul>
             </div>
             <NavButton id="continue" to_pathname="/alarm" to_state={{from:"home"}} text="TO ALARM PAGE" />

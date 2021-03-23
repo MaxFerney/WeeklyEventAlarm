@@ -359,7 +359,7 @@ const Edit = (props) => {
             {/*conditionals for if its an edit or create event type page.*/}
             {/*<Header />*/}
             {(results==null) ? getData() : getData(item)}
-            <button onClick={()=>{setRedirectToCalendar(true)}}>Back to Calendar</button>
+            <button onClick={()=>{setRedirectToCalendar(true)}} id="backToCalendar">Back to Calendar</button>
             {/*<Footer />*/}
        </div>
     );

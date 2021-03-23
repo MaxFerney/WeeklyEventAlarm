@@ -33,7 +33,7 @@ const DayItems = (props) => {
                         from:'existingEvent'
                     }
                 }}>
-                    <span>{item.Details.Name}</span> <span>{formatStart}-{formatEnd}</span>
+                    <span>{item.Details.Name}</span> <span>{formatStart}-{formatEnd} &gt;</span>
                 </NavLink>
 
             </li>

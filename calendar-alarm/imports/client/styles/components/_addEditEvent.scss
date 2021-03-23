@@ -1,58 +1,74 @@
 
 #editPage{
-    @include createGrid(12,1);
+    @include createGrid(1,1);
     @include squishElements($squish);
     h1{
         @include createTextBackground($background-white,$dropShadow,$radius,0);
         grid-row:1/1;
+        grid-column:1/-1;
         font-size:$fontSize-h1;
         padding:3%;
         text-align:center;
-    }
-    input,select{
-        @include createTextBackground($background-white,$dropShadow,$radius,0);
-        @include doFontStuff("Montserrat",$fontSize-p);
-        border-radius:10px;
-        padding:2%;
         margin-bottom:2%;
     }
-    button,#saveValuesBtn{
+    button{
         @include createTextBackground($background-white,$dropShadow,$radius,0);
         @include doFontStuff("Montserrat",$fontSize-p);
         border-radius:10px;
+        padding-top:2%;
+        padding-bottom:2%;
     }
-    .dayButton{
-        @include createTextBackground($background-white,$dropShadow,$radius,0);
-        @include doFontStuff("Montserrat",$fontSize-p);
-        float: left;
-        padding:2%;
-        margin-left:3%;
-    }
-    .selectedBorder{
-        border:2px solid black;
-    }
-    //specific styling
-    #editInfoContainer{
-        grid-row:2/4;
-    }
-    #editTimeContainer{
-        grid-row:5/7;
-        // @include createGrid(2,2);
-        // p{
-        //     grid-row:1/1;
-        //     grid-column:1/1;
-        // }
-        // input{
-        //     grid-row:1/1;
-        //     grid-column:2/2;
-        // }
-        // p+p{
-        //     grid-row:2/2;
-        //     grid-column:1/1;
-        // }
-        // input+input{
-        //     grid-row:2/2;
-        //     grid-column:2/2;
-        // }
-    }
+    #editContainer{
+            @include createGrid(12,7);
+            #editInfoContainer{
+                grid-row:1/1;
+                grid-column:1/-1;
+            }
+            #editTimeContainer{
+                grid-row:2/2;
+                grid-column:1/-1;
+            }
+            #saveValuesBtn{
+                grid-column:1/-1;
+                grid-row:8/8;
+            }
+            #backToCalendar{
+                grid-row:9/9;
+            }
+            input{
+                @include createTextBackground($background-white,$dropShadow,$radius,0);
+                @include doFontStuff("Montserrat",$fontSize-p);
+                border-radius:10px;
+                padding:2%;
+                margin-bottom:2%;
+            }
+            select{
+                @include createTextBackground($background-white,$dropShadow,$radius,0);
+                @include doFontStuff("Montserrat",$fontSize-p);
+                border-radius:10px;
+                padding:2%;
+                width:77%;
+            }
+            #saveValuesBtn{
+                @include createTextBackground($background-white,$dropShadow,$radius,0);
+                @include doFontStuff("Montserrat",$fontSize-p);
+                border-radius:10px;
+                padding-top:2%;
+                padding-bottom:2%;
+            }
+            #saveValuesBtn{
+                margin-top:2%;
+            }
+            .dayButton{
+                @include createTextBackground($background-white,$dropShadow,$radius,0);
+                @include doFontStuff("Montserrat",$fontSize-p);
+                float:left;
+                padding:2%;
+                margin-left:3%;
+                margin-top:2%;
+            }
+            .selectedBorder{
+                border:2px solid black;
+            }
+        }
 }
