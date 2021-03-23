@@ -1,6 +1,6 @@
 
 #editPage{
-    @include createGrid(1,1);
+    @include createGrid(2,1);
     @include squishElements($squish);
     h1{
         @include createTextBackground($background-white,$dropShadow,$radius,0);
@@ -11,12 +11,13 @@
         text-align:center;
         margin-bottom:2%;
     }
-    button{
+    #backToCalendar{
         @include createTextBackground($background-white,$dropShadow,$radius,0);
         @include doFontStuff("Montserrat",$fontSize-p);
         border-radius:10px;
         padding-top:2%;
         padding-bottom:2%;
+        color:red;
     }
     #editContainer{
             @include createGrid(12,7);
@@ -30,10 +31,7 @@
             }
             #saveValuesBtn{
                 grid-column:1/-1;
-                grid-row:8/8;
-            }
-            #backToCalendar{
-                grid-row:9/9;
+                grid-row:7/7;
             }
             input{
                 @include createTextBackground($background-white,$dropShadow,$radius,0);
@@ -48,6 +46,7 @@
                 border-radius:10px;
                 padding:2%;
                 width:77%;
+                margin-top:2%;
             }
             #saveValuesBtn{
                 @include createTextBackground($background-white,$dropShadow,$radius,0);
@@ -55,8 +54,6 @@
                 border-radius:10px;
                 padding-top:2%;
                 padding-bottom:2%;
-            }
-            #saveValuesBtn{
                 margin-top:2%;
             }
             .dayButton{
@@ -64,8 +61,9 @@
                 @include doFontStuff("Montserrat",$fontSize-p);
                 float:left;
                 padding:2%;
-                margin-left:3%;
+                margin-left:1%;
                 margin-top:2%;
+                grid-column:1/-1;
             }
             .selectedBorder{
                 border:2px solid black;
