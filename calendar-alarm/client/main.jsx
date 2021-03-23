@@ -14,6 +14,9 @@ Meteor.startup(() => {
         const props = {
             allCalendarItems:allCalendarItems
         };
+        console.log("+++++++++++++++++++++++++++++++++++++++++++++++++++++");
+        console.log(JSON.stringify(navigator.notification));
+        console.log("+++++++++++++++++++++++++++++++++++++++++++++++++++++");
         ReactDOM.render(<App {...props}/>, document.getElementById('react-target'));
     });
 
