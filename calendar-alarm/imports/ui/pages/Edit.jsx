@@ -366,7 +366,7 @@ const Edit = (props) => {
             </Helmet>*/}
             {/*conditionals for if its an edit or create event type page.*/}
             {/*<Header />*/}
-            {(results.length==0) ? getData() : getData(item)}
+            {(results == null || results==undefined) ? getData() : (results.length==0) ? getData():getData(item)}
             <button onClick={()=>{setRedirectToCalendar(true)}} id="backToCalendar">Back to Calendar</button>
             {/*<Footer />*/}
        </div>
