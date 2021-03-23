@@ -1,0 +1,7 @@
+#overviewPage{
+    @include createGrid(12,1);
+    @include squishElements($squish);
+    #eventOverview{
+        @include createTextBackground($background-white,$dropShadow,$radius,0);
+    }
+}

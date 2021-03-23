@@ -81,10 +81,8 @@ const EventOverview = (props) => {
             <div id="eventOverview">
                 <h1>{currentEvent}</h1>
                 <h1>{eventTime}</h1>
+                {(results==null) ? <p>awaiting data</p> : renderItem()}
             </div>
-            <p>Your event starts in 15 minutes! Please take proper precautions to assure you are not late.</p>
-            <p>Your estimated commute is: {commute} minutes</p>
-            {(results==null) ? <p>awaiting data</p> : renderItem()}
             <button onClick={()=>{setRedirectToCalendar(true)}}>Back to Calendar</button>
             <button onClick={()=>{setRedirectToEdit(true)}}>Edit</button>
             {/*<NavButton id="continue" to_pathname="/calendar" to_state={{from:"alarm"}} text="Back to events" />*/}

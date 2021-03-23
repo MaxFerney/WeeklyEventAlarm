@@ -1,0 +1,31 @@
+
+#editPage{
+    @include createGrid(12,1);
+    @include squishElements($squish);
+    h1{
+        @include createTextBackground($background-white,$dropShadow,$radius,0);
+        grid-row:1/1;
+        font-size:$fontSize-h1;
+        padding:3%;
+    }
+    input,select{
+        @include createTextBackground($background-white,$dropShadow,$radius,0);
+        @include doFontStuff("Montserrat",$fontSize-p);
+        border-radius:10px;
+        padding:2%;
+    }
+    .dayButton{
+        @include createTextBackground($background-white,$dropShadow,$radius,0);
+        @include doFontStuff("Montserrat",$fontSize-p);
+    }
+    .selectedBorder{
+        border:2px solid black;
+    }
+    //specific styling
+    #editInfoContainer{
+        grid-row:2/4;
+    }
+    #editTimeContainer{
+        grid-row:5/7;
+    }
+}

@@ -190,7 +190,7 @@ const Edit = (props) => {
                 }
             });
             return (
-                <select name="categories" id="themeSelection" className="" >
+                <select name="categories" id="themeSelection" className="" placeholder="Event Theme">
                     {mappedCategories}
                 </select>
             );
@@ -198,12 +198,9 @@ const Edit = (props) => {
         if (data==null){
             return (
                 <div id="editInfoContainer">
-                    <p>Name</p>
-                    <input id="eventName" type="text" className=""/>
-                    <p>Event Theme</p>
-                    { renderCategories("Work") }
-                    <p>Event Address</p>
-                    <input id="eventAddress" type="text" className=""/>
+                    <input id="eventName" type="text" className="" placeholder="Event Name"/>
+                    { renderCategories("Event Theme") }
+                    <input id="eventAddress" type="text" className="" placeholder="Event Address"/>
                 </div>
             );
         } else {
@@ -211,13 +208,11 @@ const Edit = (props) => {
             console.log(results[0].Details);
             return (
                 <div id="editInfoContainer">
-                    <p>Name</p>
                     <input id="eventName" type="text" className="" defaultValue={results[0].Details.Name}/>
-                    <p>Event Theme</p>
                     { renderCategories(results[0].Details.Theme.toString()) }
-                    <p>Event Address</p>
-                    <input id="eventAddress" type="text" className="" defaultValue={results[0].Details.Address}/>
+                    <input id="eventAddress" type="text" className="" defaultValue={results[0].Details.Address} />
                 </div>
+
             );
         }
 
@@ -275,10 +270,8 @@ const Edit = (props) => {
         if (data == null){
             return (
                 <div id="editTimeContainer">
-                    <p>Start Time</p>
-                    <input id="TimeStart" type="datetime-local" className=""/>
-                    <p>End Time</p>
-                    <input id="TimeEnd" type="datetime-local" className=""/>
+                    <input id="TimeStart" type="datetime-local" className="" placeholder="startTime"/>
+                    <input id="TimeEnd" type="datetime-local" className="" placeholder="endTime"/>
                     { makeButtonArray() }
                     {/*<p>Number of weeks to repeat (OR DOES REPEAT?)</p>*/}
                     {/*put a drop down with function here ON HOLD FOR NOW*/}
@@ -357,6 +350,7 @@ const Edit = (props) => {
     //console.log(results);
     return (
        <div id="editPage">
+        <h1>Add or Edit Event</h1>
             {/*<Helmet>
                 <title>Edit / Update</title>
             </Helmet>*/}
