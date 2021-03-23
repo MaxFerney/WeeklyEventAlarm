@@ -270,7 +270,9 @@ const Edit = (props) => {
         if (data == null){
             return (
                 <div id="editTimeContainer">
+                    <p>Start Time</p>
                     <input id="TimeStart" type="datetime-local" className="" placeholder="startTime"/>
+                    <p>End Time</p>
                     <input id="TimeEnd" type="datetime-local" className="" placeholder="endTime"/>
                     { makeButtonArray() }
                     {/*<p>Number of weeks to repeat (OR DOES REPEAT?)</p>*/}

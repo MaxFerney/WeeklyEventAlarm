@@ -48,6 +48,15 @@
         border:2px solid black;
         @include createTextBackground($background-white,$dropShadow,$radius,0);
     }
+    #addEventButton{
+        @include createTextBackground($background-white,$dropShadow,$radius,0);
+        @include doFontStuff("Montserrat",$fontSize-p);
+        text-decoration:none;
+        border:2px solid black;
+        grid-row:12/12;
+        text-align:center;
+        color:black;
+    }
     .events>a{
         @include doFontStuff("Montserrat",$fontSize-p);
         text-decoration:none;

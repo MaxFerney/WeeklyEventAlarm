@@ -154,7 +154,7 @@ const Calendar = (props) => {
                 <DayItems {...props} day={currentDay}/>
                 {/*add event button*/}
             </div>
-            <NavLink to={{
+            <NavLink id="addEventButton"to={{
                 pathname:"/edit/"+currentTime,
                 state:{
                     eventID:currentTime,

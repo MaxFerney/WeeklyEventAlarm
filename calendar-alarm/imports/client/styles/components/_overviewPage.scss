@@ -1,7 +1,24 @@
 #overviewPage{
     @include createGrid(12,1);
+    max-width:75%;
     @include squishElements($squish);
+    h1{
+        @include createTextBackground($background-white,$dropShadow,$radius,0);
+        @include doFontStuff("Montserrat",$fontSize-h1);
+        grid-row:1/1;
+        margin-bottom:2%;
+
+    }
     #eventOverview{
         @include createTextBackground($background-white,$dropShadow,$radius,0);
+        padding:3%;
+        grid-row:2/6;
+    }
+    button{
+        @include createTextBackground($background-white,$dropShadow,$radius,0);
+        @include doFontStuff("Montserrat",$fontSize-p);
+        width:35%;
+        float:left;
+        grid-row:8/8;
     }
 }

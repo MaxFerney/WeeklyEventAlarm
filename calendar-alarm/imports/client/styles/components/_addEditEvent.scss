@@ -7,16 +7,26 @@
         grid-row:1/1;
         font-size:$fontSize-h1;
         padding:3%;
+        text-align:center;
     }
     input,select{
         @include createTextBackground($background-white,$dropShadow,$radius,0);
         @include doFontStuff("Montserrat",$fontSize-p);
         border-radius:10px;
         padding:2%;
+        margin-bottom:2%;
+    }
+    button,#saveValuesBtn{
+        @include createTextBackground($background-white,$dropShadow,$radius,0);
+        @include doFontStuff("Montserrat",$fontSize-p);
+        border-radius:10px;
     }
     .dayButton{
         @include createTextBackground($background-white,$dropShadow,$radius,0);
         @include doFontStuff("Montserrat",$fontSize-p);
+        float: left;
+        padding:2%;
+        margin-left:3%;
     }
     .selectedBorder{
         border:2px solid black;
@@ -27,5 +37,22 @@
     }
     #editTimeContainer{
         grid-row:5/7;
+        // @include createGrid(2,2);
+        // p{
+        //     grid-row:1/1;
+        //     grid-column:1/1;
+        // }
+        // input{
+        //     grid-row:1/1;
+        //     grid-column:2/2;
+        // }
+        // p+p{
+        //     grid-row:2/2;
+        //     grid-column:1/1;
+        // }
+        // input+input{
+        //     grid-row:2/2;
+        //     grid-column:2/2;
+        // }
     }
 }

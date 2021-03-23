@@ -78,9 +78,8 @@ const EventOverview = (props) => {
   //Needs to route to Calendar.jsx
     return(
         <div id="overviewPage">
+            <h1>Event Overview</h1>
             <div id="eventOverview">
-                <h1>{currentEvent}</h1>
-                <h1>{eventTime}</h1>
                 {(results==null) ? <p>awaiting data</p> : renderItem()}
             </div>
             <button onClick={()=>{setRedirectToCalendar(true)}}>Back to Calendar</button>
