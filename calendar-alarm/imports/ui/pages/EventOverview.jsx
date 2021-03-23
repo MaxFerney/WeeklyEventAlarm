@@ -11,6 +11,56 @@ import { CalendarCollectionAccess } from './../../../lib/calData.js';
 // Components
 // import Header from './../components/Header.js';
 // import Footer from './../components/Footer.js';
+const EventDetailCompoent = (props) =>{
+    const item = props.item;
+    console.log(props)
+    return(
+        <div id="eventOverview">
+            <div id="details">
+                <div id="eventName">
+                    <p className="descriptor">Name: </p>
+                    <p className="value">{item.Details.Name}</p>
+                </div>
+                <div id="eventTheme">
+                    <p className="descriptor">Event Theme: </p>
+                    <p className="value">{item.Details.Theme}</p>
+                </div>
+                <div id="eventAddress">
+                    <p className="descriptor">Address: </p>
+                    <p className="value">{item.Details.Address}</p>
+                </div>
+            </div>
+            <div id="times">
+                <div id="eventStart">
+                    <p className="descriptor">Start Time: </p>
+                    <p className="value">{moment(item.Times.StartTime, 'X').format('h:mm a')}</p>
+                </div>
+                <div id="eventStop">
+                    <p className="descriptor">Stop Time: </p>
+                    <p className="value">{moment(item.Times.StopTime, 'X').format('h:mm a')}</p>
+                </div>
+                <div id="eventDays">
+                    <p className="descriptor">Days: </p>
+                    <p className="value">{
+                        item.Times.Days.map((day)=>
+                            <span>{moment(day,'d').format('dd')}</span>
+                        )
+                    }</p>
+                </div>
+                <div id="eventRepeat">
+                    <p className="descriptor">Repeat: </p>
+                    <p className="value">{item.Times.DoesRepeat.toString()}</p>
+                </div>
+            </div>
+            <div id="other">
+                <div id="eventSound">
+                    <p className="descriptor">Alarm Sound: </p>
+                    <p className="value">{item.AlarmDetails.Sound}</p>
+                </div>
+            </div>
+        </div>
+    );
+}
 
 const EventOverview = (props) => {
     //Stubbed out variables to edit later
@@ -19,9 +69,10 @@ const EventOverview = (props) => {
     let commute=0;
     let results = null;
     let item;
-    let location = useLocation();
     const currTime = moment().format('X');
-    const [eventID, setEventID] = useState(!!location.state ? location.state.eventID : null);
+
+    let eventID = props.eventID;
+    console.log(eventID);
     const [redirectToCalendar, setRedirectToCalendar] = useState(false);
     const [redirectToEdit, setRedirectToEdit] = useState(false);
     // console.log(eventID);
@@ -33,14 +84,14 @@ const EventOverview = (props) => {
 
         console.log(props.allCalendarItems);
         results = props.allCalendarItems.filter(item => item.EventID.toString() === eventID.toString());
-        item = JSON.stringify(results[0])
+        item = results[0];
         //console.log(results[0]);
         return results[0];
 
     }
     const renderItem = () => {
         return(
-            <p>{item}</p>
+            <EventDetailCompoent item={item} />
         );
     }
 
@@ -79,11 +130,13 @@ const EventOverview = (props) => {
     return(
         <div id="overviewPage">
             <h1>Event Overview</h1>
-            <div id="eventOverview">
-                {(results==null) ? <p>awaiting data</p> : renderItem()}
+            {(results.length==0) ? <p>awaiting data</p> : renderItem()}
+
+            <div id="buttons">
+                <button onClick={()=>{setRedirectToCalendar(true)}}>Back to Calendar</button>
+                <button onClick={()=>{setRedirectToEdit(true)}}>Edit</button>
             </div>
-            <button onClick={()=>{setRedirectToCalendar(true)}}>Back to Calendar</button>
-            <button onClick={()=>{setRedirectToEdit(true)}}>Edit</button>
+
             {/*<NavButton id="continue" to_pathname="/calendar" to_state={{from:"alarm"}} text="Back to events" />*/}
         </div>
     );
