@@ -43,7 +43,7 @@ const EventDetailCompoent = (props) =>{
                     <p className="descriptor">Days: </p>
                     <p className="value">{
                         item.Times.Days.map((day)=>
-                            <span>{moment(day,'d').format('dd')}</span>
+                            <span key={day}>{moment(day,'d').format('dd')}</span>
                         )
                     }</p>
                 </div>
