@@ -109,7 +109,7 @@ const EventOverview = (props) => {
             <Redirect to={{
                 pathname:"/calendar",
                 state:{
-                    eventID:location.state.eventID,
+                    eventID:eventID,
                     from:"overview"
                 }
             }}/>
@@ -118,9 +118,9 @@ const EventOverview = (props) => {
     if (redirectToEdit){
         return(
             <Redirect to={{
-                pathname:"/edit/"+location.state.eventID,
+                pathname:"/edit/"+eventID,
                 state:{
-                    eventID:location.state.eventID,
+                    eventID:eventID,
                     from:"existingEvent"
                 }
             }}/>
