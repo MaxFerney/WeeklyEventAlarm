@@ -20,7 +20,7 @@ const Edit = (props) => {
     let item;
     let firstRender = true;
 
-    const [eventID, setEventID] = useState(!!location.state ? location.state.eventID : null);
+    let eventID = props.eventID;
 
     const [redirectToOverview, setRedirectToOverview] = useState(false);
     const [redirectToCalendar, setRedirectToCalendar] = useState(false);
@@ -37,9 +37,12 @@ const Edit = (props) => {
             console.log("this is an existing event");
             results = props.allCalendarItems.filter(item => item.EventID.toString() === eventID.toString());
 
-            item = JSON.stringify(results[0])
-            console.log(item);
-            daysSelected = results[0].Times.Days;
+            //waits for results to get populated.
+            if (results.length>0){
+                item = JSON.stringify(results[0])
+                console.log(item);
+                daysSelected = results[0].Times.Days;
+            }
 
         } else {
             console.error("something went horribly wrong");
@@ -247,7 +250,7 @@ const Edit = (props) => {
                 //if creating new
                 for(var i=0;i<7;i++){
                     let dayNum = i;
-                    let formattedDay = moment( moment().day(i) ).format("ddd");
+                    let formattedDay = moment( moment().day(i) ).format("dd");
                     days.push(
                         <div key={i} id={"day"+i} className={"dayButton"} onClick={()=>{selectDay(dayNum)}}>{formattedDay}</div>
                     );
@@ -255,7 +258,7 @@ const Edit = (props) => {
             } else {
                 //if there are days selected from db
                 for(var i=0;i<7;i++){
-                    formattedDay = moment( moment().day(i) ).format("ddd");
+                    formattedDay = moment( moment().day(i) ).format("dd");
                     let isSelected = "";
                     if (daysSelected.includes(i)){
                         isSelected="selectedBorder"
@@ -265,7 +268,11 @@ const Edit = (props) => {
                     );
                 }
             }
-            return days;
+            return(
+                <div id="button_array">
+                    {days}
+                </div>
+            );
         }
         if (data == null){
             return (
@@ -274,6 +281,7 @@ const Edit = (props) => {
                     <input id="TimeStart" type="datetime-local" className="" placeholder="startTime"/>
                     <p>End Time</p>
                     <input id="TimeEnd" type="datetime-local" className="" placeholder="endTime"/>
+
                     { makeButtonArray() }
                     {/*<p>Number of weeks to repeat (OR DOES REPEAT?)</p>*/}
                     {/*put a drop down with function here ON HOLD FOR NOW*/}
@@ -327,9 +335,9 @@ const Edit = (props) => {
     if (redirectToOverview){
         return(
             <Redirect to={{
-                pathname:"/overview/"+location.state.eventID,
+                pathname:"/overview/"+eventID,
                 state:{
-                    eventID:location.state.eventID,
+                    eventID:eventID,
                     from:"edit"
                 }
             }}/>
@@ -342,7 +350,7 @@ const Edit = (props) => {
             <Redirect to={{
                 pathname:"/calendar",
                 state:{
-                    eventID:location.state.eventID,
+                    eventID:eventID,
                     from:"overview"
                 }
             }}/>
@@ -358,7 +366,7 @@ const Edit = (props) => {
             </Helmet>*/}
             {/*conditionals for if its an edit or create event type page.*/}
             {/*<Header />*/}
-            {(results==null) ? getData() : getData(item)}
+            {(results.length==0) ? getData() : getData(item)}
             <button onClick={()=>{setRedirectToCalendar(true)}} id="backToCalendar">Back to Calendar</button>
             {/*<Footer />*/}
        </div>
