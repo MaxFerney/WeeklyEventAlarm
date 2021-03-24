@@ -325,9 +325,14 @@ const Edit = (props) => {
                 {getInfoData(data)}
                 {getDateData(data)}
                 {/*{getOtherData(data)}*/}
-                <button id="saveValuesBtn" className="" onClick={()=>{ seeNewTime(data) }}>
-                    {(data==null) ? "Create" : "Save"}
-                </button>
+
+
+                <div id="button_container">
+                    <button id="saveValuesBtn" className="" onClick={()=>{ seeNewTime(data) }}>
+                        {(data==null) ? "Create" : "Save"}
+                    </button>
+                    <button onClick={()=>{setRedirectToCalendar(true)}} id="backToCalendar">Back to Calendar</button>
+                </div>
             </div>
         );
     }
@@ -367,7 +372,7 @@ const Edit = (props) => {
             {/*conditionals for if its an edit or create event type page.*/}
             {/*<Header />*/}
             {(results == null || results==undefined) ? getData() : (results.length==0) ? getData():getData(item)}
-            <button onClick={()=>{setRedirectToCalendar(true)}} id="backToCalendar">Back to Calendar</button>
+
             {/*<Footer />*/}
        </div>
     );
