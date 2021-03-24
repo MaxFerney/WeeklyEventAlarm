@@ -42,8 +42,29 @@ function EditRouter(props) {
     let location = useLocation();
     return <Edit {...props} categories={allCategories} eventID={id} location={location} />
 }
+
 export default class App extends React.Component{
-    render(){
+    constructor(props){
+        super(props);
+        this.state={
+            date: new Date()
+        };
+    }
+    componentDidMount(){
+        this.timerID = setInterval(
+            ()=> this.tick, 500
+        );
+    }
+    componentWillUnmount() {
+        clearInterval(this.timerID);
+    }
+
+    tick() {
+        this.setState({
+            date: new Date()
+        });
+    }
+    renderRoute(props){
         return(
             <Router history={customHistory}>
                 <Switch>
@@ -80,6 +101,14 @@ export default class App extends React.Component{
 
                 </Switch>
             </Router>
+        );
+    }
+    render(){
+        return(
+            <>
+                {this.renderRoute(this.state.date)}
+            </>
+
         );
     }
 }
