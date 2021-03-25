@@ -47,25 +47,56 @@ export default class App extends React.Component{
     constructor(props){
         super(props);
         this.state={
-            date: new Date()
+            //date: new Date(),
+            allCalendarItems:[],
         };
     }
     componentDidMount(){
         //CALL DATA HERE!!!!!
+        let fetchCalendarItems = async () =>{
+            Meteor.call(`getAllData`, (results, error)=>{
+                console.log(results);
+                let allCalendarItems = [];
+                console.log("++++++++++++++++++****************%%$$$##");
+                console.log(allCalendarItems);
+                allCalendarItems = results;
+                this.setState({
+                    allCalendarItems
+                });
+            });
+        };
+        fetchCalendarItems();
+        /*
         this.timerID = setInterval(
             ()=> this.tick, 500
         );
+        */
     }
+    /*
+    componentDidUpdate(prevProps, prevState) {
+        // Typical usage (don't forget to compare props):
+        if (this.props.userID !== prevProps.userID) {
+            this.fetchData(this.props.userID);
+        }
+    }
+    */
     componentWillUnmount() {
         clearInterval(this.timerID);
-    }
-
-    tick() {
         this.setState({
-            date: new Date()
+            //date: new Date(),
+            allCalendarItems:[],
         });
     }
+
+    // tick() {
+    //     this.setState({
+    //         date: new Date()
+    //     });
+    // }
     renderRoute(props){
+        if (props.allCalendarItems==undefined){
+            props={allCalendarItems:[]}
+        }
         return(
             <Router history={customHistory}>
                 <Switch>
@@ -73,31 +104,31 @@ export default class App extends React.Component{
                         key="home"
                         path="/"
                         exact>
-                        <HomePage {...this.props}/>
+                        <HomePage {...props}/>
                     </Route>
                     <Route
                         key="calendar"
                         path="/calendar"
                         exact>
-                        <Calendar {...this.props}/>
+                        <Calendar {...props}/>
                     </Route>
                     <Route
                         key="edit"
                         path="/edit/:id"
                         exact>
-                        <EditRouter {...this.props}/>
+                        <EditRouter {...props}/>
                     </Route>
                     {<Route
                         key="overview"
                         path="/overview/:id"
                         exact>
-                        <OverviewRouter {...this.props}/>
+                        <OverviewRouter {...props}/>
                     </Route>}
                     <Route
                         key="alarmpage"
                         path="/alarm"
                         exact>
-                        <AlarmPage {...this.props}/>
+                        <AlarmPage {...props}/>
                     </Route>
 
                 </Switch>
@@ -107,9 +138,8 @@ export default class App extends React.Component{
     render(){
         return(
             <>
-                {this.renderRoute(this.state.date)}
+                {this.renderRoute(this.state.allCalendarItems)}
             </>
-
         );
     }
 }

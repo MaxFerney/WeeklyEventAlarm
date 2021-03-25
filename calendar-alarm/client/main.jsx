@@ -13,20 +13,14 @@ Meteor.startup(() => {
     Tracker.autorun(()=>{
         // console.log(CalendarCollectionAccess.find().fetch());
         // const allCalendarItems = CalendarCollectionAccess.find().fetch();
-        let allCalendarItems = [];
-        allCalendarItems = Meteor.call(`getAllData`, (results, error)=>{
-            console.log(results);
-        });
+        let allCalendarItems=[];
         console.log(allCalendarItems);
         console.log("+++++++++++++++++++++++++++++++++++++++++++++++++++++");
         console.log(JSON.stringify(navigator.notification));
         //navigator.notification.alert("hello world", alertDismissed, 'some title', 'a button');
         console.log("+++++++++++++++++++++++++++++++++++++++++++++++++++++");
-        ReactDOM.render(<App allCalendarItems={(
-            allCalendarItems==undefined ||
-            allCalendarItems==null
-            ? []
-            : allCalendarItems)}/>, document.getElementById('react-target'));
+        //allCalendarItems={allCalendarItems)}
+        ReactDOM.render(<App />, document.getElementById('react-target'));
     });
 
 });
