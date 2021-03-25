@@ -99,6 +99,9 @@ const Calendar = (props) => {
         // let el=document.getElementById(selectedDay);
         // el.classList.add("selectedBorder");
     }
+    function adjustDate(direction,currentDay){
+
+    }
     const taskRender = () => {
         let days=[];
         for(var i=0;i<7;i++){
@@ -119,7 +122,6 @@ const Calendar = (props) => {
         return days;
 
     }
-
     return(
         <div id="calendarPage">
             <div id="weekPicker">

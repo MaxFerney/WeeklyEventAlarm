@@ -9,15 +9,15 @@
         font-size:$fontSize-h1;
         padding:3%;
         text-align:center;
-        margin-bottom:2%;
+        margin-bottom:$margin-general;
     }
     #backToCalendar{
         @include createTextBackground($background-white,$dropShadow,$radius,0);
         @include doFontStuff("Montserrat",$fontSize-p);
         border-radius:10px;
-        padding-top:2%;
-        padding-bottom:2%;
-        color:red;
+        margin-top:$margin-general;
+        padding-bottom:$margin-general;
+        padding:4%;
     }
     #editContainer{
             @include createGrid(12,7);
@@ -38,7 +38,8 @@
                 @include doFontStuff("Montserrat",$fontSize-p);
                 border-radius:10px;
                 padding:2%;
-                margin-bottom:2%;
+                margin-bottom:$margin-general;
+                width:$width-general;
             }
             select{
                 @include createTextBackground($background-white,$dropShadow,$radius,0);
@@ -46,15 +47,34 @@
                 border-radius:10px;
                 padding:2%;
                 width:77%;
-                margin-bottom:2%;
+                margin-bottom:$margin-general;
+                width:$width-general;
+            }
+            #editTimeContainer{
+                margin-top:$margin-extra;
+                margin-bottom:$margin-extra;
+                p{
+                    @include createTextBackground($background-white,$dropShadow,$radius,0);
+                    color:black;
+                    padding:2%;
+                    text-align:center;
+                    margin-bottom:$margin-general;
+                    width:$width-general;
+                }
+                #TimeStart{
+                    margin-bottom:4%;
+                    width:$width-general;
+                }
             }
             #saveValuesBtn{
                 @include createTextBackground($background-white,$dropShadow,$radius,0);
                 @include doFontStuff("Montserrat",$fontSize-p);
                 border-radius:10px;
-                padding-top:2%;
-                padding-bottom:2%;
-                margin-top:2%;
+                padding:4%;
+                padding-bottom:$margin-general;
+                margin-top:$margin-general;
+                margin-bottom:$margin-general;
+                width:100%;
             }
             .dayButton{
                 @include createTextBackground($background-white,$dropShadow,$radius,0);
@@ -62,7 +82,7 @@
                 float:left;
                 padding:2%;
                 margin-left:1%;
-                margin-top:2%;
+                margin-top:$margin-general;
                 grid-column:1/-1;
             }
             .selectedBorder{
