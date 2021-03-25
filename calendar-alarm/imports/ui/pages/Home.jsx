@@ -52,7 +52,7 @@ const HomePage = (props) => {
                     {/*renderEvents(allPostsInDB)*/}
                 </ul>
             </div>
-            <NavButton id="continue" to_pathname="/alarm" to_state={{from:"home"}} text="TO ALARM PAGE" />
+            <NavButton id="continue" to_pathname="/calendar" to_state={{from:"home"}} text="Continue" />
         </div>
     );
 }
