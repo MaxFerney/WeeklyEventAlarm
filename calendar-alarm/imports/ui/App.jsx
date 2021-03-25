@@ -25,6 +25,7 @@ import Edit from './pages/Edit.jsx';
 import Calendar from './pages/Calendar.jsx';
 import AlarmPage from './pages/AlarmPage.jsx';
 
+//constants and functions
 const allCategories = [
     'Home',
     'Work',
@@ -32,6 +33,8 @@ const allCategories = [
     'Vacation'
 ];
 
+
+//Rendering and Routing Components
 function OverviewRouter(props) {
     let { id } = useParams();
     let location = useLocation();
@@ -53,20 +56,50 @@ export default class App extends React.Component{
     componentDidMount(){
         this.timerID = setInterval(
             () => this.tick(),//PLEASE SET PARENTHESIS HERE TO ENABLE TIMER
-            5000
+            1000
         );
     }
     componentWillUnmount() {
         clearInterval(this.timerID);
     }
-
+    onConfirm(buttonIndex){
+        //could make this a follow up prompt.
+        let returnString = (
+            "You selected button number " + buttonIndex + "\nyou selected: "+(buttonIndex==1?"OK":"Snooze")
+        )
+        alert(returnString);
+    }
+    //anything that happens here gets checked every [setInterval] milliseconds
     tick() {
-        //console.log("this is a tick!");
         results = this.props.allCalendarItems.filter(item => true);
-        //console.log(results)
-        //console.log(moment().format('X'));
         results.map((eventItem)=>{
-            console.log(eventItem.eventID);
+
+            let today = moment().day();
+            let uniNow = moment().format('X');
+            let title= eventItem.Details.Name;
+            let message="It will take some time to get to "+eventItem.Details.Address;
+
+            //if an event occurs today
+            if (eventItem.Times.Days.includes(today)){
+                console.log("there's an event today!");
+
+                //if theres an event now, do one type of ping
+                if (eventItem.Times.StartTime == uniNow) {
+                    console.log("ITS NOW!!!!");
+                    //prompt not appearing in background, but sound is
+                    //2 content lines MAX
+                    //3 buttons MAX
+                    navigator.notification.confirm(
+                        message,
+                        this.onConfirm,
+                        title+" Starts Now!",
+                        ['OK', 'Snooze']);
+                    navigator.notification.beep(2);
+                }
+
+                //if theres an event in CONST minutes, then another type of ping
+
+            }
         })
         this.setState({
             date: new Date()
