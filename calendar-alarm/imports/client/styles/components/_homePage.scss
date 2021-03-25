@@ -30,9 +30,9 @@
     #continue{
         @include createTextBackground($background-white,$dropShadow,$radius,0);
         @include doFontStuff("Montserrat",$fontSize-p);
-        grid-row:9/10;
+        grid-row:8/9;
         margin-top:5%;
-        padding-top:3%;
+        padding:3%;
         text-align:center;
         text-decoration:none;
         justify-content: center;

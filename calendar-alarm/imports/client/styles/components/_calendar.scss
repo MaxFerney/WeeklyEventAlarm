@@ -48,6 +48,7 @@
         grid-column:1/-1;
         border:2px solid black;
         @include createTextBackground($background-white,$dropShadow,$radius,0);
+        overflow:scroll;
     }
     #addEventButton{
         grid-row:10/10;
@@ -71,8 +72,12 @@
         color:black;
         margin-bottom:3%;
     }
+    li:first-child{
+        padding-top:2%;
+    }
     li{
-        margin-bottom:3%;
+        margin-bottom:5%;
+        padding-left:2%;
     }
     .selectedBorder{
         border:2px solid black;
