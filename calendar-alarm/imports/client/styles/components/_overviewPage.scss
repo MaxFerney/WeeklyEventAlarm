@@ -20,7 +20,7 @@
         }
     }
     button:nth-child(2){
-        margin-left:$margin-general;
+        margin-left:4%;
     }
     button{
         @include createTextBackground($background-white,$dropShadow,$radius,0);

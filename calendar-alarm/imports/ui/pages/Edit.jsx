@@ -365,7 +365,7 @@ const Edit = (props) => {
     //console.log(results);
     return (
        <div id="editPage">
-        <h1>Add or Edit Event</h1>
+        <h1>{(results == null || results==undefined) ? "Add" : (results.length==0) ? "Add":"Edit"} Event</h1>
             {/*<Helmet>
                 <title>Edit / Update</title>
             </Helmet>*/}
