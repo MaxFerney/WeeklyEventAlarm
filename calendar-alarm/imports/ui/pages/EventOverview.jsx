@@ -18,29 +18,29 @@ const EventDetailCompoent = (props) =>{
         <div id="eventOverview">
             <div id="details">
                 <div id="eventName">
-                    <p className="descriptor">Name: </p>
+                    <h2 className="descriptor">Name: </h2>
                     <p className="value">{item.Details.Name}</p>
                 </div>
                 <div id="eventTheme">
-                    <p className="descriptor">Event Theme: </p>
+                    <h2 className="descriptor">Event Theme: </h2>
                     <p className="value">{item.Details.Theme}</p>
                 </div>
                 <div id="eventAddress">
-                    <p className="descriptor">Address: </p>
+                    <h2 className="descriptor">Address: </h2>
                     <p className="value">{item.Details.Address}</p>
                 </div>
             </div>
             <div id="times">
                 <div id="eventStart">
-                    <p className="descriptor">Start Time: </p>
+                    <h2 className="descriptor">Start Time: </h2>
                     <p className="value">{moment(item.Times.StartTime, 'X').format('h:mm a')}</p>
                 </div>
                 <div id="eventStop">
-                    <p className="descriptor">Stop Time: </p>
+                    <h2 className="descriptor">Stop Time: </h2>
                     <p className="value">{moment(item.Times.StopTime, 'X').format('h:mm a')}</p>
                 </div>
                 <div id="eventDays">
-                    <p className="descriptor">Days: </p>
+                    <h2 className="descriptor">Days: </h2>
                     <p className="value">{
                         item.Times.Days.map((day)=>
                             <span key={day}>{moment(day,'d').format('dd')}</span>
