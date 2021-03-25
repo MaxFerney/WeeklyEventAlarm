@@ -7,7 +7,11 @@ function insertLink({ title, url }) {
 
 Meteor.methods({
     getAllData(){
-        return CalendarCollectionAccess.find().fetch();
+        let data = CalendarCollectionAccess.find(); //.fetch()
+        console.log("################## CALLING ALL DATA ##################");
+        console.log(data);
+        return data;
+
     },
     getEventByEventID(eventID){
         return CalendarCollectionAccess.find({EventID:eventID});

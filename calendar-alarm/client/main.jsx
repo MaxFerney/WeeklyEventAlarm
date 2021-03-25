@@ -11,17 +11,22 @@ Meteor.startup(() => {
         console.log("i've been dismissed");
     }
     Tracker.autorun(()=>{
-        console.log(CalendarCollectionAccess.find().fetch());
-        const allCalendarItems = CalendarCollectionAccess.find().fetch();
-        const props = {
-            allCalendarItems:allCalendarItems
-        };
+        // console.log(CalendarCollectionAccess.find().fetch());
+        // const allCalendarItems = CalendarCollectionAccess.find().fetch();
+        let allCalendarItems = [];
+        allCalendarItems = Meteor.call(`getAllData`, (results, error)=>{
+            console.log(results);
+        });
         console.log(allCalendarItems);
         console.log("+++++++++++++++++++++++++++++++++++++++++++++++++++++");
         console.log(JSON.stringify(navigator.notification));
-        navigator.notification.alert("hello world", alertDismissed, 'some title', 'a button');
+        //navigator.notification.alert("hello world", alertDismissed, 'some title', 'a button');
         console.log("+++++++++++++++++++++++++++++++++++++++++++++++++++++");
-        ReactDOM.render(<App {...props}/>, document.getElementById('react-target'));
+        ReactDOM.render(<App allCalendarItems={(
+            allCalendarItems==undefined ||
+            allCalendarItems==null
+            ? []
+            : allCalendarItems)}/>, document.getElementById('react-target'));
     });
 
 });

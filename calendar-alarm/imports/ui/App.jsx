@@ -51,6 +51,7 @@ export default class App extends React.Component{
         };
     }
     componentDidMount(){
+        //CALL DATA HERE!!!!!
         this.timerID = setInterval(
             ()=> this.tick, 500
         );
