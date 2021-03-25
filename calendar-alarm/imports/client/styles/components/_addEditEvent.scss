@@ -17,7 +17,8 @@
         border-radius:10px;
         margin-top:$margin-general;
         padding-bottom:$margin-general;
-        padding:4%;
+        padding:6%;
+        width:$width-extra;
     }
     #editContainer{
             @include createGrid(12,7);
@@ -46,7 +47,7 @@
                 @include doFontStuff("Montserrat",$fontSize-p);
                 border-radius:10px;
                 padding:2%;
-                width:77%;
+                width:$width-general;
                 margin-bottom:$margin-general;
                 width:$width-general;
             }
@@ -69,12 +70,13 @@
             #saveValuesBtn{
                 @include createTextBackground($background-white,$dropShadow,$radius,0);
                 @include doFontStuff("Montserrat",$fontSize-p);
+                grid-column:1/-1;
                 border-radius:10px;
-                padding:4%;
+                padding:6%;
                 padding-bottom:$margin-general;
                 margin-top:$margin-general;
                 margin-bottom:$margin-general;
-                width:100%;
+                width:$width-extra;
             }
             .dayButton{
                 @include createTextBackground($background-white,$dropShadow,$radius,0);

@@ -58,6 +58,7 @@
         border:2px solid black;
         grid-row:12/12;
         text-align:center;
+        justify-content:center;
         color:black;
     }
     .events>a{
@@ -70,8 +71,8 @@
         color:black;
         margin-bottom:3%;
     }
-    .events>span{
-        margin-right:5%;
+    li{
+        margin-bottom:3%;
     }
     .selectedBorder{
         border:2px solid black;

@@ -15,7 +15,7 @@ const DayItems = (props) => {
 
     let dayItems = props.allCalendarItems.filter(item => {
         return(
-            item.Times.Days.includes(day.day())
+            <p>{item.Times.Days.includes(day.day())}</p>
         )
     } );
 
