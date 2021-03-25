@@ -19,7 +19,7 @@ Meteor.startup(() => {
         console.log(allCalendarItems);
         console.log("+++++++++++++++++++++++++++++++++++++++++++++++++++++");
         console.log(JSON.stringify(navigator.notification));
-        navigator.notification.alert("hello world", alertDismissed, 'some title', 'a button');
+        //navigator.notification.alert("hello world", alertDismissed, 'some title', 'a button');
         console.log("+++++++++++++++++++++++++++++++++++++++++++++++++++++");
         ReactDOM.render(<App {...props}/>, document.getElementById('react-target'));
     });

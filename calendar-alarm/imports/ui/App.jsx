@@ -52,7 +52,8 @@ export default class App extends React.Component{
     }
     componentDidMount(){
         this.timerID = setInterval(
-            ()=> this.tick, 500
+            () => this.tick,//PLEASE SET PARENTHESIS HERE TO ENABLE TIMER 
+            500
         );
     }
     componentWillUnmount() {
@@ -60,11 +61,14 @@ export default class App extends React.Component{
     }
 
     tick() {
+        console.log("this is a tick!");
         this.setState({
             date: new Date()
         });
+
     }
     renderRoute(props){
+        console.log("I've been ticked off!!");
         return(
             <Router history={customHistory}>
                 <Switch>

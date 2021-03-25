@@ -42,6 +42,8 @@ const Edit = (props) => {
                 item = JSON.stringify(results[0])
                 console.log(item);
                 daysSelected = results[0].Times.Days;
+                console.log("THESE ARE THEY DAYS SELECTED!")
+                console.log(daysSelected)
             }
 
         } else {
@@ -136,7 +138,12 @@ const Edit = (props) => {
                     }
                 }
 
-            Meteor.call(`updateEventByID`, location.state.eventID, databaseUpdate);
+            CalendarCollectionAccess.find({EventID:props.eventID}).fetch().map((currentItem) => {
+                CalendarCollectionAccess.update({_id:currentItem._id},{$set:databaseUpdate});
+            });
+
+            //CalendarCollectionAccess.update({EventID:props.eventID}, {$set:databaseUpdate});
+            // Meteor.call(`updateEventByID`, location.state.eventID, databaseUpdate);
         //     CalendarCollectionAccess.update({_id:item._id},{$set:{
         //             EventID:location.state.eventID,
         //             isActive:true,
@@ -258,13 +265,14 @@ const Edit = (props) => {
             } else {
                 //if there are days selected from db
                 for(var i=0;i<7;i++){
+                    let dayNum=i;
                     formattedDay = moment( moment().day(i) ).format("dd");
                     let isSelected = "";
-                    if (daysSelected.includes(i)){
+                    if (results[0].Times.Days.includes(i)){
                         isSelected="selectedBorder"
                     }
                     days.push(
-                        <div key={i} id={"day"+i} className={"dayButton "+isSelected} onClick={()=>{selectDay(i)}}>{formattedDay}</div>
+                        <div key={i} id={"day"+i} className={"dayButton "+isSelected} onClick={()=>{selectDay(dayNum)}}>{formattedDay}</div>
                     );
                 }
             }
@@ -365,13 +373,13 @@ const Edit = (props) => {
     //console.log(results);
     return (
        <div id="editPage">
-        <h1>Add or Edit Event</h1>
+        <h1>{(results == null || results==undefined) ? "Add" : (results.length==0) ? "Add":"Edit"} Event</h1>
             {/*<Helmet>
                 <title>Edit / Update</title>
             </Helmet>*/}
             {/*conditionals for if its an edit or create event type page.*/}
             {/*<Header />*/}
-            {(results == null || results==undefined) ? getData() : (results.length==0) ? getData():getData(item)}
+            {(results == null || results==undefined) ? getData(null) : (results.length==0) ? getData(null):getData(item)}
 
             {/*<Footer />*/}
        </div>
