@@ -13,7 +13,7 @@ import {
 } from "react-router-dom";
 import PropTypes from 'prop-types';
 import { createBrowserHistory } from "history";
-
+import moment from 'moment';
 import { CalendarCollectionAccess } from './../../lib/calData.js';
 
 const customHistory = createBrowserHistory();
@@ -52,8 +52,8 @@ export default class App extends React.Component{
     }
     componentDidMount(){
         this.timerID = setInterval(
-            () => this.tick,//PLEASE SET PARENTHESIS HERE TO ENABLE TIMER 
-            500
+            () => this.tick(),//PLEASE SET PARENTHESIS HERE TO ENABLE TIMER
+            5000
         );
     }
     componentWillUnmount() {
@@ -61,14 +61,20 @@ export default class App extends React.Component{
     }
 
     tick() {
-        console.log("this is a tick!");
+        //console.log("this is a tick!");
+        results = this.props.allCalendarItems.filter(item => true);
+        //console.log(results)
+        //console.log(moment().format('X'));
+        results.map((eventItem)=>{
+            console.log(eventItem.eventID);
+        })
         this.setState({
             date: new Date()
         });
 
     }
     renderRoute(props){
-        console.log("I've been ticked off!!");
+        //console.log("I've been ticked off!!");
         return(
             <Router history={customHistory}>
                 <Switch>
