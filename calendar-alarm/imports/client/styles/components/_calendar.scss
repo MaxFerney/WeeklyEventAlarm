@@ -44,23 +44,23 @@
         //overflow:scroll;
     }
     #dailyTaskList{
-        grid-row:8/10;
+        grid-row:8/11;
         grid-column:1/-1;
         border:2px solid black;
         @include createTextBackground($background-white,$dropShadow,$radius,0);
         overflow:scroll;
     }
     #addEventButton{
-        grid-row:10/10;
+        grid-row:11/11;
         grid-column:1/-1;
         @include createTextBackground($background-white,$dropShadow,$radius,0);
         @include doFontStuff("Montserrat",$fontSize-p);
         text-decoration:none;
         border:2px solid black;
-        grid-row:12/12;
         text-align:center;
         justify-content:center;
         color:black;
+        padding-top:3%;
     }
     .events>a{
         @include doFontStuff("Montserrat",$fontSize-p);

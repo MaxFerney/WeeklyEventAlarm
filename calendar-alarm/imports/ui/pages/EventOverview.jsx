@@ -52,12 +52,6 @@ const EventDetailCompoent = (props) =>{
                     <p className="value">{item.Times.DoesRepeat.toString()}</p>
                 </div>
             </div>
-            <div id="other">
-                <div id="eventSound">
-                    <p className="descriptor">Alarm Sound: </p>
-                    <p className="value">{item.AlarmDetails.Sound}</p>
-                </div>
-            </div>
         </div>
     );
 }
