@@ -13,7 +13,7 @@ import { CalendarCollectionAccess } from './../../../lib/calData.js';
 // import Footer from './../components/Footer.js';
 const EventDetailCompoent = (props) =>{
     const item = props.item;
-    console.log(props)
+    //console.log(props)
     return(
         <div id="eventOverview">
             <div id="details">
@@ -66,7 +66,7 @@ const EventOverview = (props) => {
     const currTime = moment().format('X');
 
     let eventID = props.eventID;
-    console.log(eventID);
+    //console.log(eventID);
     const [redirectToCalendar, setRedirectToCalendar] = useState(false);
     const [redirectToEdit, setRedirectToEdit] = useState(false);
     // console.log(eventID);
@@ -76,7 +76,7 @@ const EventOverview = (props) => {
 
     const getEventInfo = () => {
 
-        console.log(props.allLocalStorage);
+        //console.log(props.allLocalStorage);
         results = props.allLocalStorage.filter(item => item.EventID.toString() === eventID.toString());
         item = results[0];
         //console.log(results[0]);

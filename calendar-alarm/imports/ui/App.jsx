@@ -81,7 +81,7 @@ export default class App extends React.Component{
 
             //if an event occurs today
             if (eventItem.Times.Days.includes(today)){
-                console.log("there's an event today!");
+                //console.log("there's an event today!");
 
                 //if theres an event now, do one type of ping
                 if (eventItem.Times.StartTime == uniNow) {

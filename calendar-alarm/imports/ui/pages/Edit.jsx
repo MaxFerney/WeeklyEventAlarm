@@ -216,8 +216,8 @@ const Edit = (props) => {
                 </div>
             );
         } else {
-            console.log(data);
-            console.log(results[0].Details);
+            //console.log(data);
+            //console.log(results[0].Details);
             return (
                 <div id="editInfoContainer">
                     <input id="eventName" type="text" className="" defaultValue={results[0].Details.Name}/>
