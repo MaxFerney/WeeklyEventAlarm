@@ -54,6 +54,7 @@ export default class App extends React.Component{
             theme: 'Vacation',
             nextEvent: undefined,
             futureTimes: [],
+            allLocalStorage: this.props.allLocalStorage,
         };
     }
 
@@ -72,7 +73,7 @@ export default class App extends React.Component{
         }
     }
     getFutureTimes(){
-        let allStartTimes = this.props.allLocalStorage
+        let allStartTimes = this.state.allLocalStorage
             .filter(item => item.Times.Days.includes( moment().day() ) )
             .sort((t1,t2)=> this.unixToToday(t1.Times.StartTime) - this.unixToToday(t2.Times.StartTime))
             .map((item)=>{
@@ -94,6 +95,21 @@ export default class App extends React.Component{
             "You selected button number " + buttonIndex + "\nyou selected: "+(buttonIndex==1?"OK":"Snooze")
         )
         alert(returnString);
+    }
+    allStorage() {
+        var storageArray = [];
+        keys = Object.keys(localStorage);
+        i = keys.length;
+        while ( i-- ) {
+            keyName = keys[i];
+            var data = localStorage.getItem(keyName);
+            if (data) {
+                dataParsed = JSON.parse(data);
+                //dataParsed["keyName"] = keyName;
+                storageArray.push( dataParsed );
+            }
+        }
+        return storageArray;
     }
     /*INTERNAL FUNCTIONS*/
 
@@ -157,7 +173,7 @@ export default class App extends React.Component{
 
 
         /*Check Time - Do Alarm*/
-        results = this.props.allLocalStorage
+        results = this.state.allLocalStorage
             .filter(item => true)
             .map((eventItem)=>{
 
@@ -194,7 +210,8 @@ export default class App extends React.Component{
 
         /*State Updates*/
         this.setState({
-            date: new Date()
+            date: new Date(),
+            allLocalStorage:this.allStorage()
         });
 
     }
@@ -207,13 +224,13 @@ export default class App extends React.Component{
                         key="home"
                         path="/"
                         exact>
-                        <HomePage {...this.props}/>
+                        <HomePage {...this.props} allLocalStorage={this.state.allLocalStorage}/>
                     </Route>
                     <Route
                         key="calendar"
                         path="/calendar"
                         exact>
-                        <Calendar {...this.props}/>
+                        <Calendar {...this.props} allLocalStorage={this.state.allLocalStorage}/>
                     </Route>
                     <Route
                         key="edit"
@@ -231,7 +248,7 @@ export default class App extends React.Component{
                         key="alarmpage"
                         path="/alarm"
                         exact>
-                        <AlarmPage {...this.props}/>
+                        <AlarmPage {...this.props} allLocalStorage={this.state.allLocalStorage}/>
                     </Route>
 
                 </Switch>
