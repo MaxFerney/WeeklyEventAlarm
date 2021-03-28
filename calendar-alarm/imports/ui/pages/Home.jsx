@@ -47,7 +47,6 @@ const HomePage = (props) => {
                 <h2>Today's Events</h2>
                 <ul>
                     <li>Test Event</li>
-                    {/*renderEvents(allPostsInDB)*/}
                 </ul>
                 <p>all storage</p>
                 <p>{props.allLocalStorage.map((item)=>

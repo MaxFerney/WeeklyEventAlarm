@@ -122,6 +122,7 @@ const Calendar = (props) => {
         return days;
 
     }
+    //$('editPage').css('background-image', 'url(' + imageUrl + ')');
     return(
         <div id="calendarPage">
             <div id="weekPicker">
