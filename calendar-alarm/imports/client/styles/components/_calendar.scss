@@ -43,7 +43,8 @@
         }
         div{
             p{
-                @include doFontStuff("Montserrat",$fontSize-p);
+                @include doFontStuff("Montserrat",25px);
+                justify-content: center;
             }
         }
         div:first-child{
@@ -51,16 +52,16 @@
         }
         //Styles based on category
         .itemBox_Home{
-            background-color:$event-bg-home;
+            @include styleEventBoxes($event-bg-home);
         }
         .itemBox_Work{
-            background-color:$event-bg-work;
+            @include styleEventBoxes($event-bg-work);
         }
         .itemBox_School{
-            background-color:$event-bg-school;
+            @include styleEventBoxes($event-bg-school);
         }
         .itemBox_Vacation{
-            background-color:$event-bg-vacation;
+            @include styleEventBoxes($event-bg-vacation);
         }
     }
     #dailyTaskList{
