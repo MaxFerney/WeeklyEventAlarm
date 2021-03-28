@@ -11,8 +11,6 @@ import NavButton from './../components/NavButton.jsx';
 // import Header from './../components/Header.js';
 // import Footer from './../components/Footer.js';
 
-
-
 const HomePage = (props) => {
 
 
@@ -51,6 +49,14 @@ const HomePage = (props) => {
                     <li>Test Event</li>
                     {/*renderEvents(allPostsInDB)*/}
                 </ul>
+                <p>all storage</p>
+                <p>{props.allLocalStorage.map((item)=>
+                    <div key={item.keyName}>
+                        <span>{item.my}</span>
+                        <span>{item.keyName}</span>
+                    </div>
+                )}</p>
+
             </div>
             <NavButton id="continue" to_pathname="/calendar" to_state={{from:"home"}} text="Continue" />
         </div>

@@ -11,48 +11,51 @@ Meteor.startup(() => {
         console.log("i've been dismissed");
     }
     function allStorage() {
-        var archive = {}, // Notice change here
-            keys = Object.keys(localStorage);
-            i = keys.length;
-
+        var storageArray = [{}];
+        keys = Object.keys(localStorage);
+        i = keys.length;
         while ( i-- ) {
-            archive[ keys[i] ] = localStorage.getItem( keys[i] );
+            keyName = keys[i];
+            var data = localStorage.getItem(keyName);
+            if (data) {
+                dataParsed = JSON.parse(data);
+                dataParsed["keyName"] = keyName;
+                storageArray.push( dataParsed );
+            }
         }
-
-        return archive;
+        return storageArray;
     }
+    //if doing a refresh on localStorage
+    //localStorage.clear();
     Tracker.autorun(()=>{
         console.log(CalendarCollectionAccess.find().fetch());
         const allCalendarItems = CalendarCollectionAccess.find().fetch();
+
+        console.log(allCalendarItems);
+
+        console.log("+++++++++++++++++++++++++++++++++++++++++++++++++++++");
+        console.log(JSON.stringify(navigator.notification)); //empty object
+        console.log(navigator.localStorage); //undefined
+        console.log(window.localStorage); //object object
+        console.log(localStorage); //object storage
+        console.log("#####################################################");
+        // var data = localStorage.getItem('myKey')
+        // if (data) {
+        //     data = JSON.parse(data);
+        //     console.log(data.my);
+        // }
+
+
+        let allLocalStorage = allStorage();
+
+        console.log("#####################################################");
+
+        console.log("+++++++++++++++++++++++++++++++++++++++++++++++++++++");
+
         const props = {
             allCalendarItems:allCalendarItems,
             allLocalStorage:allLocalStorage
         };
-
-        localStorage.setItem('myKey2', JSON.stringify({ my: 'data2' }))
-
-
-        console.log(allCalendarItems);
-        console.log("+++++++++++++++++++++++++++++++++++++++++++++++++++++");
-        console.log(JSON.stringify(navigator.notification)); //empty object
-        //navigator.notification.alert("hello world", alertDismissed, 'some title', 'a button');
-        console.log(navigator.localStorage); //undefined
-        console.log(window.localStorage); //object object
-        console.log(localStorage); //object object
-        console.log("#####################################################");
-        var data = localStorage.getItem('myKey')
-        if (data) {
-            data = JSON.parse(data)
-            console.log(data.my);
-        }
-
-
-        const allLocalStorage = allStorage();
-        console.log(JSON.stringify(allLocalStorage));
-        console.log(allLocalStorage);
-        console.log("#####################################################");
-
-        console.log("+++++++++++++++++++++++++++++++++++++++++++++++++++++");
         ReactDOM.render(<App {...props}/>, document.getElementById('react-target'));
     });
 
