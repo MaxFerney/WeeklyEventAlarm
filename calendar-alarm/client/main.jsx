@@ -45,6 +45,8 @@ Meteor.startup(() => {
         //     console.log(data.my);
         // }
 
+        //localStorage.setItem('myKey2', JSON.stringify({ my: 'data2' }))
+
 
         let allLocalStorage = allStorage();
 
