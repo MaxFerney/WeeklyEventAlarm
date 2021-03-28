@@ -31,19 +31,13 @@ const Edit = (props) => {
         console.log("getting information...");
         if (location.state.from=="addEvent"){
             //this is a new event. set defaults here
-            console.log("this is a new event");
         } else if (location.state.from=="existingEvent"){
             //gather defaults from existing event
-            console.log("this is an existing event");
             results = props.allLocalStorage.filter(item => item.EventID.toString() === eventID.toString());
-
             //waits for results to get populated.
             if (results.length>0){
                 item = JSON.stringify(results[0])
-                console.log(item);
                 daysSelected = results[0].Times.Days;
-                console.log("THESE ARE THEY DAYS SELECTED!")
-                console.log(daysSelected)
             }
 
         } else {
@@ -53,17 +47,9 @@ const Edit = (props) => {
     }
     //updates db with info
     const seeNewTime = (data=null) => {
-        // var startTime = parseInt(moment($('#newTimeStart').val()).format('X'));
-        // var stopTime = parseInt(moment($('#newTimeEnd').val()).format('X'));
-        // var category = $('#categorySelection').val();
-
-        /*THIS WILL BE REPLACED WITH STUFF ON THE PAGE*/
-        //default
         var name = $('#eventName').val();
         var theme = $('#themeSelection').val();
         var address = $('#eventAddress').val();
-        // var startTime = parseInt( moment( moment().minutes(),"m" ).format('X') );
-        // var stopTime = parseInt( moment( moment(moment().minutes(),"m").add(1, 'h') ).format('X') );
         var startTime = parseInt(moment($('#TimeStart').val()).format('X'))
         var stopTime = parseInt(moment($('#TimeEnd').val()).format('X'))
         var days = daysSelected;
@@ -71,128 +57,42 @@ const Edit = (props) => {
             //ensure atleast a single day is selected
             daysSelected.push(parseInt(moment($('#TimeStart').val()).format('d')))
         }
-        var doInsert = false;
-
-        if (data == null){
-            var repeat = false;
-            var soundName = "Alarm";
-            var soundFileLocation = null;
-            //perhaps change this type or how it's stored
-            var notifications = [
-                {minPrior:2},
-                {minPrior:15},
-                {hourPrior:0}
-            ];
-            var description = "None Provided";
-            var dataToInsert = {
-                EventID:eventID,
-                isActive:true,
-                Details:{
-                    Name:name,
-                    Theme:theme,
-                    Address:address,
-                    Description:description
-                },
-                Times:{
-                    StartTime:startTime,
-                    StopTime:stopTime,
-                    Days:daysSelected,
-                    DoesRepeat:repeat
-                },
-                AlarmDetails:{
-                    Notifications:notifications,
-                    Sound:soundName,
-                    SoundFile:soundFileLocation
-                }
+        var repeat = false;
+        var soundName = "Alarm";
+        var soundFileLocation = null;
+        //perhaps change this type or how it's stored
+        var notifications = [
+            {minPrior:2},
+            {minPrior:15},
+            {hourPrior:0}
+        ];
+        var description = "None Provided";
+        var dataToInsert = {
+            EventID:eventID,
+            isActive:true,
+            Details:{
+                Name:name,
+                Theme:theme,
+                Address:address,
+                Description:description
+            },
+            Times:{
+                StartTime:startTime,
+                StopTime:stopTime,
+                Days:daysSelected,
+                DoesRepeat:repeat
+            },
+            AlarmDetails:{
+                Notifications:notifications,
+                Sound:soundName,
+                SoundFile:soundFileLocation
             }
-            CalendarCollectionAccess.insert(dataToInsert);
-            localStorage.setItem(eventID, JSON.stringify(dataToInsert, null, '\t'));
-
-        } else {
-            console.log('attempting to update')
-            var repeat = results[0].Times.DoesRepeat;
-            var soundName = results[0].AlarmDetails.Sound;
-            var soundFileLocation = results[0].AlarmDetails.SoundFile;
-            //perhaps change this type or how it's stored
-            var notifications = results[0].AlarmDetails.Notifications;
-            var description = results[0].Details.Description;
-
-            var databaseUpdate = {
-                    EventID:eventID,
-                    isActive:true,
-                    Details:{
-                        Name:name,
-                        Theme:theme,
-                        Address:address,
-                        Description:description
-                    },
-                    Times:{
-                        StartTime:startTime,
-                        StopTime:stopTime,
-                        Days:daysSelected,
-                        DoesRepeat:repeat
-                    },
-                    AlarmDetails:{
-                        Notifications:notifications,
-                        Sound:soundName,
-                        SoundFile:soundFileLocation
-                    }
-                }
-
-            CalendarCollectionAccess.find({EventID:props.eventID}).fetch().map((currentItem) => {
-                CalendarCollectionAccess.update({_id:currentItem._id},{$set:databaseUpdate});
-            });
-            localStorage.setItem(eventID, JSON.stringify(databaseUpdate, null, '\t'));
-
-            //CalendarCollectionAccess.update({EventID:props.eventID}, {$set:databaseUpdate});
-            // Meteor.call(`updateEventByID`, location.state.eventID, databaseUpdate);
-        //     CalendarCollectionAccess.update({_id:item._id},{$set:{
-        //             EventID:location.state.eventID,
-        //             isActive:true,
-        //             Details:{
-        //                 Name:name,
-        //                 Theme:theme,
-        //                 Address:address,
-        //                 Description:description
-        //             },
-        //             Times:{
-        //                 StartTime:startTime,
-        //                 StopTime:stopTime,
-        //                 Days:daysSelected,
-        //                 DoesRepeat:repeat
-        //             },
-        //             AlarmDetails:{
-        //                 Notifications:notifications,
-        //                 Sound:soundName,
-        //                 SoundFile:soundFileLocation
-        //             }
-        //         }
-        //     });
         }
-
-
-
-
-
-
-        //alert('New Time Added!');
-        //console.log("lets gooo");
+        localStorage.setItem(eventID.toString(), JSON.stringify(dataToInsert, null, '\t'));
         setRedirectToOverview(true);
-        //redirectToOverview=true
-        // return (
-        //
-        //     <Redirect to={{
-        //         pathname:"/overview/"+location.state.eventID,
-        //         state:{
-        //             eventID:location.state.eventID,
-        //             from:"edit"
-        //         }
-        //     }}/>
-        // );
     }
 
     const getInfoData = (data=null) => {
-
         const renderCategories = (default_category="Work") => {
             var mappedCategories = props.categories.map((category) => {
                 if (category==default_category){
@@ -216,18 +116,14 @@ const Edit = (props) => {
                 </div>
             );
         } else {
-            //console.log(data);
-            //console.log(results[0].Details);
             return (
                 <div id="editInfoContainer">
                     <input id="eventName" type="text" className="" defaultValue={results[0].Details.Name}/>
                     { renderCategories(results[0].Details.Theme.toString()) }
                     <input id="eventAddress" type="text" className="" defaultValue={results[0].Details.Address} />
                 </div>
-
             );
         }
-
     }
 
     const getDateData = (data=null) => {
@@ -238,17 +134,13 @@ const Edit = (props) => {
                 //remove day from days selected.
                 $('#day'+dayNum).removeClass("selectedBorder");
                 daysSelected = daysSelected.filter(function(e) { return e !== dayNum })
-                //console.log("REMOVED DAY"+dayNum);
             } else {
                 //add day
                 $('#day'+dayNum).addClass("selectedBorder");
                 if(!daysSelected.includes(dayNum)){
                     daysSelected.push(dayNum)
-                    //console.log("adding day"+dayNum)
                 }
-                //console.log("ADDED DAY"+dayNum);
             }
-            //console.log(daysSelected);
 
         }
         //generate buttons for days of week
@@ -288,9 +180,9 @@ const Edit = (props) => {
             return (
                 <div id="editTimeContainer">
                     <p>Start Time</p>
-                    <input id="TimeStart" type="datetime-local" className="" placeholder="startTime"/>
+                    <input id="TimeStart" type="datetime-local" className="" placeholder="startTime" defaultValue={moment().format('YYYY[-]MM[-]DD[T]HH[:]mm')}/>
                     <p>End Time</p>
-                    <input id="TimeEnd" type="datetime-local" className="" placeholder="endTime"/>
+                    <input id="TimeEnd" type="datetime-local" className="" placeholder="endTime" defaultValue={moment().format('YYYY[-]MM[-]DD[T]HH[:]mm')}/>
 
                     { makeButtonArray() }
                     {/*<p>Number of weeks to repeat (OR DOES REPEAT?)</p>*/}
@@ -307,8 +199,6 @@ const Edit = (props) => {
                     <p>End Time</p>
                     <input id="TimeEnd" type="datetime-local" className="" defaultValue={moment(defaultEnd, 'X').format('YYYY[-]MM[-]DD[T]HH[:]mm')}/>
                     { makeButtonArray(data) }
-                    {/*<p>Number of weeks to repeat (OR DOES REPEAT?)</p>*/}
-                    {/*put a drop down with function here ON HOLD FOR NOW*/}
                 </div>
             );
         }
@@ -327,15 +217,12 @@ const Edit = (props) => {
             </div>
         );
     }
-    //whole form
     const getData = (data=null) => {
 
         return(
             <div id="editContainer">
                 {getInfoData(data)}
                 {getDateData(data)}
-                {/*{getOtherData(data)}*/}
-
 
                 <div id="button_container">
                     <button id="saveValuesBtn" className="" onClick={()=>{ seeNewTime(data) }}>
@@ -358,7 +245,6 @@ const Edit = (props) => {
             }}/>
         );
 
-        //console.log(redirectToOverview);
     }
     if (redirectToCalendar){
         return(
@@ -371,19 +257,11 @@ const Edit = (props) => {
             }}/>
         );
     }
-    //console.log(item);
-    //console.log(results);
+
     return (
        <div id="editPage">
         <h1>{(results == null || results==undefined) ? "Add" : (results.length==0) ? "Add":"Edit"} Event</h1>
-            {/*<Helmet>
-                <title>Edit / Update</title>
-            </Helmet>*/}
-            {/*conditionals for if its an edit or create event type page.*/}
-            {/*<Header />*/}
             {(results == null || results==undefined) ? getData(null) : (results.length==0) ? getData(null):getData(item)}
-
-            {/*<Footer />*/}
        </div>
     );
 }
