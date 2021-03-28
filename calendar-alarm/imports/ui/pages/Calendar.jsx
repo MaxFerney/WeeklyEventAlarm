@@ -12,8 +12,14 @@ import { CalendarCollectionAccess } from './../../../lib/calData.js';
 // import Footer from './../components/Footer.js';
 const DayItems = (props) => {
     day = props.day;
-
+    /*
     let dayItems = props.allCalendarItems.filter(item => {
+        return(
+            item.Times.Days.includes(day.day())
+        )
+    } );
+    */
+    let dayItems = props.allLocalStorage.filter(item => {
         return(
             item.Times.Days.includes(day.day())
         )

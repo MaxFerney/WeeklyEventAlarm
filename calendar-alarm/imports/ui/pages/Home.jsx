@@ -10,7 +10,32 @@ import NavButton from './../components/NavButton.jsx';
 // Components
 // import Header from './../components/Header.js';
 // import Footer from './../components/Footer.js';
-
+const ListDailyEvents = (props) => {
+    let today = moment().day();
+    const listItem = (itemData) => {
+        if (itemData){
+            let formatStart = moment(itemData.Times.StartTime, 'X').format('h:mm a');
+            return(
+                itemData.Details.Name+" at "+formatStart
+            );
+        }
+    }
+    let dayItems = props.allLocalStorage.filter(item => {
+        return(
+            item.Times.Days.includes(today)
+        )
+    } );
+    return(
+        <ul>
+            {props.allLocalStorage.length==0
+                ? <li>No items for today</li>
+                : dayItems.map((item)=>
+                    <li key={item.eventID}>{listItem(item)}</li>
+                )
+            }
+        </ul>
+    );
+}
 const HomePage = (props) => {
 
 
@@ -45,8 +70,9 @@ const HomePage = (props) => {
             <h1>{moment(getUnixSec()).format('dddd, MMMM Do')}</h1>
             <div id="dailyEvents">
                 <h2>Today's Events</h2>
-                <ul>
+                {/*<ul>
                     <li>Test Event</li>
+<<<<<<< HEAD
                 </ul>
                 <p>all storage</p>
                 <p>{props.allLocalStorage.map((item)=>
@@ -55,6 +81,11 @@ const HomePage = (props) => {
                         <span>{item.keyName}</span>
                     </div>
                 )}</p>
+=======
+
+                </ul>*/}
+                <ListDailyEvents {...props}/>
+>>>>>>> df527927726d6e1b3ee5844fc6bc91f5a2265daa
 
             </div>
             <NavButton id="continue" to_pathname="/calendar" to_state={{from:"home"}} text="Continue" />

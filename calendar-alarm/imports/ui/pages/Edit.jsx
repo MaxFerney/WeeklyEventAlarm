@@ -35,7 +35,7 @@ const Edit = (props) => {
         } else if (location.state.from=="existingEvent"){
             //gather defaults from existing event
             console.log("this is an existing event");
-            results = props.allCalendarItems.filter(item => item.EventID.toString() === eventID.toString());
+            results = props.allLocalStorage.filter(item => item.EventID.toString() === eventID.toString());
 
             //waits for results to get populated.
             if (results.length>0){
@@ -84,9 +84,8 @@ const Edit = (props) => {
                 {hourPrior:0}
             ];
             var description = "None Provided";
-
-            CalendarCollectionAccess.insert({
-                EventID:location.state.eventID,
+            var dataToInsert = {
+                EventID:eventID,
                 isActive:true,
                 Details:{
                     Name:name,
@@ -105,7 +104,9 @@ const Edit = (props) => {
                     Sound:soundName,
                     SoundFile:soundFileLocation
                 }
-            });
+            }
+            CalendarCollectionAccess.insert(dataToInsert);
+            localStorage.setItem(eventID, JSON.stringify(dataToInsert, null, '\t'));
 
         } else {
             console.log('attempting to update')
@@ -117,7 +118,7 @@ const Edit = (props) => {
             var description = results[0].Details.Description;
 
             var databaseUpdate = {
-                    EventID:location.state.eventID,
+                    EventID:eventID,
                     isActive:true,
                     Details:{
                         Name:name,
@@ -141,6 +142,7 @@ const Edit = (props) => {
             CalendarCollectionAccess.find({EventID:props.eventID}).fetch().map((currentItem) => {
                 CalendarCollectionAccess.update({_id:currentItem._id},{$set:databaseUpdate});
             });
+            localStorage.setItem(eventID, JSON.stringify(databaseUpdate, null, '\t'));
 
             //CalendarCollectionAccess.update({EventID:props.eventID}, {$set:databaseUpdate});
             // Meteor.call(`updateEventByID`, location.state.eventID, databaseUpdate);
