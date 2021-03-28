@@ -71,7 +71,7 @@ export default class App extends React.Component{
     }
     //anything that happens here gets checked every [setInterval] milliseconds
     tick() {
-        results = this.props.allCalendarItems.filter(item => true);
+        results = this.props.allLocalStorage.filter(item => true);
         results.map((eventItem)=>{
 
             let today = moment().day();

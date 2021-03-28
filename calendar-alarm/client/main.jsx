@@ -11,7 +11,7 @@ Meteor.startup(() => {
         console.log("i've been dismissed");
     }
     function allStorage() {
-        var storageArray = [{}];
+        var storageArray = [];
         keys = Object.keys(localStorage);
         i = keys.length;
         while ( i-- ) {
@@ -19,7 +19,7 @@ Meteor.startup(() => {
             var data = localStorage.getItem(keyName);
             if (data) {
                 dataParsed = JSON.parse(data);
-                dataParsed["keyName"] = keyName;
+                //dataParsed["keyName"] = keyName;
                 storageArray.push( dataParsed );
             }
         }

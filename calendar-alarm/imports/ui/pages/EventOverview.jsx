@@ -76,8 +76,8 @@ const EventOverview = (props) => {
 
     const getEventInfo = () => {
 
-        console.log(props.allCalendarItems);
-        results = props.allCalendarItems.filter(item => item.EventID.toString() === eventID.toString());
+        console.log(props.allLocalStorage);
+        results = props.allLocalStorage.filter(item => item.EventID.toString() === eventID.toString());
         item = results[0];
         //console.log(results[0]);
         return results[0];
