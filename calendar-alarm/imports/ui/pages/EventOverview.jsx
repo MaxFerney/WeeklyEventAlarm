@@ -129,6 +129,10 @@ const EventOverview = (props) => {
             <div id="buttons">
                 <button onClick={()=>{setRedirectToCalendar(true)}}>Back to Calendar</button>
                 <button onClick={()=>{setRedirectToEdit(true)}}>Edit</button>
+                <button onClick={()=>{
+                    localStorage.removeItem(eventID.toString());
+                    setRedirectToCalendar(true);
+                }}>DELETE</button>
             </div>
 
             {/*<NavButton id="continue" to_pathname="/calendar" to_state={{from:"alarm"}} text="Back to events" />*/}
