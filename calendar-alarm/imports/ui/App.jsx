@@ -71,6 +71,7 @@ export default class App extends React.Component{
     }
     //anything that happens here gets checked every [setInterval] milliseconds
     tick() {
+        //background = all items times - now = smallest = theme
         results = this.props.allLocalStorage.filter(item => true);
         results.map((eventItem)=>{
 

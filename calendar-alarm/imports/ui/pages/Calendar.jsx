@@ -109,19 +109,41 @@ const Calendar = (props) => {
 
     }
     const taskRender = () => {
+        const itemDivBox = (dayID, dayItems) => {
+            let dayBoxes = dayItems.map((item)=>
+                <div key={item.EventID.toString()} class={"itemBox "+item.Details.Theme}>
+                    .
+                </div>
+            )
+            //console.log(dayBoxes);
+            return dayBoxes;
+        }
+        //Day columns
         let days=[];
         for(var i=0;i<7;i++){
-            let dayID = moment( moment().day(i) ).format("ddd");
+            let dayName = moment( moment().day(i) ).format("ddd"); //mon
+            let dayID = moment( moment().day(i) ); //1
+            let dayItems = props.allLocalStorage.filter(item => {
+                return(
+                    item.Times.Days.includes(i)
+                )
+            } );
+            //individual day column
             days.push(
+
                 <div
                     key={i}
-                    id={dayID}
+                    id={dayName}
                     className="visualCalendar"
                     onClick={()=>{
-                        styleSelectedDay(dayID);
-                        setCurrentDay(moment(dayID, 'ddd'));
+                        styleSelectedDay(dayName);
+                        setCurrentDay(moment(dayName, 'ddd'));
                     }}>
-                    .
+                    {
+                        dayItems.length==0
+                        ? <p></p>
+                        : itemDivBox(dayID, dayItems)
+                    }
                 </div>
             );
         }
