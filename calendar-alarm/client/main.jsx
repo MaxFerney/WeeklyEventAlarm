@@ -5,6 +5,7 @@ import { Tracker } from 'meteor/tracker';
 import App from './../imports/ui/App.jsx';
 import { CalendarCollectionAccess } from '../lib/calData.js'
 import PropTypes from 'prop-types';
+import moment from 'moment';
 
 Meteor.startup(() => {
     function alertDismissed(){
@@ -34,6 +35,9 @@ Meteor.startup(() => {
         console.log(allCalendarItems);
 
         console.log("+++++++++++++++++++++++++++++++++++++++++++++++++++++");
+
+
+
         console.log(JSON.stringify(navigator.notification)); //empty object
         console.log(navigator.localStorage); //undefined
         console.log(window.localStorage); //object object
@@ -51,7 +55,9 @@ Meteor.startup(() => {
         let allLocalStorage = allStorage();
 
         console.log("#####################################################");
-
+        console.log("1616844568");
+        console.log(moment(1616844568, 'X').format('h:mm a'));
+        console.log(moment( moment(1616844568, 'X').format('h:mm a'), 'h:mm a').format('X'));
         console.log("+++++++++++++++++++++++++++++++++++++++++++++++++++++");
 
         const props = {

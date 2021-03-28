@@ -50,10 +50,48 @@ export default class App extends React.Component{
     constructor(props){
         super(props);
         this.state={
-            date: new Date()
+            date: new Date(),
+            theme: 'Vacation',
+            allStartTimes: []
         };
     }
+    unixToToday(unixTime){
+        return moment( moment(unixTime, 'X').format('h:mm:ss a'), 'h:mm:ss a').format('X');
+    }
     componentDidMount(){
+        let allStartTimes = this.props.allLocalStorage
+            .filter(item => item.Times.Days.includes( moment().day() ) )
+            .sort((t1,t2)=> this.unixToToday(t1.Times.StartTime) - this.unixToToday(t2.Times.StartTime))
+            .map((item)=>{
+                timeNow = moment().format('X');
+                //if (now sorted..) time is in the future
+                if (this.unixToToday(item.Times.StartTime)-timeNow > 0){
+                    console.log(JSON.stringify(item));
+                    return item;
+                }
+            });
+        //remove all nulls (aka past times)
+        allStartTimesFiltered = allStartTimes.filter(item=>item!=null);
+
+        this.setState({
+            allStartTimes:allStartTimesFiltered
+        });
+        if (allStartTimesFiltered.length>0){
+
+            //return first item, as its nearest.
+            //set theme'd background
+            if (allStartTimesFiltered[0]!=null && allStartTimesFiltered[0]!=undefined)
+            {
+                console.log(JSON.stringify(allStartTimesFiltered[0]))
+                this.setState({
+                    theme:allStartTimesFiltered[0].Details.Theme
+                });
+            }
+        } else {
+            this.setState({
+                theme:'Vacation'
+            });
+        }
         this.timerID = setInterval(
             () => this.tick(),//PLEASE SET PARENTHESIS HERE TO ENABLE TIMER
             1000
@@ -71,37 +109,54 @@ export default class App extends React.Component{
     }
     //anything that happens here gets checked every [setInterval] milliseconds
     tick() {
-        //background = all items times - now = smallest = theme
-        results = this.props.allLocalStorage.filter(item => true);
-        results.map((eventItem)=>{
 
-            let today = moment().day();
-            let uniNow = moment().format('X');
-            let title= eventItem.Details.Name;
-            let message="It will take some time to get to "+eventItem.Details.Address;
+        /*Setting Background CSS*/
+        console.log(this.state.theme);
+        if(this.state.theme=='Vacation'){
+            $('body, html').css({
+                'background-image': 'url("/images/Travel_Background.jpg")'
+            });
+        } else {
+            $('body, html').css({
+                'background-image':'url("/images/'+this.state.theme+'_Background.jpg")'
+            });
+        }
 
-            //if an event occurs today
-            if (eventItem.Times.Days.includes(today)){
-                //console.log("there's an event today!");
+        /*Check Time - Do Alarm*/
+        results = this.props.allLocalStorage
+            .filter(item => true)
+            .map((eventItem)=>{
 
-                //if theres an event now, do one type of ping
-                if (eventItem.Times.StartTime == uniNow) {
-                    console.log("ITS NOW!!!!");
-                    //prompt not appearing in background, but sound is
-                    //2 content lines MAX
-                    //3 buttons MAX
-                    navigator.notification.confirm(
-                        message,
-                        this.onConfirm,
-                        title+" Starts Now!",
-                        ['OK', 'Snooze']);
-                    navigator.notification.beep(2);
+                let today = moment().day();
+                let uniNow = moment().format('X');
+                let title= eventItem.Details.Name;
+                let message="It will take some time to get to "+eventItem.Details.Address;
+
+                //if an event occurs today
+                if (eventItem.Times.Days.includes(today)){
+                    //console.log("there's an event today!");
+
+                    //if theres an event now, do one type of ping
+                    eventItem.Times.StartTime
+                    if (this.unixToToday(eventItem.Times.StartTime) == uniNow) {
+                        console.log("ITS NOW!!!!");
+                        //prompt not appearing in background, but sound is
+                        //2 content lines MAX
+                        //3 buttons MAX
+                        navigator.notification.confirm(
+                            message,
+                            this.onConfirm,
+                            title+" Starts Now!",
+                            ['OK', 'Snooze']);
+                        navigator.notification.beep(2);
+                    }
+
+                    //if theres an event in CONST minutes, then another type of ping
+
                 }
+            });
 
-                //if theres an event in CONST minutes, then another type of ping
-
-            }
-        })
+        /*State Updates*/
         this.setState({
             date: new Date()
         });
