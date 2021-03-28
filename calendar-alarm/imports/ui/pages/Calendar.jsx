@@ -111,8 +111,8 @@ const Calendar = (props) => {
     const taskRender = () => {
         const itemDivBox = (dayID, dayItems) => {
             let dayBoxes = dayItems.map((item)=>
-                <div key={item.EventID.toString()} class={"itemBox "+item.Details.Theme}>
-                    .
+                <div key={item.EventID.toString()} class={"itemBox_"+item.Details.Theme}>
+                    <p>.</p>
                 </div>
             )
             //console.log(dayBoxes);

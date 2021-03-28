@@ -41,7 +41,28 @@
             @include createTextBackground($background-white,$dropShadow,$radius,0);
             height:30vh;
         }
-        //overflow:scroll;
+        div{
+            p{
+                @include doFontStuff("Montserrat",25px);
+                justify-content: center;
+            }
+        }
+        div:first-child{
+            border-radius:$radius;
+        }
+        //Styles based on category
+        .itemBox_Home{
+            @include styleEventBoxes($event-bg-home);
+        }
+        .itemBox_Work{
+            @include styleEventBoxes($event-bg-work);
+        }
+        .itemBox_School{
+            @include styleEventBoxes($event-bg-school);
+        }
+        .itemBox_Vacation{
+            @include styleEventBoxes($event-bg-vacation);
+        }
     }
     #dailyTaskList{
         grid-row:8/11;

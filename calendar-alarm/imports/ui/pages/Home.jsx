@@ -70,6 +70,10 @@ const HomePage = (props) => {
             <h1>{moment(getUnixSec()).format('dddd, MMMM Do')}</h1>
             <div id="dailyEvents">
                 <h2>Today's Events</h2>
+                {/*<ul>
+                    <li>Test Event</li>
+
+                </ul>*/}
                 <ListDailyEvents {...props}/>
 
             </div>
