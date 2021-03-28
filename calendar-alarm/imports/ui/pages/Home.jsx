@@ -70,22 +70,7 @@ const HomePage = (props) => {
             <h1>{moment(getUnixSec()).format('dddd, MMMM Do')}</h1>
             <div id="dailyEvents">
                 <h2>Today's Events</h2>
-                {/*<ul>
-                    <li>Test Event</li>
-<<<<<<< HEAD
-                </ul>
-                <p>all storage</p>
-                <p>{props.allLocalStorage.map((item)=>
-                    <div key={item.keyName}>
-                        <span>{item.my}</span>
-                        <span>{item.keyName}</span>
-                    </div>
-                )}</p>
-=======
-
-                </ul>*/}
                 <ListDailyEvents {...props}/>
->>>>>>> df527927726d6e1b3ee5844fc6bc91f5a2265daa
 
             </div>
             <NavButton id="continue" to_pathname="/calendar" to_state={{from:"home"}} text="Continue" />
