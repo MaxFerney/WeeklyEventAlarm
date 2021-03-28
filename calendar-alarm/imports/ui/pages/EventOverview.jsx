@@ -90,7 +90,7 @@ const EventOverview = (props) => {
     }
 
     if (results == null){
-        console.log("getting info");
+        //console.log("getting info");
         if(eventID == null){
             console.error("HOW DID YOU GET HERE?!?");
         } else {

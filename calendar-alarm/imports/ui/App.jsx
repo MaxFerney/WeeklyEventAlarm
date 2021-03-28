@@ -52,13 +52,26 @@ export default class App extends React.Component{
         this.state={
             date: new Date(),
             theme: 'Vacation',
-            allStartTimes: []
+            nextEvent: undefined,
+            futureTimes: [],
         };
     }
+
+    /*INTERNAL FUNCTIONS*/
     unixToToday(unixTime){
         return moment( moment(unixTime, 'X').format('h:mm:ss a'), 'h:mm:ss a').format('X');
     }
-    componentDidMount(){
+    getNextEvent(timesInFuture){
+        if (timesInFuture.length>0){
+            if (timesInFuture[0]!=null && timesInFuture[0]!=undefined)
+            {
+                return timesInFuture[0];
+            }
+        } else {
+            return undefined;
+        }
+    }
+    getFutureTimes(){
         let allStartTimes = this.props.allLocalStorage
             .filter(item => item.Times.Days.includes( moment().day() ) )
             .sort((t1,t2)=> this.unixToToday(t1.Times.StartTime) - this.unixToToday(t2.Times.StartTime))
@@ -66,39 +79,14 @@ export default class App extends React.Component{
                 timeNow = moment().format('X');
                 //if (now sorted..) time is in the future
                 if (this.unixToToday(item.Times.StartTime)-timeNow > 0){
-                    console.log(JSON.stringify(item));
+                    //console.log(JSON.stringify(item));
                     return item;
                 }
             });
         //remove all nulls (aka past times)
         allStartTimesFiltered = allStartTimes.filter(item=>item!=null);
 
-        this.setState({
-            allStartTimes:allStartTimesFiltered
-        });
-        if (allStartTimesFiltered.length>0){
-
-            //return first item, as its nearest.
-            //set theme'd background
-            if (allStartTimesFiltered[0]!=null && allStartTimesFiltered[0]!=undefined)
-            {
-                console.log(JSON.stringify(allStartTimesFiltered[0]))
-                this.setState({
-                    theme:allStartTimesFiltered[0].Details.Theme
-                });
-            }
-        } else {
-            this.setState({
-                theme:'Vacation'
-            });
-        }
-        this.timerID = setInterval(
-            () => this.tick(),//PLEASE SET PARENTHESIS HERE TO ENABLE TIMER
-            1000
-        );
-    }
-    componentWillUnmount() {
-        clearInterval(this.timerID);
+        return allStartTimesFiltered;
     }
     onConfirm(buttonIndex){
         //could make this a follow up prompt.
@@ -107,11 +95,55 @@ export default class App extends React.Component{
         )
         alert(returnString);
     }
+    /*INTERNAL FUNCTIONS*/
+
+    componentDidMount(){
+
+        /*Theme for next event*/
+        let nextEvent = this.getNextEvent(this.getFutureTimes());
+        if (nextEvent!=undefined){
+            this.setState({
+                theme: nextEvent.Details.Theme,
+                nextEvent: nextEvent,
+                futureTimes:this.getFutureTimes()
+            });
+        } else {
+            this.setState({theme: 'Vacation' });
+        }
+
+
+        this.timerID = setInterval(
+            () => this.tick(),//PLEASE SET PARENTHESIS HERE TO ENABLE TIMER
+            1000
+        );
+    }
+    componentWillUnmount() {
+        this.state={
+            date: new Date(),
+            theme: 'Vacation',
+            nextEvent: undefined,
+            futureTimes: [],
+        };
+        clearInterval(this.timerID);
+    }
+
     //anything that happens here gets checked every [setInterval] milliseconds
     tick() {
 
+
+        /*Updating Next Events*/
+        let nextEvent = this.getNextEvent(this.getFutureTimes());
+        if (nextEvent!=undefined){
+            this.setState({
+                theme: nextEvent.Details.Theme,
+                nextEvent: nextEvent,
+                futureTimes:this.getFutureTimes()
+            });
+        } else {this.setState({theme: 'Vacation' });}
+
+
+
         /*Setting Background CSS*/
-        console.log(this.state.theme);
         if(this.state.theme=='Vacation'){
             $('body, html').css({
                 'background-image': 'url("/images/Travel_Background.jpg")'
@@ -122,6 +154,8 @@ export default class App extends React.Component{
             });
         }
 
+
+
         /*Check Time - Do Alarm*/
         results = this.props.allLocalStorage
             .filter(item => true)
@@ -130,7 +164,7 @@ export default class App extends React.Component{
                 let today = moment().day();
                 let uniNow = moment().format('X');
                 let title= eventItem.Details.Name;
-                let message="It will take some time to get to "+eventItem.Details.Address;
+                let message = eventItem.Details.Address;
 
                 //if an event occurs today
                 if (eventItem.Times.Days.includes(today)){
@@ -155,6 +189,8 @@ export default class App extends React.Component{
 
                 }
             });
+
+
 
         /*State Updates*/
         this.setState({
