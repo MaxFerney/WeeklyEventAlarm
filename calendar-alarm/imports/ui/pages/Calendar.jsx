@@ -15,14 +15,14 @@ const unixToToday = (unixTime) =>{
 }
 
 const DayItems = (props) => {
-    day = props.day;
+    let day = props.day;
     let dayItems = props.allLocalStorage.filter(item => {
         return(
             item.Times.Days.includes(day.day())
         )
     } ).sort( (d1,d2) => unixToToday(d1.Times.StartTime) - unixToToday(d2.Times.StartTime) );
 
-    console.log(dayItems);
+    //console.log(dayItems);
 
     const items = dayItems.map((item)=>{
         let formatStart = moment(item.Times.StartTime, 'X').format('h:mm a');
@@ -67,7 +67,7 @@ const Calendar = (props) => {
     let amPm="am";
     let currentTime = moment().format('X');
 
-    console.log(currentTime);
+    //console.log(currentTime);
     const getDays = () =>{
         let days=[];
         for(var i=0;i<7;i++){

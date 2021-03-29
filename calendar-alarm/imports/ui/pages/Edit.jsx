@@ -29,7 +29,7 @@ const Edit = (props) => {
 
     if (firstRender){
         let allLocalStorage = allStorage();
-        console.log("getting information...");
+        //console.log("getting information...");
         if (location.state.from=="addEvent"){
             //this is a new event. set defaults here
         } else if (location.state.from=="existingEvent"){
@@ -94,7 +94,7 @@ const Edit = (props) => {
         while (d--){
             if ($('#day'+d).hasClass("selectedBorder")){
                 days.push( d );
-                console.log("pushed day: "+d);
+                //console.log("pushed day: "+d);
             }
         }
         days = days.sort((d1,d2)=>d1-d2);
@@ -141,7 +141,7 @@ const Edit = (props) => {
             localStorage.setItem(eventID, JSON.stringify(dataToInsert, null, '\t'));
 
         } else {
-            console.log('attempting to update')
+            //console.log('attempting to update')
             var repeat = results[0].Times.DoesRepeat;
             var soundName = results[0].AlarmDetails.Sound;
             var soundFileLocation = results[0].AlarmDetails.SoundFile;
