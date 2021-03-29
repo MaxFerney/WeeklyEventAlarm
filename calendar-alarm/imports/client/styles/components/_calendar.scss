@@ -5,8 +5,6 @@
     #weekPicker{
         grid-column:1/-1;
         grid-row:1/1;
-        display:grid;
-        grid-template-columns: repeat(3, 1fr);
         @include createTextBackground($background-white,$dropShadow,$radius);
         @include doFontStuff("Montserrat",$fontSize-h2);
         text-align: center;
@@ -47,11 +45,11 @@
                 justify-content: center;
             }
         }
-        div:first-child{
-            border-radius:10px 10px 0 0;
-        }
-        div:last-child{
+        div>div:last-child{
             border-radius:0 0 10px 10px;
+        }
+        div>div:first-child{
+            border-radius:10px 10px 0 0;
         }
         //Styles based on category
         .itemBox_Home{
