@@ -48,7 +48,10 @@
             }
         }
         div:first-child{
-            border-radius:$radius;
+            border-radius:10px 10px 0 0;
+        }
+        div:last-child{
+            border-radius:0 0 10px 10px;
         }
         //Styles based on category
         .itemBox_Home{

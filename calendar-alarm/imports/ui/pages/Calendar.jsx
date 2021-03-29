@@ -154,9 +154,7 @@ const Calendar = (props) => {
     return(
         <div id="calendarPage">
             <div id="weekPicker">
-                <p>&lt;</p>
                 <p>{startDate}-{endDate},{year}</p>
-                <p>&gt;</p>
             </div>
             <div id="weeklyCalendar">
                 <div id="dayOfWeek">
