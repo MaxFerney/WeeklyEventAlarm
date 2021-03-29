@@ -10,20 +10,17 @@ import { CalendarCollectionAccess } from './../../../lib/calData.js';
 // Components
 // import Header from './../components/Header.js';
 // import Footer from './../components/Footer.js';
+const unixToToday = (unixTime) =>{
+    return moment( moment(unixTime, 'X').format('h:mm:ss a'), 'h:mm:ss a').format('X');
+}
+
 const DayItems = (props) => {
     day = props.day;
-    /*
-    let dayItems = props.allCalendarItems.filter(item => {
-        return(
-            item.Times.Days.includes(day.day())
-        )
-    } );
-    */
     let dayItems = props.allLocalStorage.filter(item => {
         return(
             item.Times.Days.includes(day.day())
         )
-    } );
+    } ).sort( (d1,d2) => unixToToday(d1.Times.StartTime) - unixToToday(d2.Times.StartTime) );
 
     console.log(dayItems);
 
@@ -56,17 +53,10 @@ const DayItems = (props) => {
 const Calendar = (props) => {
 
     //Stubbed out variables to edit later
-
     let location = useLocation();
-    // let results = null;
-    // let item;
     let firstRender = true;
-    //let currentDay = null;
     const [currentDay, setCurrentDay] = useState(moment(moment().day(), 'd'));
-    // const [updateDayItems, setUpdateDayItems] = useState(false);
     let startDate= moment( moment().day(0) ).format("MMM Do");
-    // console.log( moment(moment().month()+1,"M").format("MMM") );
-    // console.log( moment(moment().month()+1,"M").format("MMM").toString() + ", " + moment().date().toString() );
     let endDate= moment( moment().day(6) ).format("MMM Do");
     //year is current year
     let year=moment( moment().day(0) ).format("YYYY");
@@ -77,15 +67,6 @@ const Calendar = (props) => {
     let amPm="am";
     let currentTime = moment().format('X');
 
-    // if (firstRender){
-    //     useEffect(()=>{
-    //         let today = moment(moment().day(), 'd');
-    //         console.log(today.day()); //2
-    //         styleSelectedDay(today.format('ddd'));
-    //         setCurrentDay(today)
-    //         firstRender=false;
-    //     })
-    // }
     console.log(currentTime);
     const getDays = () =>{
         let days=[];
@@ -105,17 +86,16 @@ const Calendar = (props) => {
         // let el=document.getElementById(selectedDay);
         // el.classList.add("selectedBorder");
     }
-    function adjustDate(direction,currentDay){
 
-    }
     const taskRender = () => {
         const itemDivBox = (dayID, dayItems) => {
             let dayBoxes = dayItems.map((item)=>
-                <div key={item.EventID.toString()} class={"itemBox_"+item.Details.Theme}>
-                    <p>.</p>
+                <div key={item.EventID.toString()} className={"itemBox_"+item.Details.Theme}>
+                    <p className="calendar_p">{moment(item.Times.StartTime, 'X').format('h:mma')}</p>
                 </div>
             )
             //console.log(dayBoxes);
+
             return dayBoxes;
         }
         //Day columns
@@ -127,7 +107,7 @@ const Calendar = (props) => {
                 return(
                     item.Times.Days.includes(i)
                 )
-            } );
+            } ).sort( (d1,d2) => unixToToday(d1.Times.StartTime) - unixToToday(d2.Times.StartTime) );
             //individual day column
             days.push(
 
@@ -161,24 +141,11 @@ const Calendar = (props) => {
             <div id="weeklyCalendar">
                 <div id="dayOfWeek">
                     {getDays()}
-                    {/*<p>S {moment(moment().day())}</p>
-                    <p>M</p>
-                    <p>T</p>
-                    <p>W</p>
-                    <p>R</p>
-                    <p>F</p>
-                    <p>S</p>
-                    U+005C U+0022*/}
+
                 </div>
                 <div id="taskArea">
                     {taskRender()}
-                    {/*<div id="sundayTasks" className="visualCalendar" onClick={()=>{styleSelectedDay("sundayTasks")}}>.</div>
-                    <div id="mondayTasks" className="visualCalendar" onClick={()=>{styleSelectedDay("mondayTasks")}}>.</div>
-                    <div id="tuesdayTasks" className="visualCalendar" onClick={()=>{styleSelectedDay("tuesdayTasks")}}>.</div>
-                    <div id="wednesdayTasks" className="visualCalendar" onClick={()=>{styleSelectedDay("wednesdayTasks")}}>.</div>
-                    <div id="thursdayTasks" className="visualCalendar" onClick={()=>{styleSelectedDay("thursdayTasks")}}>.</div>
-                    <div id="fridayTasks" className="visualCalendar" onClick={()=>{styleSelectedDay("fridayTasks")}}>.</div>
-                    <div id="saturdayTasks" className="visualCalendar" onClick={()=>{styleSelectedDay("saturdayTasks")}}>.</div>*/}
+
                 </div>
             </div>
             <div id="dailyTaskList">
