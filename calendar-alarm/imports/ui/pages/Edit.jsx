@@ -32,7 +32,6 @@ const Edit = (props) => {
         console.log("getting information...");
         if (location.state.from=="addEvent"){
             //this is a new event. set defaults here
-            daysSelected.push(parseInt(moment().day()));
         } else if (location.state.from=="existingEvent"){
             //gather defaults from existing event
             results = allLocalStorage.filter(item => item.EventID.toString() === eventID.toString());
@@ -90,9 +89,19 @@ const Edit = (props) => {
         var address = $('#eventAddress').val();
         var startTime = parseInt(moment($('#TimeStart').val()).format('X'))
         var stopTime = parseInt(moment($('#TimeEnd').val()).format('X'))
-        var days = daysSelected;
+        var days = [];
+        let d=7;
+        while (d--){
+            if ($('#day'+d).hasClass("selectedBorder")){
+                days.push( d );
+                console.log("pushed day: "+d);
+            }
+        }
+        days = days.sort((d1,d2)=>d1-d2);
+        //var days = daysSelected;
         if (days.length==0){
-            days.push(parseInt(moment($('#TimeStart').val()).format('d')))
+            // days.push(parseInt(moment($('#TimeStart').val()).format('d')))
+            days.push(moment().day())
         }
         var doInsert = false;
 
@@ -152,7 +161,7 @@ const Edit = (props) => {
                     Times:{
                         StartTime:startTime,
                         StopTime:stopTime,
-                        Days:daysSelected,
+                        Days:days,
                         DoesRepeat:repeat
                     },
                     AlarmDetails:{
@@ -166,7 +175,6 @@ const Edit = (props) => {
                 CalendarCollectionAccess.update({_id:currentItem._id},{$set:databaseUpdate});
             });
             localStorage.setItem(eventID, JSON.stringify(databaseUpdate, null, '\t'));
-
         }
         setRedirectToOverview(true);
     }
