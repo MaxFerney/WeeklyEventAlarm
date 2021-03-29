@@ -43,7 +43,7 @@
         }
         div{
             p{
-                @include doFontStuff("Montserrat",25px);
+                @include doFontStuff("Montserrat",12px);
                 justify-content: center;
             }
         }

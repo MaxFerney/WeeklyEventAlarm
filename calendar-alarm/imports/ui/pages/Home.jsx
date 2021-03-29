@@ -10,6 +10,10 @@ import NavButton from './../components/NavButton.jsx';
 // Components
 // import Header from './../components/Header.js';
 // import Footer from './../components/Footer.js';
+const unixToToday = (unixTime) =>{
+    return moment( moment(unixTime, 'X').format('h:mm:ss a'), 'h:mm:ss a').format('X');
+}
+
 const ListDailyEvents = (props) => {
     let today = moment().day();
     const listItem = (itemData) => {
@@ -20,11 +24,14 @@ const ListDailyEvents = (props) => {
             );
         }
     }
-    let dayItems = props.allLocalStorage.filter(item => {
+
+    let dayItems = props.allLocalStorage
+    .filter(item => {
         return(
             item.Times.Days.includes(today)
         )
-    } );
+    } )
+    .sort( (d1,d2) => unixToToday(d1.Times.StartTime) - unixToToday(d2.Times.StartTime) );
     return(
         <ul>
             {props.allLocalStorage.length==0
