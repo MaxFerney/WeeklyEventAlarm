@@ -242,7 +242,7 @@ export default class App extends React.Component{
                         key="overview"
                         path="/overview/:id"
                         exact>
-                        <OverviewRouter {...this.props}/>
+                        <OverviewRouter {...this.props} allLocalStorage={this.state.allLocalStorage}/>
                     </Route>}
                     <Route
                         key="alarmpage"
