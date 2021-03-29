@@ -87,8 +87,8 @@ const Edit = (props) => {
         var name = $('#eventName').val();
         var theme = $('#themeSelection').val();
         var address = $('#eventAddress').val();
-        var startTime = parseInt(moment($('#TimeStart').val()).format('X'))
-        var stopTime = parseInt(moment($('#TimeEnd').val()).format('X'))
+        var startTime = parseInt(moment($('#TimeStart').val(), 'HH:mm').format('X'))
+        var stopTime = parseInt(moment($('#TimeEnd').val(), 'HH:mm').format('X'))
         var days = [];
         let d=7;
         while (d--){
@@ -268,9 +268,11 @@ const Edit = (props) => {
             return (
                 <div id="editTimeContainer">
                     <p>Start Time</p>
-                    <input id="TimeStart" type="datetime-local" className="" placeholder="startTime" defaultValue={moment().format('YYYY[-]MM[-]DD[T]HH[:]mm')}/>
+                    <input id="TimeStart" type="time" className="" placeholder="startTime" defaultValue={moment().format('HH[:]mm')}/>
+                    {/*<input id="TimeStart" type="datetime-local" className="" placeholder="startTime" defaultValue={moment().format('YYYY[-]MM[-]DD[T]HH[:]mm')}/>*/}
                     <p>End Time</p>
-                    <input id="TimeEnd" type="datetime-local" className="" placeholder="endTime" defaultValue={moment().format('YYYY[-]MM[-]DD[T]HH[:]mm')}/>
+                    <input id="TimeEnd" type="time" className="" placeholder="endTime" defaultValue={moment().format('HH[:]mm')}/>
+                    {/*<input id="TimeEnd" type="datetime-local" className="" placeholder="endTime" defaultValue={moment().format('YYYY[-]MM[-]DD[T]HH[:]mm')}/>*/}
 
                     { makeButtonArray() }
                     {/*<p>Number of weeks to repeat (OR DOES REPEAT?)</p>*/}
@@ -283,9 +285,11 @@ const Edit = (props) => {
             return (
                 <div id="editTimeContainer">
                     <p>Start Time</p>
-                    <input id="TimeStart" type="datetime-local" className="" defaultValue={moment(defaultStart, 'X').format('YYYY[-]MM[-]DD[T]HH[:]mm')}/>
+                    <input id="TimeStart" type="time" className="" defaultValue={moment(defaultStart, 'X').format('HH[:]mm')}/>
+                    {/*<input id="TimeStart" type="datetime-local" className="" defaultValue={moment(defaultStart, 'X').format('YYYY[-]MM[-]DD[T]HH[:]mm')}/>*/}
                     <p>End Time</p>
-                    <input id="TimeEnd" type="datetime-local" className="" defaultValue={moment(defaultEnd, 'X').format('YYYY[-]MM[-]DD[T]HH[:]mm')}/>
+                    <input id="TimeEnd" type="time" className="" defaultValue={moment(defaultEnd, 'X').format('HH[:]mm')}/>
+                    {/*<input id="TimeEnd" type="datetime-local" className="" defaultValue={moment(defaultEnd, 'X').format('YYYY[-]MM[-]DD[T]HH[:]mm')}/>*/}
                     { makeButtonArray(data) }
                 </div>
             );
