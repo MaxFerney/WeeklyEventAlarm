@@ -206,8 +206,8 @@ const Edit = (props) => {
             return (
                 <div id="editInfoContainer">
                     <input id="eventName" type="text" className="" defaultValue={results[0].Details.Name}/>
-                    { renderCategories(results[0].Details.Theme.toString()) }
                     <input id="eventAddress" type="text" className="" defaultValue={results[0].Details.Address} />
+                    { renderCategories(results[0].Details.Theme.toString()) }
                 </div>
             );
         }
