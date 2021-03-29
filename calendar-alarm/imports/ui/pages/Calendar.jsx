@@ -109,6 +109,14 @@ const Calendar = (props) => {
                 )
             } ).sort( (d1,d2) => unixToToday(d1.Times.StartTime) - unixToToday(d2.Times.StartTime) );
             //individual day column
+            dayItems = dayItems.filter((item, index) => {
+                //console.log(index);
+                if (index<6){
+                    return true;
+                } else {
+                    return false;
+                }
+            } );
             days.push(
 
                 <div
