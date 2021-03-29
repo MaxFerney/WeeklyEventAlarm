@@ -166,8 +166,9 @@ const Edit = (props) => {
                 CalendarCollectionAccess.update({_id:currentItem._id},{$set:databaseUpdate});
             });
             localStorage.setItem(eventID, JSON.stringify(databaseUpdate, null, '\t'));
-        setRedirectToOverview(true);
+
         }
+        setRedirectToOverview(true);
     }
 
     const getInfoData = (data=null) => {
