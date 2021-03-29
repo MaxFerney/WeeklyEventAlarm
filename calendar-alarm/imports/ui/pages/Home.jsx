@@ -17,7 +17,7 @@ const unixToToday = (unixTime) =>{
 const ListDailyEvents = (props) => {
     let today = moment().day();
     const listItem = (itemData) => {
-        if (itemData){
+        if (itemData!=undefined && itemData!=null){
             let formatStart = moment(itemData.Times.StartTime, 'X').format('h:mm a');
             return(
                 itemData.Details.Name+" at "+formatStart
@@ -32,6 +32,14 @@ const ListDailyEvents = (props) => {
         )
     } )
     .sort( (d1,d2) => unixToToday(d1.Times.StartTime) - unixToToday(d2.Times.StartTime) );
+    dayItems = dayItems.filter((item, index) => {
+        //console.log(index);
+        if (index<6){
+            return true;
+        } else {
+            return false;
+        }
+    } );
     return(
         <ul>
             {props.allLocalStorage.length==0
