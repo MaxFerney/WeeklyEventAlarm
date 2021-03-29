@@ -28,12 +28,14 @@ const Edit = (props) => {
 
 
     if (firstRender){
+        let allLocalStorage = allStorage();
         console.log("getting information...");
         if (location.state.from=="addEvent"){
             //this is a new event. set defaults here
+            daysSelected.push(parseInt(moment().day()));
         } else if (location.state.from=="existingEvent"){
             //gather defaults from existing event
-            results = props.allLocalStorage.filter(item => item.EventID.toString() === eventID.toString());
+            results = allLocalStorage.filter(item => item.EventID.toString() === eventID.toString());
             //waits for results to get populated.
             if (results.length>0){
                 item = JSON.stringify(results[0])
@@ -45,51 +47,127 @@ const Edit = (props) => {
         }
         firstRender=false;
     }
+    function allStorage() {
+        var storageArray = [];
+        keys = Object.keys(localStorage);
+        i = keys.length;
+        while ( i-- ) {
+            keyName = keys[i];
+            var data = localStorage.getItem(keyName);
+            if (data) {
+                dataParsed = JSON.parse(data);
+                //dataParsed["keyName"] = keyName;
+                storageArray.push( dataParsed );
+            }
+        }
+        return storageArray;
+    }
+    /*
+    useEffect(()=>{
+        //check days selected in here?
+        return function cleanup() {
+            location = useLocation();
+            daysSelected = [];
+            results = null;
+            item=undefined;
+            firstRender = true;
+            eventID = props.eventID;
+            setRedirectToOverview(false);
+            setRedirectToCalendar(false);
+        };
+    });
+    */
     //updates db with info
     const seeNewTime = (data=null) => {
+        // var startTime = parseInt(moment($('#newTimeStart').val()).format('X'));
+        // var stopTime = parseInt(moment($('#newTimeEnd').val()).format('X'));
+        // var category = $('#categorySelection').val();
+
+        /*THIS WILL BE REPLACED WITH STUFF ON THE PAGE*/
+        //default
         var name = $('#eventName').val();
         var theme = $('#themeSelection').val();
         var address = $('#eventAddress').val();
         var startTime = parseInt(moment($('#TimeStart').val()).format('X'))
         var stopTime = parseInt(moment($('#TimeEnd').val()).format('X'))
         var days = daysSelected;
-        if (daysSelected.length==0){
-            //ensure atleast a single day is selected
-            daysSelected.push(parseInt(moment($('#TimeStart').val()).format('d')))
+        if (days.length==0){
+            days.push(parseInt(moment($('#TimeStart').val()).format('d')))
         }
-        var repeat = false;
-        var soundName = "Alarm";
-        var soundFileLocation = null;
-        //perhaps change this type or how it's stored
-        var notifications = [
-            {minPrior:2},
-            {minPrior:15},
-            {hourPrior:0}
-        ];
-        var description = "None Provided";
-        var dataToInsert = {
-            EventID:eventID,
-            isActive:true,
-            Details:{
-                Name:name,
-                Theme:theme,
-                Address:address,
-                Description:description
-            },
-            Times:{
-                StartTime:startTime,
-                StopTime:stopTime,
-                Days:daysSelected,
-                DoesRepeat:repeat
-            },
-            AlarmDetails:{
-                Notifications:notifications,
-                Sound:soundName,
-                SoundFile:soundFileLocation
+        var doInsert = false;
+
+        if (data == null){
+            var repeat = false;
+            var soundName = "Alarm";
+            var soundFileLocation = null;
+            //perhaps change this type or how it's stored
+            var notifications = [
+                {minPrior:2},
+                {minPrior:15},
+                {hourPrior:0}
+            ];
+            var description = "None Provided";
+            var dataToInsert = {
+                EventID:eventID,
+                isActive:true,
+                Details:{
+                    Name:name,
+                    Theme:theme,
+                    Address:address,
+                    Description:description
+                },
+                Times:{
+                    StartTime:startTime,
+                    StopTime:stopTime,
+                    Days:days,
+                    DoesRepeat:repeat
+                },
+                AlarmDetails:{
+                    Notifications:notifications,
+                    Sound:soundName,
+                    SoundFile:soundFileLocation
+                }
             }
-        }
-        localStorage.setItem(eventID.toString(), JSON.stringify(dataToInsert, null, '\t'));
+            CalendarCollectionAccess.insert(dataToInsert);
+            localStorage.setItem(eventID, JSON.stringify(dataToInsert, null, '\t'));
+
+        } else {
+            console.log('attempting to update')
+            var repeat = results[0].Times.DoesRepeat;
+            var soundName = results[0].AlarmDetails.Sound;
+            var soundFileLocation = results[0].AlarmDetails.SoundFile;
+            //perhaps change this type or how it's stored
+            var notifications = results[0].AlarmDetails.Notifications;
+            var description = results[0].Details.Description;
+
+            var databaseUpdate = {
+                    EventID:eventID,
+                    isActive:true,
+                    Details:{
+                        Name:name,
+                        Theme:theme,
+                        Address:address,
+                        Description:description
+                    },
+                    Times:{
+                        StartTime:startTime,
+                        StopTime:stopTime,
+                        Days:daysSelected,
+                        DoesRepeat:repeat
+                    },
+                    AlarmDetails:{
+                        Notifications:notifications,
+                        Sound:soundName,
+                        SoundFile:soundFileLocation
+                    }
+                }
+
+            CalendarCollectionAccess.find({EventID:props.eventID}).fetch().map((currentItem) => {
+                CalendarCollectionAccess.update({_id:currentItem._id},{$set:databaseUpdate});
+            });
+            localStorage.setItem(eventID, JSON.stringify(databaseUpdate, null, '\t'));
         setRedirectToOverview(true);
+        }
     }
 
     const getInfoData = (data=null) => {
@@ -152,8 +230,9 @@ const Edit = (props) => {
                 for(var i=0;i<7;i++){
                     let dayNum = i;
                     let formattedDay = moment( moment().day(i) ).format("dd");
-                    days.push(
-                        <div key={i} id={"day"+i} className={"dayButton"} onClick={()=>{selectDay(dayNum)}}>{formattedDay}</div>
+                    let isSelected = "";
+                    days.push(                          /*should fix:  v  added space*/
+                        <div key={i} id={"day"+i} className={"dayButton "+isSelected} onClick={()=>{selectDay(dayNum)}}>{formattedDay}</div>
                     );
                 }
             } else {

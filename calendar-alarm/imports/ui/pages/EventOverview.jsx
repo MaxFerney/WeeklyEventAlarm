@@ -69,15 +69,15 @@ const EventOverview = (props) => {
     //console.log(eventID);
     const [redirectToCalendar, setRedirectToCalendar] = useState(false);
     const [redirectToEdit, setRedirectToEdit] = useState(false);
+    let allLocalStorage = allStorage();
     // console.log(eventID);
     // console.log(props.eventID);
     // console.log(moment().format('X'));
     //test eventID - 1615495198
 
     const getEventInfo = () => {
-
         //console.log(props.allLocalStorage);
-        results = props.allLocalStorage.filter(item => item.EventID.toString() === eventID.toString());
+        results = allLocalStorage.filter(item => item.EventID.toString() === eventID.toString());
         item = results[0];
         //console.log(results[0]);
         return results[0];
@@ -88,7 +88,21 @@ const EventOverview = (props) => {
             <EventDetailCompoent item={item} />
         );
     }
-
+    function allStorage() {
+        var storageArray = [];
+        keys = Object.keys(localStorage);
+        i = keys.length;
+        while ( i-- ) {
+            keyName = keys[i];
+            var data = localStorage.getItem(keyName);
+            if (data) {
+                dataParsed = JSON.parse(data);
+                //dataParsed["keyName"] = keyName;
+                storageArray.push( dataParsed );
+            }
+        }
+        return storageArray;
+    }
     if (results == null){
         //console.log("getting info");
         if(eventID == null){
