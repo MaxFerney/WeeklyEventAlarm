@@ -3,7 +3,7 @@
     @include createGrid(2,1);
     @include squishElements($squish);
     h1{
-        @include createTextBackground($background-white,$dropShadow,$radius,0);
+        @include createTextBackground($background-white,$dropShadow,$radius);
         grid-row:1/1;
         grid-column:1/-1;
         font-size:$fontSize-h1;
@@ -12,7 +12,7 @@
         margin-bottom:$margin-general;
     }
     #backToCalendar{
-        @include createTextBackground($background-white,$dropShadow,$radius,0);
+        @include createTextBackground($background-white,$dropShadow,$radius);
         @include doFontStuff("Montserrat",$fontSize-p);
         border-radius:10px;
         margin-top:$margin-general;
@@ -35,7 +35,7 @@
                 grid-row:7/7;
             }
             input{
-                @include createTextBackground($background-white,$dropShadow,$radius,0);
+                @include createTextBackground($background-white,$dropShadow,$radius);
                 @include doFontStuff("Montserrat",$fontSize-p);
                 border-radius:10px;
                 padding:2%;
@@ -43,7 +43,7 @@
                 width:$width-general;
             }
             select{
-                @include createTextBackground($background-white,$dropShadow,$radius,0);
+                @include createTextBackground($background-white,$dropShadow,$radius);
                 @include doFontStuff("Montserrat",$fontSize-p);
                 border-radius:10px;
                 padding:2%;
@@ -55,7 +55,7 @@
                 margin-top:$margin-extra;
                 margin-bottom:$margin-extra;
                 p{
-                    @include createTextBackground($background-white,$dropShadow,$radius,0);
+                    @include createTextBackground($background-white,$dropShadow,$radius);
                     color:black;
                     padding:2%;
                     text-align:center;
@@ -68,7 +68,7 @@
                 }
             }
             #saveValuesBtn{
-                @include createTextBackground($background-white,$dropShadow,$radius,0);
+                @include createTextBackground($background-white,$dropShadow,$radius);
                 @include doFontStuff("Montserrat",$fontSize-p);
                 grid-column:1/-1;
                 border-radius:10px;
@@ -79,7 +79,7 @@
                 width:$width-extra;
             }
             .dayButton{
-                @include createTextBackground($background-white,$dropShadow,$radius,0);
+                @include createTextBackground($background-white,$dropShadow,$radius);
                 @include doFontStuff("Montserrat",$fontSize-p);
                 float:left;
                 padding:2%;

@@ -6,11 +6,10 @@
     height:100vh;
 }
 //creates background behind the text
-@mixin createTextBackground($background-color,$drop-shadow,$border-radius,$padding){
+@mixin createTextBackground($background-color,$drop-shadow,$border-radius){
     background-color:$background-color;
     border-radius:$border-radius;
     box-shadow: $drop-shadow;
-    padding:$padding;
 }
 @mixin doFontStuff($font,$fontSize){
     font-family:$font,sans-serif;
@@ -25,4 +24,5 @@
 @mixin styleEventBoxes($box-color){
     background-color:$box-color;
     border:2px solid black;
+    margin-bottom:$margin-general;
 }

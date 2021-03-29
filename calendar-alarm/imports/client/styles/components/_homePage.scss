@@ -4,7 +4,7 @@
     @include squishElements($squish);
     //specific styling
     h1{
-        @include createTextBackground($background-white,$dropShadow,$radius,0);
+        @include createTextBackground($background-white,$dropShadow,$radius);
         @include doFontStuff("Montserrat",$fontSize-h1);
         grid-row:1/2;
         text-align: center;
@@ -12,7 +12,8 @@
         padding:3%;
     }
     #dailyEvents{
-        @include createTextBackground($background-white,$dropShadow,$radius,3%);
+        //add padding back
+        @include createTextBackground($background-white,$dropShadow,$radius);
         grid-row:3/6;
         height:30vh;
         h2{
@@ -28,7 +29,7 @@
         }
     }
     #continue{
-        @include createTextBackground($background-white,$dropShadow,$radius,0);
+        @include createTextBackground($background-white,$dropShadow,$radius);
         @include doFontStuff("Montserrat",$fontSize-p);
         grid-row:8/9;
         margin-top:5%;
