@@ -47,13 +47,6 @@ const EventDetailCompoent = (props) =>{
                         )
                     }</p>
                 </div>
-<<<<<<< HEAD
-=======
-                {/*<div id="eventRepeat">
-                    <p className="descriptor">Repeat: </p>
-                    <p className="value">{item.Times.DoesRepeat.toString()}</p>
-                </div>*/}
->>>>>>> 3e08bb8937dde95ab9a763036ea2929a12895335
             </div>
         </div>
     );

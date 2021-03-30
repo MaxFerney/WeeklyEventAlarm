@@ -40,9 +40,11 @@
             height:30vh;
         }
         div{
+            //box-shadow: $dropShadow;
+            margin-bottom:2%;
             p{
                 @include doFontStuff("Montserrat",12px);
-                justify-content: center;
+                text-align: center;
             }
         }
         div>div:last-child{

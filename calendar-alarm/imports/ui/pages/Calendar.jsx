@@ -28,7 +28,7 @@ const DayItems = (props) => {
         let formatStart = moment(item.Times.StartTime, 'X').format('h:mm a');
         let formatEnd = moment(item.Times.StopTime, 'X').format('h:mm a');
         return(
-            <li key={item.EventID} className={"events theme_"+item.Details.Theme}>
+            <li key={item.EventID} className={"events"}>
                 <NavLink to={{
                     pathname:"/overview/"+item.EventID,
                     state:{
@@ -36,7 +36,7 @@ const DayItems = (props) => {
                         from:'existingEvent'
                     }
                 }}>
-                    <span>{item.Details.Name}</span> <span>{formatStart}-{formatEnd} &gt;</span>
+                <span className={"theme_"+item.Details.Theme}><span>{item.Details.Name}</span> <span>{formatStart}-{formatEnd} &gt;</span></span>
                 </NavLink>
 
             </li>

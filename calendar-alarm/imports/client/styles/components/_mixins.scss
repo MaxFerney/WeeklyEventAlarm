@@ -9,7 +9,7 @@
 @mixin createTextBackground($background-color,$drop-shadow,$border-radius){
     background-color:$background-color;
     border-radius:$border-radius;
-    box-shadow: $drop-shadow;
+    box-shadow: $dropShadow;
 }
 @mixin doFontStuff($font,$fontSize){
     font-family:$font,sans-serif;
@@ -23,7 +23,7 @@
 //Dynamically styles event boxes
 @mixin styleEventBoxes($box-color){
     background-color:$box-color;
-    border:2px solid black;
     margin-bottom:$margin-general;
     min-height:25px;
+    margin-bottom:2%;
 }
