@@ -64,6 +64,9 @@
         .itemBox_Vacation{
             @include styleEventBoxes($event-bg-vacation);
         }
+        .over_six_text{
+            text-align: center;
+        }
     }
     #dailyTaskList{
         grid-row:8/11;
@@ -71,6 +74,22 @@
         border:2px solid black;
         @include createTextBackground($background-white,$dropShadow,$radius);
         overflow:scroll;
+        .theme_Home{
+            //@include styleEventBoxes($event-bg-home);
+            background-color: lighten($event-bg-home, 20%);
+        }
+        .theme_Work{
+            //@include styleEventBoxes($event-bg-work);
+            background-color: lighten($event-bg-work, 20%);
+        }
+        .theme_School{
+            //@include styleEventBoxes($event-bg-school);
+            background-color: lighten($event-bg-school, 20%);
+        }
+        .theme_Vacation{
+            //@include styleEventBoxes($event-bg-vacation);
+            background-color: lighten($event-bg-vacation, 20%);
+        }
     }
     #addEventButton{
         grid-row:11/11;

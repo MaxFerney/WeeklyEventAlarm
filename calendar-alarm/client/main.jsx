@@ -8,9 +8,6 @@ import PropTypes from 'prop-types';
 import moment from 'moment';
 
 Meteor.startup(() => {
-    function alertDismissed(){
-        console.log("i've been dismissed");
-    }
     function allStorage() {
         var storageArray = [];
         keys = Object.keys(localStorage);
@@ -29,20 +26,20 @@ Meteor.startup(() => {
     //if doing a refresh on localStorage
     //localStorage.clear();
     Tracker.autorun(()=>{
-        console.log(CalendarCollectionAccess.find().fetch());
+        // console.log(CalendarCollectionAccess.find().fetch());
         const allCalendarItems = CalendarCollectionAccess.find().fetch();
 
-        console.log(allCalendarItems);
-
-        console.log("+++++++++++++++++++++++++++++++++++++++++++++++++++++");
-
-
-
-        console.log(JSON.stringify(navigator.notification)); //empty object
-        console.log(navigator.localStorage); //undefined
-        console.log(window.localStorage); //object object
-        console.log(localStorage); //object storage
-        console.log("#####################################################");
+        // console.log(allCalendarItems);
+        //
+        // console.log("+++++++++++++++++++++++++++++++++++++++++++++++++++++");
+        //
+        //
+        //
+        // console.log(JSON.stringify(navigator.notification)); //empty object
+        // console.log(navigator.localStorage); //undefined
+        // console.log(window.localStorage); //object object
+        // console.log(localStorage); //object storage
+        // console.log("#####################################################");
         // var data = localStorage.getItem('myKey')
         // if (data) {
         //     data = JSON.parse(data);
@@ -54,11 +51,11 @@ Meteor.startup(() => {
 
         let allLocalStorage = allStorage();
 
-        console.log("#####################################################");
-        console.log("1616844568");
-        console.log(moment(1616844568, 'X').format('h:mm a'));
-        console.log(moment( moment(1616844568, 'X').format('h:mm a'), 'h:mm a').format('X'));
-        console.log("+++++++++++++++++++++++++++++++++++++++++++++++++++++");
+        // console.log("#####################################################");
+        // console.log("1616844568");
+        // console.log(moment(1616844568, 'X').format('h:mm a'));
+        // console.log(moment( moment(1616844568, 'X').format('h:mm a'), 'h:mm a').format('X'));
+        // console.log("+++++++++++++++++++++++++++++++++++++++++++++++++++++");
 
         const props = {
             allCalendarItems:allCalendarItems,

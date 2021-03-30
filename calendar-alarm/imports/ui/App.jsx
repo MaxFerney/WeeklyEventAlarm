@@ -94,7 +94,7 @@ export default class App extends React.Component{
         let returnString = (
             "You selected button number " + buttonIndex + "\nyou selected: "+(buttonIndex==1?"OK":"Snooze")
         )
-        alert(returnString);
+        //alert(returnString);
     }
     allStorage() {
         var storageArray = [];
@@ -182,13 +182,42 @@ export default class App extends React.Component{
                 let title= eventItem.Details.Name;
                 let message = eventItem.Details.Address;
 
+                let eventNow = this.unixToToday(eventItem.Times.StartTime);
+                let eventOneMin = moment( moment(this.unixToToday(eventItem.Times.StartTime), 'X').subtract(1, 'm') ).format('X');
+                let eventFiveMin = moment( moment(this.unixToToday(eventItem.Times.StartTime), 'X').subtract(5, 'm') ).format('X');
                 //if an event occurs today
                 if (eventItem.Times.Days.includes(today)){
                     //console.log("there's an event today!");
 
                     //if theres an event now, do one type of ping
-                    eventItem.Times.StartTime
-                    if (this.unixToToday(eventItem.Times.StartTime) == uniNow) {
+
+                    if (eventFiveMin == uniNow) {
+                        console.log("Its in 5 minutes");
+                        //prompt not appearing in background, but sound is
+                        //2 content lines MAX
+                        //3 buttons MAX
+                        navigator.notification.confirm(
+                            message,
+                            this.onConfirm,
+                            title+" Starts in 5 minutes",
+                            ['OK', 'Snooze']);
+                        navigator.notification.beep(3);
+                    }
+
+                    if (eventOneMin == uniNow) {
+                        console.log("Its in 1 minute");
+                        //prompt not appearing in background, but sound is
+                        //2 content lines MAX
+                        //3 buttons MAX
+                        navigator.notification.confirm(
+                            message,
+                            this.onConfirm,
+                            title+" Starts in 1 minute",
+                            ['OK', 'Snooze']);
+                        navigator.notification.beep(2);
+                    }
+
+                    if (eventNow == uniNow) {
                         console.log("ITS NOW!!!!");
                         //prompt not appearing in background, but sound is
                         //2 content lines MAX
@@ -197,8 +226,8 @@ export default class App extends React.Component{
                             message,
                             this.onConfirm,
                             title+" Starts Now!",
-                            ['OK', 'Snooze']);
-                        navigator.notification.beep(2);
+                            ['OK']);
+                        navigator.notification.beep(1);
                     }
 
                     //if theres an event in CONST minutes, then another type of ping
