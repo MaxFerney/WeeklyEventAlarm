@@ -47,10 +47,10 @@ const EventDetailCompoent = (props) =>{
                         )
                     }</p>
                 </div>
-                <div id="eventRepeat">
+                {/*<div id="eventRepeat">
                     <p className="descriptor">Repeat: </p>
                     <p className="value">{item.Times.DoesRepeat.toString()}</p>
-                </div>
+                </div>*/}
             </div>
         </div>
     );
