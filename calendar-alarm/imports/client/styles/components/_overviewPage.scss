@@ -30,4 +30,8 @@
         float:left;
         margin-top:$margin-general;
     }
+    #deleteButton{
+        @include createTextBackground($background-white,$dropShadow,$radius);
+        @include doFontStuff("Montserrat",$fontSize-p);
+    }
 }

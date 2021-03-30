@@ -47,10 +47,6 @@ const EventDetailCompoent = (props) =>{
                         )
                     }</p>
                 </div>
-                <div id="eventRepeat">
-                    <p className="descriptor">Repeat: </p>
-                    <p className="value">{item.Times.DoesRepeat.toString()}</p>
-                </div>
             </div>
         </div>
     );
@@ -146,7 +142,7 @@ const EventOverview = (props) => {
                 <button onClick={()=>{
                     localStorage.removeItem(eventID.toString());
                     setRedirectToCalendar(true);
-                }}>DELETE</button>
+                }} id="deleteButton">DELETE</button>
             </div>
 
             {/*<NavButton id="continue" to_pathname="/calendar" to_state={{from:"alarm"}} text="Back to events" />*/}
