@@ -64,6 +64,9 @@
         .itemBox_Vacation{
             @include styleEventBoxes($event-bg-vacation);
         }
+        .over_six_text{
+            text-align: center;
+        }
     }
     #dailyTaskList{
         grid-row:8/11;
