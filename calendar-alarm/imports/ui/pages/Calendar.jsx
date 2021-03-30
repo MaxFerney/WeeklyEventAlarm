@@ -88,12 +88,25 @@ const Calendar = (props) => {
     }
 
     const taskRender = () => {
-        const itemDivBox = (dayID, dayItems) => {
-            let dayBoxes = dayItems.map((item)=>
+        const itemDivBox = (dayID, dayItems, overSix) => {
+            let dayBoxes = dayItems.map((item, index)=>
+            <>
                 <div key={item.EventID.toString()} className={"itemBox_"+item.Details.Theme}>
                     <p className="calendar_p">{moment(item.Times.StartTime, 'X').format('h:mma')}</p>
                 </div>
+                {/*{console.log("overSix: "+overSix.toString()+" | index: "+index)}
+                {(overSix && index==5)
+                    ? " v "
+                    : ""
+                }
+                */}
+            </>
             )
+            if (overSix){
+                dayBoxes.push(
+                    <p className="over_six_text">V</p>
+                );
+            }
             //console.log(dayBoxes);
 
             return dayBoxes;
@@ -103,6 +116,7 @@ const Calendar = (props) => {
         for(var i=0;i<7;i++){
             let dayName = moment( moment().day(i) ).format("ddd"); //mon
             let dayID = moment( moment().day(i) ); //1
+            let overSix = false
             let dayItems = props.allLocalStorage.filter(item => {
                 return(
                     item.Times.Days.includes(i)
@@ -114,6 +128,7 @@ const Calendar = (props) => {
                 if (index<6){
                     return true;
                 } else {
+                    overSix=true;
                     return false;
                 }
             } );
@@ -130,7 +145,7 @@ const Calendar = (props) => {
                     {
                         dayItems.length==0
                         ? <p></p>
-                        : itemDivBox(dayID, dayItems)
+                        : itemDivBox(dayID, dayItems, overSix)
                     }
                 </div>
             );
